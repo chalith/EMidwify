@@ -1,0 +1,67 @@
+.loginclose{
+	float:right;
+	font-size:110%;
+	background-color:white;
+	cursor:pointer;
+	margin-top:-14%;
+	margin-right:-14%;
+	border-radius:50%;
+	text-align:center;
+	width:4%;
+	color: black;
+}
+.login{
+	background-color:#323B56;
+	display:none;
+	border:solid grey;
+	position: absolute;
+	z-index:4;
+	width: 35%;
+	height: 20%;
+	font-size:80%;
+	margin: 12% 30% 12% 30%;
+	padding: 5% 5% 5% 5%;
+}
+form{
+	color:#C7CBE2;
+}
+form input{
+	box-shadow:1px 1px 5px 1px black inset;
+	padding: 2%;
+	color: #137A7A;
+}
+table{
+	height:100%;
+	width:100%;
+}
+td label{
+	font-size:130%;
+	color:white;
+}
+table td {
+	width:50%;
+}
+td input{
+	margin-left:-25%;
+	font-size:110%;
+	width:120%;
+}
+.login button{
+	margin-left:75%;
+	color:white;
+	background-color:#151B40;
+	cursor:pointer;
+	border-radius:10%;
+	font-size:130%;
+	height:20%;
+	width:20%;
+	box-shadow:-3px -3px 20px -3px black inset;
+}
+.login button:hover{
+	background-color:#525983;
+	box-shadow:-5px -5px 20px -5px black inset;
+}
+.login button:active{
+	background-color:#8188B2;
+	box-shadow:-7px -7px 20px -7px black inset;
+}

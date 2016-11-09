@@ -1,0 +1,48 @@
+table{
+	height: 50%;
+	width: 100%;
+}
+td{
+	font-size:110%;
+	margin:2% 2% 2% 2%;
+	width: 50%;
+}
+td input{
+	width: 100%;
+	height: 50%;
+	font-size: 120%;
+}
+body{
+	background-color:#323B56;
+}
+.form_content{
+	height:80%;
+	width:70%;
+	position:absolute;
+	padding:2% 2% 2% 2%;
+	margin:2% 15% 2% 12%;
+	background-color:#D9E4F0;
+}
+.form_content button{
+	height:10%;
+	width: 15%;
+	border-radius: 10px;
+	text-align: center;
+	transition: all 0.5s;
+	cursor: pointer;
+	color:black;
+	background-color:#808080;
+	border:solid;
+	float: right;
+	font-size: 140%;
+	margin:2% 5% 0 0;
+}
+.form_content button:hover {
+	background-color:#CCCCCC;
+}
+
+.form_content button:active {
+	transform: translateY(4px);
+	background-color:#330033;
+	border:none;
+}

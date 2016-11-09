@@ -1,0 +1,90 @@
+.sentmessage{
+	background-color: #7271DA;
+	width: 80%;
+	float: right;
+	margin-left: 1% 1% 1% 1%;
+	padding-right: 2%; 
+	border-radius: 5%;
+}
+.sentmessage p{
+	float: right;
+}
+.sentmessage a{
+	float: right;
+	font-size: 80%;
+}
+.receivemessage{
+	background-color: #71DACA;
+	width: 80%;
+	float: left;
+	padding-left: 2%;
+	margin-left: 1% 1% 1% 1%;
+	border-radius: 5%;
+}
+.receivemessage p{
+	float: left;
+}
+.receivemessage a{
+	float: right;
+	font-size: 80%;
+}
+.msgheader{
+	cursor:pointer;
+	width:4%;
+	height:8%;
+	margin-left:76%;
+	background-color:#AAB8E1 ;
+	box-shadow:-3px -3px 20px 0px black inset;
+	border-radius:10%;
+	position: fixed;
+}
+.msgheader:hover img{
+	transform: scale(1.1);
+}	
+.msgheader img{
+	height: 100%;
+	width: 100%;
+}
+.msgcontent{
+	z-index:10;
+	display:none;
+	cursor:pointer;
+	width:20%;
+	height:55%;
+	margin-left:59.3%;
+	margin-top:4%;
+	background-color:#9CC2CB;
+	box-shadow:-3px -3px 20px 0px black inset;
+	position: fixed;
+}
+.msgcontent textarea{
+	height: 80%;
+	width: 72%;
+	margin-left:1%;
+	float: left;
+}
+.msgcontent button{
+	float: right;
+	width: 20%;
+	margin-right: 4%;
+}
+.msgs{
+	margin:1% 1% 1% 1%;
+	overflow-y:hidden;
+	overflow-x:hidden;
+	background-color:white;
+	height: 64%;
+	width: 98%;
+	position: static;
+}
+.msgs:hover{
+	overflow-y:scroll;
+}	
+.msgs::-webkit-scrollbar{
+	width: 8px;
+}
+.msgs::-webkit-scrollbar-thumb{
+	-webkit-box-shadow: inset 0 0 2px;
+	background-color:#545874;
+	border-radius:5px;
+}
