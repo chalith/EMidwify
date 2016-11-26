@@ -38,6 +38,8 @@ public class CreateNotification extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
+		ClinicUnvisited unvisited = new ClinicUnvisited(mid);
+		notification = notification + unvisited.viewUnvisitedMothers();
 		out.print(notification);
 		//System.out.println(notification);
 	}

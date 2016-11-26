@@ -31,12 +31,21 @@ public class TriposhaAmounts {
 		cdate = createDate(currentdate,"-");
 		getAge();
 	}
+	public TriposhaAmounts(String id, String currentdate, int age){
+		this.id = id;
+		this.age = age;
+		this.currentDate = currentdate;
+		getPerson(this.id);
+	}
 	private void getPerson(String id){
+		//System.out.println(id);
 		if(id.startsWith("Guard")){
 			person = "mother";
 		}
 		else if(id.startsWith("Child")){
 			person = "child";
+		}else if(id.charAt(id.length()-1)=='v'){
+			person = "mother";
 		}
 	}
 	void getAge(){

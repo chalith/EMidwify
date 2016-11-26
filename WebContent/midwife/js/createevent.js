@@ -74,6 +74,12 @@ $(document).ready(function(){
 			$('#selectedmothers').find('#'+d).remove();
 		}
 	});
+	$(document).on("click","tr",function(e){
+		if(e.target.id != "thead"){
+			$('.selected').removeClass("selected");
+			$(this).addClass("selected");
+		}
+	});
 });
 function getGuardians(){
 	var e1 = $('#selectedmothers').find(".mother");
@@ -88,7 +94,7 @@ function getGuardians(){
 		}
 	}
 	else{
-		alert("please select mothers for the event");
+		return false;
 	}
 	return txt;
 }
@@ -111,6 +117,7 @@ function addEvent() {
 	var etime = document.forms["eventForm"]["txteventtime"];
 	var evenue = document.forms["eventForm"]["txteventvenue"];
 	var edate = document.forms["eventForm"]["txteventdate"];
+	var guardians = getGuardians();
 	if(ename.value==""){
 		setError(name);
 		showError("Enter the event name first");
@@ -131,8 +138,11 @@ function addEvent() {
 		setError(venue);
 		showError("Enter the venue");
 	}
+	else if(!guardians){
+		showError("please select mothers for the event");
+	}
 	else{
-		var guardians = getGuardians();
+		$('#eventtable').css({'display':'block'});	
 		var table = document.getElementById("eventtable");
 		var row = table.insertRow(1);
 		var cell1 = row.insertCell(0);
@@ -156,6 +166,13 @@ function addEvent() {
 		document.getElementById("mothers").innerHTML = "";
 	}
 }
+function removefromTable(table){
+	var row = $('.selected').closest("tr").index();
+	if(row>0){
+		table.deleteRow(row);
+	}
+}
+
 function setError(element){
 	element.style.backgroundColor = "#FFB6C1";
 }

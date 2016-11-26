@@ -9,7 +9,7 @@
 <%@page import="java.sql.*"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-<title>My Profile</title>
+<title>Timeline</title>
 <head>
 <base href="${pageContext.request.contextPath}/" />
 <link rel="stylesheet" type="text/css" href="midwife/css/timeline.css">

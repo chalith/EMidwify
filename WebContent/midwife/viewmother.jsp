@@ -224,7 +224,7 @@ function loadGraph(){
 												out.print(guardian.nofchildren+" babies");	
 											}
 										%></h3> 
-										<h3> to taken care of</h3></center>
+										<h3> to take care of</h3></center>
 									</td>
 								</tr>
 							</table>

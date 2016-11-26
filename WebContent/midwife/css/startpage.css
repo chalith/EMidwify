@@ -5,7 +5,7 @@
 	padding:0.5px;
 	margin-top:0;
 	width:80%;
-	margin-bottom:-100%;
+	margin-bottom:-80%;
 	text-align:center;
 	background-color:red;
 	color: white;
@@ -13,7 +13,7 @@
 	position: relative;
 }
 .newsfeed{
-	border-radius:20px;
+	//border-radius:20px;
 }
 .container{
 	width:100%;
@@ -32,7 +32,8 @@ body{
 	float:center;
 }
 .servicebox{
-	padding:3.5% 1% 4% 1%;
+	display:inline-block;
+	padding:4% 1% 3.5% 2%;
 	height:100%;
 	position:static;
 	float:left;

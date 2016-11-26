@@ -277,7 +277,7 @@ function initialize() {
 							String s[] = address.split("\n");
 							for(int i=0;i<4;i++){
 						%>
-							<input style="width:40%; type="text" id="addressline<%out.print(i+1);%>" placeholder="Line1<%out.print(i+1);%>" name="txtaddressline<%out.print(i+1);%>" value=
+							<input style="width:40%; type="text" id="addressline<%out.print(i+1);%>" placeholder="Line<%out.print(i+1);%>" name="txtaddressline<%out.print(i+1);%>" value=
 									"<%
 										if(i<s.length){
 											out.print(s[i].trim());

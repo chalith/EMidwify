@@ -22,6 +22,7 @@
 		String mid = (String)session.getAttribute("mid");
 		if(mid==null){
 			response.sendRedirect("/EMidwify");
+			return;
 		}
 	%>
 <div>
@@ -113,6 +114,9 @@
 						%>
 						</h1>
 					</div>
+					<div class="titlebar" id="titlebar">
+						<div class="title" id="editinfotab"><center><h1>Edit Info</h1></center></div>
+					</div>
 					<div style="display: inline-block; margin-top: 0; width: 84%;" class="midwifedetails" id="details">
 						<div  style="font-size: 120%; float:left; width:70%; color:#040C23;">
 							<ul>
@@ -153,7 +157,7 @@
 												out.print(mcount+" mothers");	
 											}
 										%></h3> 
-										<h3> to taken care of</h3></center>
+										<h3> to take care of</h3></center>
 									</td>
 								</tr>
 								<tr>
@@ -165,7 +169,7 @@
 												out.print(ccount+" babies");	
 											}
 										%></h3> 
-										<h3> to taken care of</h3></center>
+										<h3> to take care of</h3></center>
 									</td>
 								</tr>
 							</table>

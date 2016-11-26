@@ -31,12 +31,23 @@ public class VaccineAmounts {
 		cdate = createDate(currentdate,"/");
 		getAge();
 	}
+	public VaccineAmounts(String id, String currentdate, int age, int remindPeriod){
+		this.remindPeriod = remindPeriod;
+		this.id = id;
+		this.age = age;
+		getPerson(this.id);
+		cdate = createDate(currentdate,"/");
+	}
 	private void getPerson(String id){
+		//System.out.println(id);
 		if(id.startsWith("Guard")){
 			person = "mother";
 		}
 		else if(id.startsWith("Child")){
 			person = "child";
+		}
+		else if(id.charAt(id.length()-1)=='v'){
+			person = "mother";
 		}
 	}
 	void getAge(){

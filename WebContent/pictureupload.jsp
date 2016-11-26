@@ -50,8 +50,9 @@ function uploadImage(){
     xmlhttp.send(null);
 }
 $(document).ready(function(){
-	$('#sourcepath').change(function(){
-		//uploadImage();
+	$('#sourcepath').on("change",function(){
+		var path = document.getElementById("sourcepath");
+		readURL(path,"pic");
 	});
 	$("input").change(function(){
 		$(this).css({"background-color":'white'});
@@ -61,6 +62,18 @@ $(document).ready(function(){
 		document.getElementById("container").style.opacity="1";
 	});
 });
+function readURL(input,imgtg) {
+    
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('#'+imgtg).attr('src', e.target.result);
+        }
+
+        reader.readAsDataURL(input.files[0]);
+    }
+}
 </script>
 </head>
 <body>
@@ -74,19 +87,16 @@ $(document).ready(function(){
 	<a id="uploadclose" class="uploadclose">X</a>
 		<form class="picform" name="pictureForm" method="post" action="uploadimage" enctype="multipart/form-data">
 			<input style="width:100%; background-color:white; margin-top: 5%;" type="file" id="sourcepath" name="txtsourcepath"/>
-			<table class="pictable">
-				</tr>
-				<tr style="height: 80%;">
-					<th style="width: 70%;">
-						<img src="" style="width:100%;" alt="pic" id="pic"></img>
-					</th>
-					<th style="width: 30%;">
-						<center>
-						<button class="button" type="button" style="width:100%; margin-top: 100%;" onclick="doUpload()">Upload</button>
-						</center>
-					</th>
-				</tr>
-			</table>
+			<div class="pictable">
+				<div style="width: 70%; float: left; padding-right:2px;">
+					<img src="" style="display:hidden; width:100%;" id="pic"></img>
+				</div><br>
+				<div style="width: 30%; float: right;">
+					<center>
+					<button class="button" type="button" style="width:100%; margin-top: 5%;" onclick="doUpload()">Upload</button>
+					</center>
+				</div>
+			</div>
 		</form>	
 	</div>
 	<jsp:include page="/alert.jsp" />

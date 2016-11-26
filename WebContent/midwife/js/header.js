@@ -3,7 +3,7 @@ $(window).load(function(){
 	//document.getElementById("title").innerHTML = document.title;
 });
 $(document).ready(function(){
-	$('#picture').hover(function(){
+	$('#userpicture').hover(function(){
 		$('#changepic').css({'display':'block'});
 	},function(){
 		$('#changepic').css({'display':'none'});

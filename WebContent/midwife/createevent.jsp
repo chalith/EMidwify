@@ -92,26 +92,31 @@
 							</div>
 						</div>
 						</center></br>
-						<div class="form_content">
-							<div style="float:left; width:33%;">
-								<div style="float:left; width:20%;">
+						<center>
+						<div class="form_content" style="width: 80%;">
+							<div style="width:50%; float: left;">
+								<div style="float:left; width:10%;">
 									<label>Date</label>
 								</div>
-								<div id="date_eventdate" style="float:left; width:70%;">
+								<div id="date_eventdate" style="float:left; width:90%;">
 									<jsp:include page="/date.jsp" />
 								</div>
 								<input type="hidden" id="eventdate" name="txteventdate"/>
 							</div>
-							<div style="float:left; width:33%;">
-								<div style="float:left; width:20%;">
+							<div style="width:50%; float: left;">
+								<div style="float:left; width:10%;">
 									<label>Time</label>
 								</div>
-								<div id="time_eventtime" style="float:left; width:80%;">
+								<div id="time_eventtime" style="float:left; width:90%;">
 									<jsp:include page="/time.jsp" />
 								</div>
 								<input type="hidden" id="eventtime" name="txteventtime"/>
 							</div>
-							<div style="float:left; width:33%;">
+						</div>
+						</center></br>
+						<center>
+						<div class="form_content">
+							<div style="width:50%;">
 								<div style="float:left; width:30%;">
 									<label style="float:right; margin-right: 5%;">Venue</label>
 								</div>
@@ -119,11 +124,12 @@
 									<input style="width:100%;" type="text" id="eventvenue" placeholder="Venue" name="txteventvenue">
 								</div>
 							</div>
-						</div></br>
-						<div class="form_content" style="display: inline-block; width: 100%;">
-							<div style="float:left; width: 50%; background-color: white;">
-								<input style="width: 98.5%;" class="search" id="mothersearch" placeholder="Enter the mother name here  &#128270"></input>
-								<div id="mothers" class="suggession">
+						</div>
+						</center></br>
+						<div class="form_content" style="display: inline-block; width: 100%; background-color: white;">
+							<input style="width: 49%;" class="search" id="mothersearch" placeholder="Enter the mother name here  &#128270"></input>
+							<div style="float:left; width: 50%;">
+								<div id="mothers" class="suggession" style="border: solid;">
 									
 								</div>
 								<center><div style="display: inline-block; width: 40%;">
@@ -131,8 +137,8 @@
 									<div class="selectbtn" id="addall"><center><h1>Add all >></h1></center></div>
 								</div></center>
 							</div>
-							<div style="float:left; width: 50%; background-color: white;">
-								<div id="selectedmothers"  class="suggession">
+							<div style="float:left; width: 50%;">
+								<div id="selectedmothers"  class="suggession" style="border: solid gray;">
 					
 								</div>
 								<center><div style="display: inline-block; width: 50%;">
@@ -143,8 +149,9 @@
 						</div>
 						<div style="margin: 2% 2% 7% 43%;">
 							<div class="btn" style="float:left;" onclick="addEvent()">Add</div>
+							<div class="btn" style="float:left;" onclick="removefromTable(eventtable)">Remove</div>
 						</div>
-						<table id="eventtable" Style="width:100%;">
+						<table id="eventtable" style="width:100%; display: none;">
 							<tr class="thead" id="thead">
 								<th id="thead">Event Name</th>
 								<th id="thead">Area</th>

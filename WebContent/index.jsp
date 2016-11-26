@@ -37,13 +37,13 @@ $(document).ready(function(){
 		<table style="width: 100%; height: 100%;">
 			<tr>
 				<th style="width: 15%; color: #796CCA;">
-					<h2>E-Midwify</h2>
+					<h2>Baby Care</h2>
 				</th>
 				<th style="width: 75%; color: white;">
 					<h1 align="center">With women, for a life time</h2>	
 				</th>
 				<th id="loginbtn" style="font-family:Trebuchet MS, Helvetica, sans-serif; font-size: 110%; width: 10%; color:gray;">
-					<a id="loginbtn">Log In</a>
+					<a style="box-shadow:0px 0px 1px 3px; padding: 5px;" id="loginbtn">Log In</a>
 				</th>
 			</tr>
 		</table>

@@ -11,10 +11,10 @@ import com.main.VaccineAmounts;
 public class MotherInClinic {
 	VaccineAmounts vaccAmounts = null;
 	public ArrayList<String[]> vaccines = null;
-	TriposhaAmounts triAmounts = null;
+	public TriposhaAmounts triAmounts = null;
 	public int triposhaAmount = 0;
-	String id = null;
-	String date = null;
+	public String id = null;
+	public String date = null;
 	public String age = null;
 	public String name = null;
 	public MotherInClinic(String name, String id,String bDate, String date) {
@@ -27,10 +27,10 @@ public class MotherInClinic {
     	Date birthDate = createDate(bDate,"-");
     	this.age = birthDate.getAge(currentDate);
     	
-		vaccAmounts = new VaccineAmounts(id, date, 7);
+		vaccAmounts = new VaccineAmounts(id,date,birthDate.getDeference(createDate(date,"-")),7);
 		vaccines = vaccAmounts.getVaccines();
 		
-		triAmounts = new TriposhaAmounts(id,date);
+		triAmounts = new TriposhaAmounts(id, date, birthDate.getDeference(createDate(date,"-")));
 		triposhaAmount = triAmounts.getAmount();
 	}
 	Date createDate(String date,String seperator){

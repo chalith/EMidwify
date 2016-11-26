@@ -40,6 +40,7 @@ $(document).ready(function(){
 		String mid = (String) session.getAttribute("mid");
 		if(mid==null){
 			response.sendRedirect("/EMidwify");
+			return;
 		}
 	%>
 	<div class="container">
@@ -49,19 +50,22 @@ $(document).ready(function(){
 		<div class="body clearfix" id="container">
 			<div class="home-col clearfix" >
 				<div class="servicebox">
+				
+					<div style="display: inline-block; width: 100%; float: left;">
+					
 					<div class="services" id="viewprofile">
 						<button><a><img id="viewprofile" src="midwife/images/services/viewprofile.png" alt="profile"></a></button>
 						<h3 align="center" id="viewprofile">Profile</h3></br>
 						<p style="margin-left: 25%;" id="viewprofile">View my profile</p>
 					</div>
 					<div id="viewtimeline" class="services">
-						<button><a><img id="viewtimeline" src="midwife/images/services/view.png" alt="message"></a></button>
+						<button><a><img id="viewtimeline" src="midwife/images/services/timeline.png" alt="message"></a></button>
 						<h3 id="viewtimeline" align="center">Timeline</h3></br>
 						<p id="viewtimeline" style="margin-left: 23%;">View my timeline</p>
 					</div>
 					
 					<div id="register" class="services">
-						<button><a href="#"><img src="midwife/images/services/reg.png" alt="location"></a></button>
+						<button><a><img src="midwife/images/services/reg.png" alt="location"></a></button>
 						<h3 align="center">Register</h3></br>
 						<p style="margin-left: 20%;">Register Mother / Child</p>
 						<div id="registerdrop" class="dropdown-content">
@@ -96,7 +100,7 @@ $(document).ready(function(){
 						</div>
 					</div> -->
 					<div id="clinic" class="services">
-						<button><a href="#"><img src="midwife/images/services/clinic.png " alt="clinic"></a></button>
+						<button><a><img src="midwife/images/services/clinic.png " alt="clinic"></a></button>
 						<h3 align="center">Clinic</h3></br>
 						<p style="margin-left: 25%;">View clinic details</p>
 						<div id="clinicdrop" class="dropdown-content">
@@ -112,6 +116,9 @@ $(document).ready(function(){
 						</table>
 						</div>
 					</div>
+					
+					</div>
+					<div style="display: inline-block; width: 100%; margin-left: 12%; float: left;">
 					
 					<div id="message" class="services">
 						<button><a>
@@ -148,6 +155,9 @@ $(document).ready(function(){
 						<h3 id="viewcreateevent" align="center">Create Events</h3></br>
 						<p id="viewcreateevent" style="margin-left: 3%;">Create special schedules for events</p>
 					</div>
+					
+					</div>
+					
 				</div>
 			</div>
 				
