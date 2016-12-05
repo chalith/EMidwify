@@ -160,10 +160,14 @@
 								<div style="float:left; width:30%;">
 									<label>Clinic Date</label>
 								</div>
-								<div id="date_clinictdate" style="float:left; width:70%;">
+								<select id="clinictdate" name="txtclinicdate" style="width:50%;">
+									<option selected disabled option>Clinic Dates</option>
+									
+								</select>
+								<!-- <div id="date_clinictdate" style="float:left; width:70%;">
 									<jsp:include page="/date.jsp" />
 								</div>
-								<input type="hidden" id="clinictdate" name="txtclinicdate">
+								<input type="hidden" id="clinictdate" name="txtclinicdate">  -->
 							</div>
 						</div>
 					</div></br>

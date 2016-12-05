@@ -49,7 +49,7 @@ public class Clinic {
 		children = new ArrayList<ChildInClinic>();
 		jdbc = new JDBC();
 		try{
-			String q = "SELECT childID,childName,childDateofDelivery FROM child WHERE guardianID IN (SELECT guardianID FROM guardian WHERE guardianAreaCode = '"+areaCode+"');";
+			String q = "SELECT childID,childName,childDateofDelivery FROM child WHERE childDateofDelivery <= '"+clinicDate+"' AND guardianID IN (SELECT guardianID FROM guardian WHERE guardianAreaCode = '"+areaCode+"');";
 			jdbc.st.executeQuery(q);
 			ResultSet rs = jdbc.st.getResultSet();
 			while(rs.next()){
@@ -76,7 +76,7 @@ public class Clinic {
 		mothers = new ArrayList<MotherInClinic>();
 		jdbc = new JDBC();
 		try{
-			String q = "SELECT guardianID,guardianName,guardianBDate FROM guardian WHERE guardianAreaCode = '"+areaCode+"';";
+			String q = "SELECT guardianID,guardianName,guardianBDate FROM guardian WHERE guardianBDate <= '"+clinicDate+"' AND guardianAreaCode = '"+areaCode+"';";
 			jdbc.st.executeQuery(q);
 			ResultSet rs = jdbc.st.getResultSet();
 			while(rs.next()){

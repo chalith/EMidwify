@@ -1,3 +1,19 @@
+function loadClinics(){
+	var xmlhttp = new XMLHttpRequest();
+	var area=document.getElementById("tempareacode").value;
+	var url="loadclinicdates"; 
+	url=url+"?area="+area;
+	xmlhttp.onreadystatechange = function() {
+		if(xmlhttp.readyState==4 && xmlhttp.status==200){
+		    var out = xmlhttp.responseText;
+		    document.getElementById("clinictdate").innerHTML = out;
+		}
+	};
+	
+	xmlhttp.open("GET",url,true);
+	xmlhttp.send(null);
+}
+
 function setUneditable(id){
 	document.getElementById(id).style.backgroundColor = "#E6E6E6";
 	document.getElementById(id).value = "";
@@ -114,6 +130,7 @@ $(window).load(function(){
 		viewChild(id);
 		$('#view').css("display","inline-block");
 	}
+	loadClinics();
 });
 $(document).ready(function(){
 	$("input").keypress(function(event){

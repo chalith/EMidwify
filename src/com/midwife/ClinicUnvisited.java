@@ -15,57 +15,64 @@ public class ClinicUnvisited {
 	ArrayList<MotherInClinic> unvisitedmothers = new ArrayList<MotherInClinic>();
 	ArrayList<ChildInClinic> unvisitedchildren = new ArrayList<ChildInClinic>();
 	Clinic clinic = null;
-	public ClinicUnvisited(String mid){
-		JDBC jdbc = null;
+	public ClinicUnvisited(String area, String date){
 		Main m = new Main();
-		try{
-			jdbc = new JDBC();
-			String q = "SELECT areaCode,area FROM area WHERE midwifeID = '"+mid+"';";
-			jdbc.st.executeQuery(q);
-			ResultSet rs =  jdbc.st.getResultSet();
-			while(rs.next()){
-				String areacode = rs.getString("areaCode");
-				JDBC jdbc1 = new JDBC();
-				try{
-					String q1 = "SELECT clinicDate FROM motherclinic;";
-					jdbc1.st.executeQuery(q1);
-					ResultSet rs1 =  jdbc1.st.getResultSet();
-					while(rs1.next()){
-						String date = rs1.getString("clinicDate");
-						clinic = new Clinic(areacode, date);
-						mothers = clinic.getMothers();
-						for(int i=0;i<mothers.size();i++){
-							if(!m.isHave("motherclinic", "motherID", mothers.get(i).id)){
-								unvisitedmothers.add(mothers.get(i));
-							}
-						}
-						children = clinic.getChildren();
-						for(int i=0;i<children.size();i++){
-							if(!m.isHave("childclinic", "childID", children.get(i).id)){
-								unvisitedchildren.add(children.get(i));
-							}
-						}
-						
-					}
-				}catch(Exception e){
-					e.printStackTrace();
-				}finally{
-					try{
-						jdbc1.conn.close();
-					}catch(Exception e){
-						e.printStackTrace();
-					}
-				}
-			}
-		}catch(Exception e){
-			e.printStackTrace();
-		}finally{
+		clinic = new Clinic(area, date);
+		mothers = clinic.getMothers();
+		for(int i=0;i<mothers.size();i++){
+			JDBC jdbc = null;
 			try{
-				jdbc.conn.close();
+				jdbc = new JDBC();
+				String q = "SELECT * FROM motherclinic WHERE motherID = '"+mothers.get(i).id+"' AND clinicDate = '"+date+"';";
+				jdbc.st.executeQuery(q);
+				ResultSet rs =  jdbc.st.getResultSet();
+				if(!rs.next()){
+					unvisitedmothers.add(mothers.get(i));
+				}
 			}catch(Exception e){
 				e.printStackTrace();
+			}finally{
+				try{
+					jdbc.conn.close();
+				}catch(Exception e){
+					e.printStackTrace();
+				}
 			}
 		}
+		children = clinic.getChildren();
+		for(int i=0;i<children.size();i++){
+			JDBC jdbc = null;
+			try{
+				jdbc = new JDBC();
+				String q = "SELECT * FROM childclinic WHERE childID = '"+children.get(i).id+"' AND clinicDate = '"+date+"';";
+				jdbc.st.executeQuery(q);
+				ResultSet rs =  jdbc.st.getResultSet();
+				if(!rs.next()){
+					unvisitedchildren.add(children.get(i));
+				}
+			}catch(Exception e){
+				e.printStackTrace();
+			}finally{
+				try{
+					jdbc.conn.close();
+				}catch(Exception e){
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+	public ArrayList<MotherInClinic> getUnvisitedMothers(){
+		return unvisitedmothers;
+	}
+	public ArrayList<ChildInClinic> getUnvisitedChildren(){
+		return unvisitedchildren;
+	}
+	
+	public int getUnvisitedMotherCount(){
+		return mothers.size();
+	}
+	public int getUnvisitedChildrenCount(){
+		return children.size();
 	}
 	String viewUnvisitedMothers(){
 		String view = "";

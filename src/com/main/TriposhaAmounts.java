@@ -173,9 +173,12 @@ public class TriposhaAmounts {
 	}
 	public int checkTriposhaGiven(){
 		jdbc = new JDBC();
+		if(pastDate==null){
+			return 0;
+		}
 		int amount = 0;
 		try{
-			String q1 = "SELECT amount FROM triposha WHERE id = '"+id+"' && date > '"+pastDate+"' && date < '"+currentDate+"';";
+			String q1 = "SELECT amount FROM triposha WHERE id = '"+id+"' && date > '"+pastDate+"' && date <= '"+currentDate+"';";
 			jdbc.st.executeQuery(q1);
 			ResultSet rs1 = jdbc.st.getResultSet();
 			while(rs1.next()){

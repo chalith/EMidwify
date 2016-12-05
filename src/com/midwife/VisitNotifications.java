@@ -46,7 +46,7 @@ public class VisitNotifications {
 		String view = "";
 		if(visits != null){
 			for(int i=0;i<visits.size();i++){
-				view = view + "<li><a style=\"color:purple\">Visit &raquo </a><p> Date to visit :- "+visits.get(i).visitDate+"</br> Child :- "+visits.get(i).childName+"</br> Guardian :- "+visits.get(i).guardianName+"</br> Address :- "+visits.get(i).address+"</br> Current age :- "+visits.get(i).visitAge+"</br> Visit Type :- "+visits.get(i).visitType+"</br> Location :- "+visits.get(i).location+"</p></li>";
+				view = view + "<li><a style=\"color:purple;\" href=\"/EMidwify/midwife/viewlocation.jsp\">Visit &raquo </a><p> Date to visit :- "+visits.get(i).visitDate+"</br> Child :- "+visits.get(i).childName+"</br> Guardian :- "+visits.get(i).guardianName+"</br> Address :- "+visits.get(i).address+"</br> Current age :- "+visits.get(i).visitAge+"</br> Visit Type :- "+visits.get(i).visitType+"</br> Location :- "+visits.get(i).location+"</p></li>";
 			}
 		}
 		return view;

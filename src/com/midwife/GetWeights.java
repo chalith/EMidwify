@@ -1,6 +1,9 @@
 package com.midwife;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import org.apache.catalina.connector.Request;
@@ -17,10 +20,8 @@ public class GetWeights {
 	String person = null;
 	String id = null;
 	JDBC jdbc = null;
-	public GetWeights(String person, String id, String startDate, String endDate) {
+	public GetWeights(String person, String id) {
 		this.person = person;
-		this.startDate = startDate;
-		this.endDate = endDate;
 		this.id = id;
 	}
 	public ArrayList<JSONObject> getWeights(){
@@ -28,9 +29,20 @@ public class GetWeights {
 			weights = new ArrayList<JSONObject>();
 			jdbc = new JDBC();
 			try{
-				String q = "SELECT * FROM motherclinic WHERE motherID = '"+id+"' && clinicDate <= '"+endDate+"' && clinicDate >= '"+startDate+"';";
+				String q = "SELECT guardianDateOfRegistered FROM guardian WHERE guardianID = '"+id+"';";
 				jdbc.st.executeQuery(q);
 				ResultSet rs = jdbc.st.getResultSet();
+				while(rs.next()){
+					startDate = (String) rs.getString("guardianDateOfRegistered");
+					startDate = startDate.substring(0, 10);
+				}
+				java.util.Date date = new java.util.Date();
+				DateFormat frmt = new SimpleDateFormat("yyyy-MM-dd");
+				endDate = frmt.format(date);
+				
+				q = "SELECT * FROM motherclinic WHERE motherID = '"+id+"' && clinicDate <= '"+endDate+"' && clinicDate >= '"+startDate+"';";
+				jdbc.st.executeQuery(q);
+				rs = jdbc.st.getResultSet();
 				while(rs.next()){
 					JSONObject ob = new JSONObject();
 					ob.put("date", rs.getString("clinicDate"));
@@ -53,9 +65,28 @@ public class GetWeights {
 			weights = new ArrayList<JSONObject>();
 			jdbc = new JDBC();
 			try{
-				String q = "SELECT * FROM childclinic WHERE childID = '"+id+"' && clinicDate <= '"+endDate+"' && clinicDate >= '"+startDate+"';";
+				String bweight = null;
+				String q = "SELECT childDateofDelivery,childBirthWeight FROM child WHERE childID = '"+id+"';";
 				jdbc.st.executeQuery(q);
 				ResultSet rs = jdbc.st.getResultSet();
+				while(rs.next()){
+					bweight = (String) rs.getString("childBirthWeight");
+					startDate = (String) rs.getString("childDateofDelivery");
+					startDate = startDate.substring(0, 10);
+				}
+				java.util.Date date = new java.util.Date();
+				DateFormat frmt = new SimpleDateFormat("yyyy-MM-dd");
+				endDate = frmt.format(date);
+				
+				JSONObject ob1 = new JSONObject();
+				ob1.put("date", startDate);
+				ob1.put("age", "1 Day");
+				ob1.put("weight", bweight);
+				weights.add(ob1);
+				
+				q = "SELECT * FROM childclinic WHERE childID = '"+id+"' && clinicDate <= '"+endDate+"' && clinicDate > '"+startDate+"';";
+				jdbc.st.executeQuery(q);
+				rs = jdbc.st.getResultSet();
 				while(rs.next()){
 					JSONObject ob = new JSONObject();
 					ob.put("date", rs.getString("clinicDate"));

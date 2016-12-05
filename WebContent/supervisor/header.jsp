@@ -7,9 +7,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <base href="${pageContext.request.contextPath}/" />
-<link rel="stylesheet" type="text/css" href="supervisor/css/main.css">
+<link rel="stylesheet" type="text/css" href="midwife/css/main.css">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-<script src="supervisor/js/header.js"></script>
+<script src="midwife/js/header.js"></script>
 </head>
 <body>
 	<%	
@@ -19,35 +19,41 @@
 		}
 	%>
 <div class="header">
-	<table style="width: 100%; height: 100%;">
+	<table style="float:left; width: 25%;">
 		<tr>
-			<th id="picture" style="width: 5%; box-shadow: 1px -2px 2px -0.5px black;">
-				<h1 id="changepic" style="font-size: 100%; margin-left:10%; margin-bottom:-68%; width:5%; z-index:20; color: white; opacity:0.7; display: none;">
+			<th id="userpicture" style="width: 25%; box-shadow:0px -2px 1px 0px white;">
+				<h1 id="changepic" style="font-size: 100%; margin-left:5%; margin-bottom:-59%; z-index:20; color: white; opacity:0.7; display: none;">
 				Change Picture</h1>
-				<img style="width: 96%; height: -5%;" src=<%
+				<img style="width: 90%; height: -5%;" src=<%
 				JDBC jdbc = new JDBC();
-				String q = "SELECT name,supervisorPicture FROM supervisor WHERE supervisorID = '"+mid+"';";
-				jdbc.st.executeQuery(q);
-				ResultSet rs = jdbc.st.getResultSet();
-				String supervisorpicture = "";
+				String midwifepicture = "";
 				String uname = "";
 				String utype = "";
-				while(rs.next()){
-					supervisorpicture = rs.getString("supervisorPicture");
-					uname = rs.getString("name");
-				}
-				utype = "Supervisor";
 				try{
-					jdbc.conn.close();
+					String q = "SELECT name,supervisorPicture FROM supervisor WHERE supervisorID = '"+mid+"';";
+					jdbc.st.executeQuery(q);
+					ResultSet rs = jdbc.st.getResultSet();
+					while(rs.next()){
+						midwifepicture = rs.getString("supervisorPicture");
+						uname = rs.getString("name");
+					}
+					utype = "Supervisor";
 				}catch(Exception e){
 					e.printStackTrace();
 				}
-				if(supervisorpicture != null){
-					out.print(supervisorpicture);
+				finally{
+					try{
+						jdbc.conn.close();
+					}catch(Exception e){
+						e.printStackTrace();
+					}
 				}
-				%> alt="midwife">
+				if(midwifepicture != null){
+					out.print(midwifepicture);
+				}
+				%> alt="supervisor">
 			</th>
-			<th id="profile" style="width: 25%; color:white; padding: 0 1% 0 1%; font-size: 70%; box-shadow: 1px -2px 2px -0.5px black;">
+			<th id="profile" style="width: 75%; color:white; padding: 0 1% 0 1%; font-size: 60%; box-shadow:0px -2px 1px 0px;">
 				<h2 id="profile" style="float: left;"><% 
 				if(uname != null){
 					out.print(uname);
@@ -59,19 +65,27 @@
 				}
 				%></h2>
 			</th>
-			<th style="width: 50%; color: #796CCA;">
-				<h3 id="title">
-					
-				</h3>
+		</tr>
+	</table>
+	<table style="float:right; width: 20%; height: 100%;">
+		<tr style="width: 100%;">
+			<th id="home" style="padding: 6% 0 5% 0; width: 10%; color:gray; font-size: 100%;">
+				<a style="box-shadow:0px 0px 1px 3px; padding: 5px;" id="home">Home</a>
 			</th>
-			<th id="home" style="width: 10%; color:gray; font-size: 100%;">
-				<a id="home">Home</a>
-			</th>
-			<th id="logout" style="width: 10%; color:gray; font-size: 100%;">
-				<a id="logout">Log Out</a>
+			<th id="logout" style="padding: 6% 0 5% 0; width: 10%; color:gray; font-size: 100%;">
+				<a style="box-shadow:0px 0px 1px 3px; padding: 5px;" id="logout">Log Out</a>
 			</th>
 		</tr>
 	</table>
+	<div style="margin: 1% 1% 1% 1%; float:right; width: 30%; color: #796CCA;">
+		<div id="searchboxshow" style="border-radius:5%; font-size:120%; margin-left:2%; padding:2.5px; float:right; color: white;">
+			<img style="width: 80%;" id="searchboxshow" src="midwife/images/services/search.png">
+		</div>
+		<div id="searchbox" style="box-shadow:0.2px 0.2px 1px 1px inset; border-radius:1%; width:80%; float:right; color: black;">
+			<jsp:include page="/search.jsp" />
+		</div>
+	</div>		
+	
 </div>
 <jsp:include page="/pictureupload.jsp" />
 </body>

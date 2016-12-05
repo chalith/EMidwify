@@ -20,6 +20,7 @@
 <script type="text/javascript" src="js/jscharts.js"></script>
 <script>
 $(window).load(function(){
+	loadGraph();
 	loadChildren();
 	loadMessages();
 	getUnreadMsgCount();
@@ -27,12 +28,10 @@ $(window).load(function(){
 });
 //This function is to view weigth graphs
 function loadGraph(){
-	var startdate = document.getElementById("startdate").value;
-	var enddate = document.getElementById("enddate").value;
 	var id = document.getElementById("guardianid").value;
 	var xmlhttp = new XMLHttpRequest();
     var url="viewweights";
-    var url=url+"?person=mother&id="+id+"&startdate="+startdate+"&enddate="+enddate;
+    var url=url+"?person=mother&id="+id;
 	xmlhttp.onreadystatechange = function() {
 		if(xmlhttp.readyState==4 && xmlhttp.status==200){
 	        var json = JSON.parse(xmlhttp.responseText);
@@ -48,8 +47,13 @@ function loadGraph(){
 			myChart.setDataArray(myData);
 			myChart.setAxisNameX("Date");
 			myChart.setAxisNameY("Weight");
+			myChart.setShowXValues(false);
+			myChart.setIntervalStartY(0);
+			myChart.setIntervalEndY(120);
+			myChart.resize(800, 500);
+			myChart.setAxisValuesNumberY(40);
 			for(var i=0;i<k.length;i++){
-				myChart.setLabelX([i, json[k[i]].date]);
+				myChart.setLabelX([i, json[k[i]].age]);
 				//alert(json[k[i]].date+" "+json[k[i]].age+" "+json[k[i]].weight);
 			}
 			myChart.draw();
@@ -146,8 +150,8 @@ function loadGraph(){
 					<input type="hidden" id="guardianormother" value="<%
 						out.print(guardormother);
 					%>"></input>
-					<div class="motherdetails" style="padding-top:2%; margin:3% 3% 0 3%; border:2px solid; font-size: 120%;">
-						<img style="width:20%; border:solid; border-radius:10%; margin-bottom: 0;" src="<% out.print(guardianPic); %>" alt="user_photo">
+					<div class="motherdetails" style="padding-top:1%; margin:3% 3% 0 3%; border:2px solid;">
+						<img style="width:15%; border:solid; border-radius:10%; margin: 2% 0 -2% 0%;" src="<% out.print(guardianPic); %>" alt="user_photo">
 						<h1 style="width:50%; float: right;"><%
 							if(guardian.fullname!=null){
 								out.print(guardian.fullname);
@@ -162,9 +166,9 @@ function loadGraph(){
 					if(guardormother.equals("mother")){
 						out.print("<div class=\"titlebar\" id=\"titlebar\">");
 						out.print("<div class=\"title\" id=\"detailstab\"><center><h1>Details</h1></center></div>");
-						out.print("<div class=\"title\" id=\"vaccinationtab\"><center><h1>Clinic Updates</h1></center></div>");
+						out.print("<div class=\"title\" id=\"vaccinationtab\"><center><h1>Attended Clinics</h1></center></div>");
 						out.print("<div class=\"title\" id=\"editinfotab\"><center><h1>Edit Info</h1></center></div>");
-						out.print("<div class=\"title\" id=\"updatetab\"><center><h1>Update</h1></center></div>");
+						out.print("<div class=\"title\" id=\"updatetab\"><center><h1>Update Clinics</h1></center></div>");
 					}
 					else{
 						out.print("<div class=\"titlebar\" id=\"titlebar\" style=\"width:10%;\">");
@@ -256,7 +260,7 @@ function loadGraph(){
 							</table>
 						</div>
 						<h2 style="width: 100%;">Weight graphs</h2>
-						<div>
+						<!-- <div>
 						<table style="float:left; width: 100%;">
 							<tr>
 								<th>
@@ -292,9 +296,9 @@ function loadGraph(){
 								</td>
 							</tr>
 						</table>
-						</div></br></br></br></br></br></br></br></br></br></br>
+						</div></br></br></br></br></br></br></br></br></br></br> -->
 						<center>
-							<div class="btn" onclick="loadGraph()">Show</div>
+							<!-- <div class="btn" onclick="loadGraph()">Show</div>  -->
 							<div style="display: inline-block;">
 								<div style="float:left; width: 100%;" id="chartcontainer">
 								

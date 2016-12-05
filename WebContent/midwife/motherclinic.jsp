@@ -57,8 +57,16 @@
 				</div>
 			</div>
 			<div class="body">
-				<div class="form">
-					<div class="form_content" style="border-Style:solid; font-size: 120%;">
+				<div class="titlebar" id="titlebar">
+					<div class="title" id="upcomingtab"><center><h1>Upcoming Clinics</h1></center></div>
+					<div class="title" id="pasttab"><center><h1>Past Clinics</h1></center></div>
+				</div>
+					
+				<div class="form" id="upcoming">
+					<div class="form_content" style="border-bottom:solid;">
+						<center><h1>Clinics to come</h1></center>
+					</div>
+					<div class="form_content" style="font-size: 120%;">
 						<div style="float:left; width:50%;">
 							<label>Area</label>
 							<select id="clinicareas" style="margin-left:13%; font-size: 80%; width:50%; background:#34495E; color: white;">
@@ -76,7 +84,7 @@
 							</select>
 						</div></br>
 					</div>
-					<div class="form_content" style="font-size: 120%; foreground:blue; border-Style:solid;"">
+					<div class="form_content" style="font-size: 120%;">
 						<div style="float:left; width:50%;">
 							<label>Venue</label>
 							<input id="venue" style="font-size: 80%; width:60%; background:#E6E6E6;" type="text" id="venue" placeholder="Venue" name="txtvenue" /readonly>
@@ -87,7 +95,7 @@
 						</div></br>
 					</div>
 					<div class="form_content">
-						<table id="motherTable" Style="width:100%;">
+						<table id="motherTable" Style="width:100%; display:none;">
 							<tr>
 								<th>Mother</th>
 								<th>Age</th>
@@ -97,7 +105,62 @@
 						</table>
 					</div>
 					<div class="form_content">
-						<table id="triposhaTable" Style="width:100%;">
+						<table id="triposhaTable" Style="width:100%; display:none;">
+							<tr>
+								<th>Mother</th>
+								<th>Triposha Amount</th>
+							</tr>
+						</table>
+					</div>
+				</div>
+				<div class="form" style="display: none;" id="past">
+					<div class="form_content" style="border-bottom:solid;">
+						<center><h1>Past clinics</h1></center>
+					</div>
+					<div class="form_content" style="font-size: 120%;">
+						<div style="float:left; width:50%;">
+							<label>Area</label>
+							<select id="pastclinicareas" style="margin-left:13%; font-size: 80%; width:50%; background:#34495E; color: white;">
+								<option selected disabled option>Area</option>
+								<%
+									out.print(areas);
+								%>
+							</select>
+						</div>
+						<div style="float:left; width:50%;">
+							<label>Scheduled Date</label>
+							<select id="pastclinicdates" style="font-size: 80%; width:50%; background:#34495E; color: white;">
+								<option selected disabled option>Clinic Dates</option>
+								
+							</select>
+						</div></br>
+					</div>
+					<div class="form_content" style="font-size: 120%;">
+						<div style="float:left; width:50%;">
+							<label>Venue</label>
+							<input id="pastvenue" style="font-size: 80%; width:60%; background:#E6E6E6;" type="text" placeholder="Venue" name="txtvenue" /readonly>
+						</div>
+						<div style="float:left; width:50%;">
+							<label>Time</label>
+							<input id="pasttime" style="margin-left:10%; font-size: 80%; width:60%; background:#E6E6E6;" type="text" placeholder="Time" name="txttime" /readonly>
+						</div></br>
+					</div>
+					<div class="form_content" id="count">
+						
+					</div>
+					
+					<div class="form_content">
+						<table id="pastMotherTable" Style="width:100%; display:none;">
+							<tr>
+								<th>Mother</th>
+								<th>Age</th>
+								<th>Vaccine</th>
+								<th>Amount</th>
+							</tr>
+						</table>
+					</div>
+					<div class="form_content">
+						<table id="pastTriposhaTable" Style="width:100%; display:none;">
 							<tr>
 								<th>Mother</th>
 								<th>Triposha Amount</th>

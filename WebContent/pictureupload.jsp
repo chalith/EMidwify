@@ -51,8 +51,10 @@ function uploadImage(){
 }
 $(document).ready(function(){
 	$('#sourcepath').on("change",function(){
-		var path = document.getElementById("sourcepath");
-		readURL(path,"pic");
+		if(testUpload()){
+			var path = document.getElementById("sourcepath");
+			readURL(path,"pic");
+		}
 	});
 	$("input").change(function(){
 		$(this).css({"background-color":'white'});

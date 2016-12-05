@@ -86,6 +86,7 @@ html{
 	background-color: white;
 }
 .header table{
+	overflow:hidden;
 	max-height:10%;
 	min-height: 100%;
 }

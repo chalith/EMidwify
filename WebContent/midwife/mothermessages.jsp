@@ -68,8 +68,9 @@
 						%>
 					</select>
 					<div id="motherbar">
-						
+					
 					</div>
+					<jsp:include page="groupmessages.jsp" />
 				</div>
 				<div class="msgcontent" id="msgcontent">
 					<div id="sendername" class="sendername" style="font-size: 80%; margin-left: 20%;"></div>
@@ -98,6 +99,5 @@
 </div>
 <jsp:include page="/alert.jsp" />
 <jsp:include page="/error.jsp" />
-<jsp:include page="groupmessages.jsp" />
 </body>
 </html>

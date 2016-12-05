@@ -24,6 +24,9 @@ $(document).ready(function(){
 			if(mid.startsWith("Midwife")){
 				response.sendRedirect("midwife/midwifefrontpage.jsp");
 			}
+			if(mid.startsWith("Supervisor")){
+				response.sendRedirect("supervisor/supervisorfrontpage.jsp");
+			}
 			else if(mid.startsWith("Guard")){
 				response.sendRedirect("mother/motherfrontpage.jsp");
 			}

@@ -35,13 +35,19 @@
 			<div class="home-col clearfix" >
 				<div class="servicebox">
 					<div class="services">
-						<button><a href="http://localhost:8081/EMidwify/mother/mother.jsp"><img src="mother/images/services/viewprofile.png" alt="profile"></a></button>
+						<button><a href="http://localhost:8081/EMidwify/mother/mother.jsp"><img src="supervisor/images/services/viewprofile.png" alt="profile"></a></button>
 						<h3 align="center">Profile</h3></br>
 						<p style="margin-left: 25%;">View my profile</p>
 					</div>
 					
+					<div id="viewtimeline" class="services">
+						<button><a><img id="viewtimeline" src="supervisor/images/services/timeline.png" alt="message"></a></button>
+						<h3 id="viewtimeline" align="center">Timeline</h3></br>
+						<p id="viewtimeline" style="margin-left: 23%;">View my timeline</p>
+					</div>
+					
 					<div id="view" class="services">
-						<button><a href="#"><img src="mother/images/services/view.png" alt="message"></a></button>
+						<button><a href="#"><img src="supervisor/images/services/view.png" alt="message"></a></button>
 						<h3 align="center">View</h3></br>
 						<p style="margin-left: 23%;">View Mother / Child</p>
 						<div id="viewdrop" class="dropdown-content">
@@ -59,7 +65,7 @@
 					</div>
 					
 					<div id="clinic" class="services">
-						<button><a href="supervisor/clinicschedule.jsp"><img src="mother/images/services/clinic.png " alt="clinic"></a></button>
+						<button><a href="supervisor/clinicschedule.jsp"><img src="supervisor/images/services/event.png " alt="clinic"></a></button>
 						<h3 align="center">Clinic</h3></br>
 						<p style="margin-left: 15%;">Create clinic schedule</p>
 					</div>
@@ -67,28 +73,12 @@
 					<div id="message" class="services">
 						<button><a href="http://localhost:8081/EMidwify/mother/midwifemessages.jsp">
 						<h1 id="messagecount" class="msgnotify" style="display:none;"></h1>
-						<img src="mother/images/services/message.png " alt="message"></a></button>
+						<img src="supervisor/images/services/message.png " alt="message"></a></button>
 						<h3 align="center">Send messages</h3></br>
 						<p style="margin-left: 10%;">Send messeges to Gurdians / Supervisor</p>
 					</div>
 					
 				</div>	
-				<div class="timeline">
-					<center><div style="background-color: white; width: 89.5%; float: left; border-radius:10%; border: solid #3C405B;">
-						<h2>Timeline</h2>
-					</div></center>
-					<table>
-					<%
-						/*String notificationString = "";
-						MotherNotifications notifications = new MotherNotifications(sid);
-						ArrayList<Notification> mnotifications = notifications.getNotifications();
-						for(int i=0;i<mnotifications.size();i++){
-							notificationString = notificationString + "<tr id=\""+mnotifications.get(i).id+"\"><td id=\""+mnotifications.get(i).id+"\">"+mnotifications.get(i).title+"</td><td id=\""+mnotifications.get(i).id+"\">"+mnotifications.get(i).date+"</td><td id=\""+mnotifications.get(i).id+"\">"+mnotifications.get(i).description+"</td></tr>";
-						}
-						out.print(notificationString);*/
-					%>
-					</table>
-				</div>
 			</div>
 				
 			<div class ="newsfeed" style="height: 100%; width: 20%; float: right; background-color:#AFC6DF;">

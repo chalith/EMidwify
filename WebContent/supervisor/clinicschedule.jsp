@@ -36,12 +36,13 @@
 	}
 %>
 <div>
-	<div class="container" id="container">
+<div class="container">
 		<div style="width:75%; height:10%; position:relative;">
 			<jsp:include page="header.jsp"/>
 		</div>
-		<div class="backbody">
+		<div class="backbody" id="container">
 			<div class="right_sidebar">
+				
 				<div class ="newsfeed clearfix">
 					
 					<h2>Latest News</h2>
@@ -169,15 +170,15 @@
 					</div>
 				</form>
 			</div>
-		</div>
-		<div class="footer">
-			<div style="float:left; width:100%; height:100%;">
-				<div style="float:left; margin:20px;">
-					Copyrights &copy; Domain Name. All rights Reseved
-				</div>
-					
-				<div style="float:right; margin:20px;">
-					website by: FordSlash
+			<div class="footer">
+				<div style="float:left; width:100%; height:100%;">
+					<div style="float:left; margin:20px;">
+						Copyrights &copy; Domain Name. All rights Reseved
+					</div>
+						
+					<div style="float:right; margin:20px;">
+						website by: FordSlash
+					</div>
 				</div>
 			</div>
 		</div>

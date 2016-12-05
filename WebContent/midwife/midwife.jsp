@@ -33,8 +33,8 @@
 		<div class="body">
 			<div style="float:left; width:80%;">					
 				<div class="details" style="display:block;">
-					<div class="midwifedetails" style="padding-top:2%; margin:3% 3% 0 3%; border:2px solid; font-size: 120%;">
-						<img style="width:20%; border:solid; border-radius:10%; margin-bottom: 0;" src="<%
+					<div class="midwifedetails" style="padding-top:1%; margin:3% 3% 0 3%; border:2px solid;">
+						<img style="width:15%; border:solid; border-radius:10%; margin: 2% 0 -2% 0%;" src="<%
 						JDBC jdbc = null;
 						String fullname = null;
 						String address = null;

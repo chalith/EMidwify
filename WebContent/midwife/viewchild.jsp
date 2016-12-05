@@ -19,13 +19,14 @@
 <script src="midwife/js/viewchild.js"></script>
 <script type="text/javascript" src="js/jscharts.js"></script>
 <script>
+$(window).load(function(){
+	loadGraph();
+});
 function loadGraph(){
-	var startdate = document.getElementById("startdate").value;
-	var enddate = document.getElementById("enddate").value;
 	var id = document.getElementById("childid").value;
 	var xmlhttp = new XMLHttpRequest();
     var url="viewweights";
-    var url=url+"?person=child&id="+id+"&startdate="+startdate+"&enddate="+enddate;
+    var url=url+"?person=child&id="+id;
 	xmlhttp.onreadystatechange = function() {
 		if(xmlhttp.readyState==4 && xmlhttp.status==200){
 	        var json = JSON.parse(xmlhttp.responseText);
@@ -41,8 +42,13 @@ function loadGraph(){
 			myChart.setDataArray(myData);
 			myChart.setAxisNameX("Date");
 			myChart.setAxisNameY("Weight");
+			myChart.setShowXValues(false);
+			myChart.setIntervalStartY(0);
+			myChart.setIntervalEndY(20);
+			myChart.resize(800, 500);
+			myChart.setAxisValuesNumberY(20);
 			for(var i=0;i<k.length;i++){
-				myChart.setLabelX([i, json[k[i]].date]);
+				myChart.setLabelX([i, json[k[i]].age]);
 				//alert(json[k[i]].date+" "+json[k[i]].age+" "+json[k[i]].weight);
 			}
 			myChart.draw();
@@ -69,8 +75,8 @@ function loadGraph(){
 		<div class="body">
 			<div style="float:left; width:80%;">
 				<div class="details" style="display:block;">
-					<div class="childdetails" style="padding-top:2%; margin:3% 3% 0 3%; border:2px solid; font-size: 120%;">
-						<img style="width:20%; border:solid; border-radius:10%; margin-bottom: 0;" src="<%
+					<div class="childdetails" style="padding-top:1%; margin:3% 3% 0 3%; border:2px solid;">
+						<img style="width:15%; border:solid; border-radius:10%; margin: 2% 0 -2% 0%;" src="<%
 							JDBC jdbc1 = new JDBC();
 						Child child = new Child();;
 						String childPic = "";
@@ -182,9 +188,9 @@ function loadGraph(){
 					</div>
 					<div class="titlebar" id="titlebar">
 						<div class="title" id="detailstab"><center><h1>Details</h1></center></div>
-						<div class="title" id="vaccinationtab"><center><h1>Clinic Updates</h1></center></div>
+						<div class="title" id="vaccinationtab"><center><h1>Attended Clinics</h1></center></div>
 						<div class="title" id="editinfotab"><center><h1>Edit Info</h1></center></div>
-						<div class="title" id="updatetab"><center><h1>Update</h1></center></div>
+						<div class="title" id="updatetab"><center><h1>Update Clinics</h1></center></div>
 					</div>
 					<div style="display: inline-block; margin-top: 0; width: 84%;" class="childdetails" id="details">
 						<input type="hidden" id="childid" value="<%
@@ -274,7 +280,7 @@ function loadGraph(){
 							</table>
 						</div>
 						<h2 style="width: 100%;">Weight graphs</h2>
-						<table style="float:left; width: 100%;">
+						<!-- <table style="float:left; width: 100%;">
 							<tr>
 								<th>
 									<div style="float:left; width:15%; width: 100%;">
@@ -308,9 +314,9 @@ function loadGraph(){
 									</center>
 								</td>
 							</tr>
-						</table></br></br></br></br></br></br></br></br></br></br>
+						</table></br></br></br></br></br></br></br></br></br></br> -->
 						<center>
-							<div class="btn" onclick="loadGraph()" style="height: 5%;">Show</div>
+							<!-- <div class="btn" onclick="loadGraph()" style="height: 5%;">Show</div> -->
 							<div style="display: inline-block;">
 								<div style="float:left; width: 100%;" id="chartcontainer">
 								

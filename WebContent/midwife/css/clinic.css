@@ -1,3 +1,37 @@
+.titlebar{
+	position:static;
+	margin-top:2%;
+	margin-left:1%;
+	width:30%;
+	height:3%;	
+	box-shadow: 1px 1px 10px 1px;
+	border-radius:5%;
+}
+.title{
+	background-color:#798DC9;
+	float:left;
+	width:50%;
+	height:100%;
+	color:white;
+	box-shadow: 1px 1px 10px 1px;
+	box-shadow:-3px -3px 20px 0px black inset;
+	border-radius:5%;
+	text-align: center;
+	cursor: pointer;
+}
+.title h1{
+	margin-top:0;
+	font-size: 90%;
+}
+.title:hover{
+	background-color:#2E51B9!important;
+	box-shadow:0 0 10px 0px black inset!important;
+}
+.title:active{
+	background-color:#0A2C91!important;
+	box-shadow:1px 1px 10px 0px black inset!important;
+}
+
 .form th, td {
     border: 1px solid black;
 	width:20%;
@@ -12,11 +46,11 @@
 	background-color:#A7D2D7;
 }
 .form{
-	width:80%;
-	padding:5% 5% 5% 5%;	
-	margin:5% 5% 5% 5%;
+	width:94%;
+	padding:2% 2% 2% 2%;	
+	margin:2.5% 1% 1% 1%;
 	background-color:white;
-	box-shadow: 1px 1px 10px 1px;
+	box-shadow: 0.1px 0.1px 2px 0.1px;
 }
 .container{
 	width:100%;
@@ -26,7 +60,7 @@
 	top: 0; left: 0; bottom: 0; right: 0;
 }
 .form_content{
-	padding:5% 2% 5% 2%;
+	padding:1% 1% 1% 1%;
 }
 .form_content th{
 	font-size:110%;

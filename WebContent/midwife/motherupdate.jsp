@@ -16,6 +16,27 @@
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 <script src="midwife/js/createviewforall.js"></script>
 <script src="midwife/js/motherupdate.js"></script>
+<script>
+function loadClinics(){
+	var xmlhttp = new XMLHttpRequest();
+	var area=document.getElementById("tempareacode").value;
+	var url="loadclinicdates"; 
+	url=url+"?area="+area;
+	xmlhttp.onreadystatechange = function() {
+		if(xmlhttp.readyState==4 && xmlhttp.status==200){
+		    var out = xmlhttp.responseText;
+		    document.getElementById("clinictdate").innerHTML = out;
+		}
+	};
+	
+	xmlhttp.open("GET",url,true);
+	xmlhttp.send(null);
+}
+$(window).load(function(){
+	loadClinics();
+});
+
+</script>
 </head>
 <body>
 	<%
@@ -136,10 +157,15 @@
 								<div style="float:left; width:30%;">	
 									<label>Clinic Date</label>
 								</div>
-								<div id="date_clinictdate" style="float:left; width:70%;">
+								<select id="clinictdate" name="txtclinicdate" style="width:50%;">
+									<option selected disabled option>Clinic Dates</option>
+									
+								</select>
+								
+								<!-- <div id="date_clinictdate" style="float:left; width:70%;">
 									<jsp:include page="/date.jsp" />	
 								</div>
-								<input type="hidden" id="clinictdate" name="txtclinicdate">
+								<input type="hidden" id="clinictdate" name="txtclinicdate">  -->
 							</div>
 						</div>
 					</div></br>

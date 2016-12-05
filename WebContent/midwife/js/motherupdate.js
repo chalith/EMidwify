@@ -1,3 +1,13 @@
+$(window).load(function(){
+	var id = document.getElementById("tempguardianid").value;
+	var areacode = document.getElementById("tempareacode").value;
+	if((id!="")&&(areacode!="")){
+		viewMother(id);
+		$('#view').css("display","inline-block");
+		viewChildren(id);
+	}
+});
+
 function setError(element){
 		element.style.backgroundColor = "#FFB6C1";
 }
@@ -82,15 +92,6 @@ function loadVaccineAmount(){
 	    xmlhttp.send(null);
 	}
 }
-$(window).load(function(){
-	var id = document.getElementById("tempguardianid").value;
-	var areacode = document.getElementById("tempareacode").value;
-	if((id!="")&&(areacode!="")){
-		viewMother(id);
-		$('#view').css("display","inline-block");
-		viewChildren(id);
-	}
-});
 $(document).ready(function(){
 	$("input").keypress(function(){
 		if(event.which == 13){

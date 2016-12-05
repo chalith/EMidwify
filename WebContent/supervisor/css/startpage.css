@@ -4,75 +4,53 @@
 	font-size: 180%;
 	padding:0.5px;
 	margin-top:0;
-	width:90%;
-	margin-bottom:-100%;
+	width:80%;
+	margin-bottom:-80%;
 	text-align:center;
 	background-color:red;
 	color: white;
 	border-radius:50%;
 	position: relative;
 }
+.newsfeed{
+	//border-radius:20px;
+}
 .container{
 	width:100%;
 	height:100%;
-	background-color:black;
 	margin:0 auto;
 	position: absolute;
 	top: 0; left: 0; bottom: 0; right: 0;
 }
 body{
-	 background-color: black;
+	background-color:white;
 }
 .body{
-	background-color:#CBD0FA;
+	background-color:white;
 	height:90%;
 	width:100%;
 	float:center;
 }
 .servicebox{
-	padding-top:5%;
-	padding-bottom:7%;
-	padding-left:1%;
+	display:inline-block;
+	padding:4% 1% 3.5% 2%;
+	height:100%;
 	position:static;
 	float:left;
-	min-height: 40%;
+	min-height:80%;
 	width: 100%;
-}
-.timeline{
-	background-color:#E2E4F2;
-	cursor:default;
-	padding:5%;
-	float:left;
-	width: 100%;
-	position: static;
-}
-.timeline table{
-	font-size:120%;
-	width: 90%;
-	position: static;
-	color: #2C2C32;
-	font-style: "Comic Sans MS", cursive, sans-serif;
-}
-.timeline tr{
-	border-style:solid;
-	cursor:pointer;
-	border-radius:5%;
-	background-color: #9BA4F3;
-}
-.timeline td{
-	padding: 1%;
 }
 .home-col{
-	overflow-y:hidden;
-	overflow-x:hidden;
+	background-color:#DEE6FB;
+	//overflow-y:hidden;
+	//overflow-x:hidden;
+	border-radius:20px;
 	float:left;
-	width:79.5%;
-	height:100%;
-	padding-left:0.4%;
+	width:80%;
 	display:inline-block;
 }
 .home-col:hover{
-	overflow-y:scroll;
+	//overflow-y:scroll;
 }
 	
 .home-col::-webkit-scrollbar{
@@ -99,6 +77,7 @@ body{
 	
 }
 .services{
+	border-radius:5%;
 	cursor:pointer;
 	width:20%;
 	height:220px;
@@ -137,18 +116,17 @@ body{
 }
 
 .dropdown-content {
-	border:solid #FDFEFF;
-    display: none;
+	border:solid #D9DBE9;
+    //display: none;
     position: relative;
-    width: 110%;
+    width: 100%;
     margin-top:12%;
-    padding-top:8%;
-    height:20%;
+    padding-top:0%;
+    padding-bottom:1%;
+    height:10%;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2) white inset;
-    margin-left:-6%;
-	color:black; 
-	background-color:#D9DBE9 ;
-	
+    margin-left:-1.3%;
+	color:black;	
 }
 .dropdown-content a{
 	width:50%;

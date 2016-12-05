@@ -10,21 +10,22 @@
 	position: absolute;
 }
 .groupicon{
-	padding-top:0.3%;
+	padding-top:1%;
 	cursor:pointer;
-	width: 5%;
-	height: 9%;
+	width: 20%;
+	height: 10%;
 	background-color:white;
 	border-radius:50%;
-	margin:42% 0 0 16.9%;
-	position: absolute;
-	box-shadow:1px 1px 10px 1px inset;
+	left:75%;
+	top:-14%;
+	position: relative;
+	box-shadow:1px 1px 2px 1px inset;
 }
 .groupicon:hover{
-	box-shadow:1px 1px 20px 1px inset;
+	box-shadow:1px 1px 8px 1px inset;
 }
 .groupicon:active{
-	box-shadow:1px 1px 30px 1px inset;
+	box-shadow:1px 1px 14px 1px inset;
 }
 .groupicon:active img{
 	transform: translateY(2px);

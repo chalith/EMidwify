@@ -11,6 +11,7 @@ import com.main.JDBC;
 public class ClinicDates {
 	public String areaCode = null;
 	public ArrayList<String[]> clinicDates = null;
+	public ArrayList<String[]> pastClinicDates = null;
 	public JDBC jdbc = null;
 	public ClinicDates(String area) {
 		areaCode = area;
@@ -29,6 +30,17 @@ public class ClinicDates {
 				String t = rs.getString("time");
 				String s[] = {d,v,t};
 				clinicDates.add(s);				
+			}
+			pastClinicDates = new ArrayList<String[]>();
+			q = "SELECT clinicDate,venue,time FROM clinics WHERE areaCode = '"+areaCode+"' && clinicDate <= '"+cDate+"';";
+			jdbc.st.executeQuery(q);
+			rs = jdbc.st.getResultSet();
+			while (rs.next()) {
+				String d = rs.getString("clinicDate");
+				String v = rs.getString("venue");
+				String t = rs.getString("time");
+				String s[] = {d,v,t};
+				pastClinicDates.add(s);				
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -51,7 +63,22 @@ public class ClinicDates {
 		}
 		return s;
 	}
+	public String[] getPastDeatils(String date){
+		String s[] = new String[2];
+		for(int i=0;i<pastClinicDates.size();i++){
+			if(pastClinicDates.get(i)[0].equals(date)){
+				s[0] = pastClinicDates.get(i)[1];
+				s[1] = pastClinicDates.get(i)[2];
+				break;
+			}
+		}
+		return s;
+	}
+	
 	public ArrayList<String[]> getDates() {
 		return clinicDates;
+	}
+	public ArrayList<String[]> getPastDates() {
+		return pastClinicDates;
 	}
 }
