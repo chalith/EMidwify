@@ -66,7 +66,7 @@
 			</div>
 		</div>
 		<div class="body">
-			<form action="midwifeeditinfo" method="post" name="midwifeeditForm">
+			<form action="supervisoreditinfo" method="post" name="midwifeeditForm">
 				<div class="form_content">
 				<div class="form_content" style="border:solid; padding-top:4%; padding-bottom: 5%;">
 					<div style="float:left; width:10%;">	
@@ -82,7 +82,7 @@
 								String picture = "";
 								JDBC jdbc = new JDBC();
 								try{
-									String q = "SELECT * FROM midwife WHERE midwifeID = '"+id+"';";
+									String q = "SELECT * FROM supervisor WHERE supervisorID = '"+id+"';";
 									jdbc.st.executeQuery(q);
 									ResultSet rs = jdbc.st.getResultSet();
 									while(rs.next()){
@@ -91,7 +91,7 @@
 										address = rs.getString(4).trim();
 										email = rs.getString(5).trim();
 										starteddate = rs.getString(6).trim();
-										picture = rs.getString(8).trim();
+										picture = rs.getString(7).trim();
 									}
 								}catch(Exception e){
 									e.printStackTrace();
@@ -104,7 +104,7 @@
 								}
 								JDBC jdbc2 = new JDBC();
 								try{
-									String q = "SELECT mobileNumber FROM midwifemobilenumber WHERE midwifeID = '"+id+"';";
+									String q = "SELECT mobileNumber FROM supervisormobilenumber WHERE supervisorID = '"+id+"';";
 									jdbc2.st.executeQuery(q);
 									ResultSet rs = jdbc2.st.getResultSet();
 									while(rs.next()){
@@ -119,6 +119,7 @@
 										e.printStackTrace();
 									}
 								}
+								
 								String midwifepicture = "";
 								out.print(picture);
 							%>"
@@ -126,7 +127,7 @@
 					</div>
 					<div style="float:left; width:45%;">
 						<div style="float:left; width:40%;">
-							<label>Midwife NIC/ID</label>
+							<label>Supervisor NIC/ID</label>
 						</div>
 						<div style="float:left; width:60%;">
 							<input style="width:60%; background:#E6E6E6;" placeholder="MidwifeID" type="text" id="midwifeid" name="txtmidwifeid" value = 
@@ -250,7 +251,6 @@
 	</div>
 </div>
 <div>
-<jsp:include page="setlocation.jsp" />
 <%
 	String alert = (String) request.getAttribute("finalAlert");
 	if(alert != null){

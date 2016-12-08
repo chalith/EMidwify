@@ -18,6 +18,19 @@
 <script src="jquery.json-2.4.min.js"></script>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script src="supervisor/js/startpage.js"></script>
+<script>
+$(document).ready(function(){
+	$('#viewprofile').click(function(){
+		window.location = "supervisor/supervisor.jsp";
+	});
+	$('#clinic').click(function(){
+		window.location = "supervisor/clinicschedule.jsp";
+	});
+	$('[name="message"]').click(function(){
+		window.location = "supervisor/midwifemessages.jsp";
+	});
+});
+</script>
 </head>
 <body>
 	<%	
@@ -34,10 +47,10 @@
 		<div class="body clearfix" id="container">
 			<div class="home-col clearfix" >
 				<div class="servicebox">
-					<div class="services">
-						<button><a href="http://localhost:8081/EMidwify/mother/mother.jsp"><img src="supervisor/images/services/viewprofile.png" alt="profile"></a></button>
-						<h3 align="center">Profile</h3></br>
-						<p style="margin-left: 25%;">View my profile</p>
+					<div class="services" id="viewprofile">
+						<button id="viewprofile"><a><img src="supervisor/images/services/viewprofile.png" alt="profile"></a></button>
+						<h3 align="center" id="viewprofile">Profile</h3></br>
+						<p style="margin-left: 25%;" id="viewprofile">View my profile</p>
 					</div>
 					
 					<div id="viewtimeline" class="services">
@@ -46,7 +59,7 @@
 						<p id="viewtimeline" style="margin-left: 23%;">View my timeline</p>
 					</div>
 					
-					<div id="view" class="services">
+					<!-- <div id="view" class="services">
 						<button><a href="#"><img src="supervisor/images/services/view.png" alt="message"></a></button>
 						<h3 align="center">View</h3></br>
 						<p style="margin-left: 23%;">View Mother / Child</p>
@@ -62,20 +75,20 @@
 						</tr>
 						</table>
 						</div>
-					</div>
+					</div> -->
 					
 					<div id="clinic" class="services">
-						<button><a href="supervisor/clinicschedule.jsp"><img src="supervisor/images/services/event.png " alt="clinic"></a></button>
-						<h3 align="center">Clinic</h3></br>
-						<p style="margin-left: 15%;">Create clinic schedule</p>
+						<button><a id="clinic"><img src="supervisor/images/services/event.png " alt="clinic"></a></button>
+						<h3 align="center" id="clinic">Clinic</h3></br>
+						<p style="margin-left: 15%;" id="clinic">Create clinic schedule</p>
 					</div>
 					
-					<div id="message" class="services">
-						<button><a href="http://localhost:8081/EMidwify/mother/midwifemessages.jsp">
-						<h1 id="messagecount" class="msgnotify" style="display:none;"></h1>
-						<img src="supervisor/images/services/message.png " alt="message"></a></button>
-						<h3 align="center">Send messages</h3></br>
-						<p style="margin-left: 10%;">Send messeges to Gurdians / Supervisor</p>
+					<div name="message" id="message" class="services">
+						<button name="message"><a>
+						<h1 name="message" id="messagecount" class="msgnotify" style="display:none;"></h1>
+						<img name="message" src="supervisor/images/services/message.png " alt="message"></a></button>
+						<h3 name="message" align="center">Send messages</h3></br>
+						<p name="message" style="margin-left: 10%;">Send messeges to Gurdians / Supervisor</p>
 					</div>
 					
 				</div>	

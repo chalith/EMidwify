@@ -90,7 +90,7 @@ function loadGraph(){
 				String clinicdates = "";
 				JDBC jdbc = new JDBC();
 				try{
-					String q="SELECT * FROM guardian WHERE (guardianID = '"+Gid+"') && (guardianAreaCode IN ( SELECT areaCode FROM area WHERE midwifeID = '"+mid+"'));";
+					String q="SELECT * FROM guardian WHERE guardianID = '"+Gid+"';";
 					jdbc.st.executeQuery(q);
 					ResultSet rs = jdbc.st.getResultSet();
 					while(rs.next()){

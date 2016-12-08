@@ -8,6 +8,7 @@ function loadMothers(){
 			if(xmlhttp.readyState==4 && xmlhttp.status==200){
 		        var users = xmlhttp.responseText;
 		        document.getElementById("motherbar").innerHTML = users;
+		        $('#msgs').animate({scrollTop:$('#msgs')[0].scrollHeight});
 			}
 		};
 		

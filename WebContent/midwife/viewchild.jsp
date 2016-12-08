@@ -91,7 +91,7 @@ function loadGraph(){
 						String fathername = null;
 						String fatherpic = null;
 						try{
-							String q1="SELECT * FROM child WHERE (childID = '"+cid+"') && (guardianID IN (SELECT guardianID FROM guardian WHERE guardianAreaCode IN (SELECT areaCode FROM area WHERE midwifeID = '"+mid+"')));";
+							String q1="SELECT * FROM child WHERE childID = '"+cid+"';";
 							jdbc1.st.executeQuery(q1);
 							ResultSet rs = jdbc1.st.getResultSet();
 							while(rs.next()){

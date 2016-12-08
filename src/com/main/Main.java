@@ -69,4 +69,18 @@ public class Main {
 		}
 		return finalid;
 	}
+	public String getPerson(String id){
+		String person = null;
+		if(isHave("guardian", "guardianID", id)){
+			person = "mother";
+		}
+		else if(isHave("midwife", "midwifeID", id)){
+			person = "midwife";
+		}
+		else if(isHave("supervisor", "supervisorID", id)){
+			person = "supervisor";
+		}
+		return person;
+	}
+	
 }

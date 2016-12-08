@@ -31,9 +31,9 @@ function show(id1,id2) {
 }
 $(document).ready(function(){
 	setInterval("loadMessagecounts();", 3000);
-	show('#view', '#viewdrop');
-	show('#register', '#registerdrop');
-	show('#update', '#updatedrop');
+	//show('#view', '#viewdrop');
+	//show('#register', '#registerdrop');
+	//show('#update', '#updatedrop');
 	$('.timeline').click(function(event){
 		var id = event.target.id;
 		if(id.length>2){

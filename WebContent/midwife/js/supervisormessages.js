@@ -40,6 +40,7 @@ function loadMessages(){
 		if(xmlhttp.readyState==4 && xmlhttp.status==200){
 		    var out = xmlhttp.responseText;
 		    document.getElementById("msgs").innerHTML = out;
+		    $('#msgs').animate({scrollTop:$('#msgs')[0].scrollHeight});
 		}
 	};
 	

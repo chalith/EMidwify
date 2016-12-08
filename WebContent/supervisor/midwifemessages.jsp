@@ -7,17 +7,16 @@
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
+<title>Message - Mothers</title>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-<title>Messages - Supervisor</title>
 <base href="${pageContext.request.contextPath}/" />
-<link rel="stylesheet" type="text/css" href="mother/css/midwifemessages.css">
-<link rel="stylesheet" type="text/css" href="mother/css/main.css">
+<link rel="stylesheet" type="text/css" href="supervisor/css/midwifemessages.css">
+<link rel="stylesheet" type="text/css" href="supervisor/css/main.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
 <script src="jquery.json-2.4.min.js"></script>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
-<script src="mother/js/midwifemessages.js"></script>
-<script src="mother/js/createviewforall.js"></script>
+<script src="supervisor/js/midwifemessages.js"></script>
+<script src="supervisor/js/createviewforall.js"></script>
 </head>
 <body>
 	<%
@@ -27,12 +26,29 @@
 		}
 	%>
 <div>
-	<div class="container">
+	<div class="container" id=container>
 		<div style="width:75%; height:10%; position:relative;">
 			<jsp:include page="header.jsp"/>
 		</div>
 		<div class="backbody">
 			<div class="right_sidebar">
+				<div class="online_userbar">
+					<select name="area" id="area">
+						<%
+							Areas a = new Areas(mid);
+							ArrayList<String[]> areaArr = null;
+							areaArr = a.getAreas();
+							String areas = "";
+							for(int i=0;i<areaArr.size();i++){
+								areas = areas+"<option value="+areaArr.get(i)[0]+">("+areaArr.get(i)[0]+") "+areaArr.get(i)[1]+"</option>";
+							}
+							out.print(areas);
+						%>
+					</select>
+					<div id="onlineusers">
+						
+					</div>
+				</div>
 				<div class ="newsfeed clearfix">
 					
 					<h2>Latest News</h2>
@@ -44,32 +60,16 @@
 				</div>
 			</div>
 			<div class="body">
-			<input type="hidden" id="midwifeid" value="<%
-				JDBC jdbc = new JDBC();
-				String sid = null;
-				try{
-					String q = "SELECT midwifeID from area WHERE areaCode = (SELECT guardianAreaCode FROM guardian WHERE guardianID = '"+mid+"');";
+			<input type="hidden" id="guardianid"/>
+				<div class="mothers">
+					<div id="motherbar">
 					
-					jdbc.st.executeQuery(q);
-					ResultSet rs = jdbc.st.getResultSet();
-					while (rs.next()) {
-						sid = rs.getString("midwifeID");
-					}
-				}catch(Exception e){
-					e.printStackTrace();
-				}finally{
-					try {
-						jdbc.conn.close();
-					} catch (SQLException e) {
-						e.printStackTrace();
-					}
-				}
-				out.print(sid);
-			%>"/>
+					</div>
+				</div>
 				<div class="msgcontent" id="msgcontent">
 					<div id="sendername" class="sendername" style="font-size: 80%; margin-left: 20%;"></div>
 					<div class="msgs" id="msgs">
-					
+						<center><h1 style="margin-top:20%; font-size: 200%; opacity:0.4;">Select a mother to view messages</h1></center>
 					</div>
 					<div style="margin-top:2%; height: 21%; width: 100%;">
 						<textarea id="message" rows="2";></textarea>
@@ -91,6 +91,7 @@
 		</div>
 	</div>
 </div>
-
+<jsp:include page="/alert.jsp" />
+<jsp:include page="/error.jsp" />
 </body>
 </html>
