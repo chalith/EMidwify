@@ -102,7 +102,6 @@
 	display:none;
 	//overflow-y:hidden;
 	//overflow-x:hidden;
-	background-color:#D5DBDB;
 }
 .details:hover{
 	//overflow-y:scroll;
@@ -121,7 +120,7 @@
 	padding:5% 5% 5% 5%;	
 	margin:3% 3% 3% 3%;
 	background-color:white;
-	box-shadow: 1px 1px 10px 1px;
+	box-shadow: 1px 1px 1px 1px;
 }
 .motherdetails h2{
 	padding:15px;

@@ -29,6 +29,9 @@ $(document).ready(function(){
 	$('[name="message"]').click(function(){
 		window.location = "supervisor/midwifemessages.jsp";
 	});
+	$('#viewtimeline').click(function(){
+		window.location = "supervisor/timeline.jsp";
+	});
 });
 </script>
 </head>
@@ -44,7 +47,7 @@ $(document).ready(function(){
 		<div style="width:75%; height:10%; position:relative">
 			<jsp:include page="header.jsp" />
 		</div>
-		<div class="body clearfix" id="container">
+		<div class="body clearfix" id="container" style="background-color:#DEE6FB;">
 			<div class="home-col clearfix" >
 				<div class="servicebox">
 					<div class="services" id="viewprofile">

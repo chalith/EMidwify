@@ -3,7 +3,7 @@
     pageEncoding="ISO-8859-1"%>
 <%@page import="com.main.*"%>
 <%@page import="com.main.Date"%>
-<%@page import="com.midwife.*"%>
+<%@page import="com.supervisor.*"%>
 <%@page import="java.text.*"%>
 <%@page import="java.util.*"%>
 <%@page import="java.sql.*"%>
@@ -12,11 +12,11 @@
 <title>Timeline</title>
 <head>
 <base href="${pageContext.request.contextPath}/" />
-<link rel="stylesheet" type="text/css" href="midwife/css/timeline.css">
-<link rel="stylesheet" type="text/css" href="midwife/css/main.css">
+<link rel="stylesheet" type="text/css" href="supervisor/css/timeline.css">
+<link rel="stylesheet" type="text/css" href="supervisor/css/main.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
-<script src="midwife/js/createviewforall.js"></script>
-<script src="midwife/js/timeline.js"></script>
+<script src="supervisor/js/createviewforall.js"></script>
+<script src="supervisor/js/timeline.js"></script>
 </head>
 <body>
 	<%
@@ -41,10 +41,10 @@
 					<table>
 					<%
 						String notificationString = "";
-						MidwifeNotifications notifications = new MidwifeNotifications(mid);
-						ArrayList<Notification> mnotifications = notifications.getNotifications();
-						for(int i=0;i<mnotifications.size();i++){
-							notificationString = notificationString + "<tr id=\""+mnotifications.get(i).id+"\"><td id=\""+mnotifications.get(i).id+"\">"+mnotifications.get(i).title+"</td><td id=\""+mnotifications.get(i).id+"\">"+mnotifications.get(i).date+"</td><td id=\""+mnotifications.get(i).id+"\">"+mnotifications.get(i).description+"</td></tr>";
+						SupervisorNotifications notifications = new SupervisorNotifications(mid);
+						ArrayList<Notification> snotifications = notifications.getNotifications();
+						for(int i=0;i<snotifications.size();i++){
+							notificationString = notificationString + "<tr id=\""+snotifications.get(i).id+"\"><td id=\""+snotifications.get(i).id+"\">"+snotifications.get(i).title+"</td><td id=\""+snotifications.get(i).id+"\">"+snotifications.get(i).date+"</td><td id=\""+snotifications.get(i).id+"\">"+snotifications.get(i).description+"</td></tr>";
 						}
 						out.print(notificationString);
 					%>

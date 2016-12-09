@@ -47,7 +47,7 @@ $(document).ready(function(){
 		<div style="width:75%; height:10%; position:relative">
 			<jsp:include page="header.jsp" />
 		</div>
-		<div class="body clearfix" id="container">
+		<div class="body clearfix" id="container" style="background-color:#DEE6FB;">
 			<div class="home-col clearfix" >
 				<div class="servicebox">
 				
