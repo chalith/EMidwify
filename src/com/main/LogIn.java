@@ -58,11 +58,12 @@ public class LogIn extends HttpServlet {
 						namepic = getName(table, "name", "supervisorPicture", "supervisorID", id);
 						user = "Supervisor";
 					}
-					else{
-						request.setAttribute("warning", "<script>showalert(\"The Username you've entered is not registered\")</script>");
-						getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
-						//response.sendRedirect("index.jsp");
-					}
+				}
+				else{
+					request.setAttribute("warning", "<script>showalert(\"The Username you've entered is not registered\")</script>");
+					getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
+					return;
+					//response.sendRedirect("index.jsp");
 				}
 			}
 			catch (Exception e) {
