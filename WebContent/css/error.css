@@ -1,12 +1,12 @@
 .erroralert_div{
 	z-index:15;
 	display:none;
-	margin:20% 30% 15% 30%;
-	width:40%;
 	float:left;
+	margin:20% 50%;
+	width:600px;
+	left:-295px;
 	cursor:pointer;
 	position: fixed;
-	height: 25%;
 	opacity:0.9;
 	background-color: #250109;
 }

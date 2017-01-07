@@ -21,9 +21,9 @@ $(document).ready(function(){
 		$('#uploadpicture').toggle("slow");
 		document.getElementById("container").style.opacity="0.2";
 	});
-	$('#searchboxshow').click(function(){
+	/*$('#searchboxshow').click(function(){
 		$('#searchbox').toggle("slow");
-	});
+	});*/
 	$('body').on('click',function(event){
 		var id = event.target.id;
 		if((id!="search")&&(id!="result")&&(id!="mothersearch")&&(id!="mothers")&&(id!="childsearch")&&(id!="children")){

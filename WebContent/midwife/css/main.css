@@ -33,6 +33,7 @@ html{
 }
 .container{
 	background-color: white;
+	width: 1366px;
 }
 .breadcrumb{
 	float: left;
@@ -96,10 +97,10 @@ html{
 	cursor:pointer;
 	width:100%;
 	min-height:10%;
-	max-height:10%;
 	z-index:10;
 	position: fixed;
 	background-color:#323B56;
+	font-size: 15px;
 }
 .header input{
 	box-shadow:0.2px 0.2px 1px 1px inset;

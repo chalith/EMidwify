@@ -47,8 +47,7 @@ $(document).ready(function(){
 		<div style="width:75%; height:10%; position:relative">
 			<jsp:include page="header.jsp" />
 		</div>
-		<div class="body clearfix" id="container" style="background-color:#DEE6FB;">
-			<div class="home-col clearfix" >
+		<div class="body" id="container" style="background-color:#DEE6FB;">
 				<div class="servicebox">
 				
 					<div style="display: inline-block; width: 100%; float: left;">
@@ -158,7 +157,7 @@ $(document).ready(function(){
 					
 					</div>
 					
-				</div>
+				
 			</div>
 				
 			<div class ="newsfeed" style="height: 100%; width: 20%; float: right; background-color:#AFC6DF;">

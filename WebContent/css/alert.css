@@ -1,12 +1,12 @@
 .alert_div{
 	z-index:15;
 	display:none;
-	margin:20% 25% 15% 25%;
-	width:50%;
+	margin:20% 50%;
+	width:600px;
+	left:-295px;
 	float:left;
 	cursor:pointer;
 	position: fixed;
-	height: 25%;
 	opacity:0.9;
 	background-color: #250109;
 }

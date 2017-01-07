@@ -1,55 +1,29 @@
 *{text-decoration:none;}
 //.clearfix{overflow:auto;}
 .msgnotify{
-	font-size: 180%;
-	padding:0.5px;
-	margin-top:0;
-	width:80%;
-	margin-bottom:-80%;
-	text-align:center;
-	background-color:red;
-	color: white;
-	border-radius:50%;
+	background-color: red;
+	color:white;
+	width: 80%;
+	border-radius:100%;
+	margin-bottom:-100%;
+	float: right;
 	position: relative;
-}
-.newsfeed{
-	//border-radius:20px;
+	margin-top: -5%;
+	font-size: 150%;
 }
 .container{
-	background-color:#DEE6FB;
-	width:100%;
-	height:100%;
-	margin:0 auto;
 	position: absolute;
-	top: 0; left: 0; bottom: 0; right: 0;
+	top: 0; bottom: 0; left: 0; right: 0;
 }
 .body{
-	height:90%;
-	width:100%;
-	float:center;
+	height: 80%;
 }
 .servicebox{
 	display:inline-block;
-	padding:4% 1% 3.5% 2%;
-	height:100%;
-	position:static;
-	float:left;
-	min-height:80%;
-	width: 100%;
+	padding:1%;
+	padding-top:2%;
+	width: 78%;
 }
-.home-col{
-	//background-color:#DEE6FB;
-	//overflow-y:hidden;
-	//overflow-x:hidden;
-	//border-radius:20px;
-	float:left;
-	width:80%;
-	display:inline-block;
-}
-.home-col:hover{
-	//overflow-y:scroll;
-}
-	
 .home-col::-webkit-scrollbar{
 	width: 8px;
 }
@@ -60,32 +34,21 @@
 }
 
 .home-col h3{
-	align:right;
-	posision:relative;
-	margin-top:4%;
-	margin-bottom:1%;
 	color:#F8F8FA;
-	
 }
 .services p{
+	margin-top:-30px;
 	color:#111539;
-	margin:0;
-	alingn:center;
 	
 }
 .services{
+	margin:0.5%;
+	min-height:200px;
 	border-radius:5%;
-	cursor:pointer;
-	width:20%;
-	height:220px;
+	float:left;	
+	width:22%;
 	background:#9394C2;
-	float:left;
-	margin-righ:1%;
-	margin-left:1%;
-	padding:0.5% 0.5% 0.5% 0.5%;
 	border:solid #F8F8FA 10px;
-	//border-radius:10px;
-	margin-bottom:10px;
 }
 .services table{
 	width: 100%;
@@ -101,7 +64,6 @@
 }
 .services img{
 	border-radius:100%;
-	border:solid white;
 	box-shadow: 10px 20px 100px 1px #B0C3E1;
 }
 
@@ -114,29 +76,18 @@
 
 .dropdown-content {
 	border:solid #D9DBE9;
-    //display: none;
-    position: relative;
-    width: 100%;
-    margin-top:12%;
-    padding-top:0%;
-    padding-bottom:1%;
-    height:10%;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2) white inset;
-    margin-left:-1.3%;
-	color:black;	
 }
-.dropdown-content a{
+dropdown-content a{
 	width:50%;
 	color:#404DC0;
 }
 .dropdown-content a:hover{
 	color:black ;
 	cursor:pointer;
+}.newsfeed{
+	height: 100%;
 }
 .footer{
-	width:100%;
-	height:10%;
-	posision:relative;
-	float:left;
 	background-color: #90A4AE  ;
 }

@@ -70,10 +70,10 @@
 	<table style="float:right; width: 20%; height: 100%;">
 		<tr style="width: 100%;">
 			<th id="home" style="padding: 6% 0 5% 0; width: 10%; color:gray; font-size: 100%;">
-				<a style="box-shadow:0px 0px 1px 3px; padding: 5px;" id="home">Home</a>
+				<a style="padding: 5px;" id="home">Home</a>
 			</th>
 			<th id="logout" style="padding: 6% 0 5% 0; width: 10%; color:gray; font-size: 100%;">
-				<a style="box-shadow:0px 0px 1px 3px; padding: 5px;" id="logout">Log Out</a>
+				<a style="padding: 5px;" id="logout">Log Out</a>
 			</th>
 		</tr>
 	</table>

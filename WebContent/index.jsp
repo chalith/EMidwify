@@ -16,8 +16,8 @@ $(document).ready(function(){
 });
 </script>
 </head>
+		
 <body>
-	<jsp:include page="alert.jsp" />
 	<%
 		String mid = (String)session.getAttribute("mid");
 		if(mid!=null){
@@ -40,19 +40,20 @@ $(document).ready(function(){
 		<table style="width: 100%; height: 100%;">
 			<tr>
 				<th style="width: 15%; color: #796CCA;">
-					<h2>Baby Care</h2>
+					<h2>Easy Midwify</h2>
 				</th>
 				<th style="width: 75%; color: white;">
 					<h1 align="center">With women, for a life time</h2>	
 				</th>
 				<th id="loginbtn" style="font-family:Trebuchet MS, Helvetica, sans-serif; font-size: 110%; width: 10%; color:gray;">
-					<a style="box-shadow:0px 0px 1px 3px; padding: 5px;" id="loginbtn">Log In</a>
+					<a style="padding: 5px;" id="loginbtn">Log In</a>
 				</th>
 			</tr>
 		</table>
 	</div>
+	<jsp:include page="login.jsp" />
+	<jsp:include page="alert.jsp" />
 	<div id="container" style="margin-top: 5%;">
-		<jsp:include page="login.jsp" />
 		<div class="container_block" id="container_block">
 			<div class="section">
 				<div class="mySlides fade" id="slide1" style="display: none;">
@@ -166,6 +167,6 @@ $(document).ready(function(){
 				</br>
 			</div>
 		</div>
-	</div>
+	</div>	
 </body>
 </html>

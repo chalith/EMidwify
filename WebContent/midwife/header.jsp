@@ -58,8 +58,6 @@
 				if(uname != null){
 					out.print(uname);
 				}
-				%></h2>
-				<h2 id="profile" style="float: right;"><% 
 				if(utype != null){
 					out.print("("+utype+")");
 				}
@@ -70,15 +68,15 @@
 	<table style="float:right; width: 20%; height: 100%;">
 		<tr style="width: 100%;">
 			<th id="home" style="padding: 6% 0 5% 0; width: 10%; color:gray; font-size: 100%;">
-				<a style="box-shadow:0px 0px 1px 3px; padding: 5px;" id="home">Home</a>
+				<a style="padding: 5px;" id="home">Home</a>
 			</th>
 			<th id="logout" style="padding: 6% 0 5% 0; width: 10%; color:gray; font-size: 100%;">
-				<a style="box-shadow:0px 0px 1px 3px; padding: 5px;" id="logout">Log Out</a>
+				<a style="padding: 5px;" id="logout">Log Out</a>
 			</th>
 		</tr>
 	</table>
 	<div style="margin: 1% 1% 1% 1%; float:right; width: 30%; color: #796CCA;">
-		<div id="searchboxshow" style="border-radius:5%; font-size:120%; margin-left:2%; padding:2.5px; float:right; color: white;">
+		<div id="searchboxshow" style="border-radius:5%; font-size:120%; margin-left:5%; padding:2.5px; float:right; color: white;">
 			<img style="width: 80%;" id="searchboxshow" src="midwife/images/services/search.png">
 		</div>
 		<div id="searchbox" style="box-shadow:0.2px 0.2px 1px 1px inset; border-radius:1%; width:80%; float:right; color: black;">

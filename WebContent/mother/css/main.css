@@ -15,15 +15,24 @@ html{
 	transform: translateY(2px);
 }
 .container{
-	background-color: #C6CFE1;
+	background-color: white;
+	width: 1366px;
+}
+.header table{
+	overflow:hidden;
+	max-height:10%;
+	min-height: 100%;
 }
 .header{
+	display:inline-block;
 	text-align:center;
 	cursor:pointer;
 	width:100%;
+	min-height:10%;
 	z-index:10;
 	position: fixed;
 	background-color:#323B56;
+	font-size: 15px;
 }
 .footer{
 	width:100%;

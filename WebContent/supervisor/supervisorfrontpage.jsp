@@ -48,7 +48,6 @@ $(document).ready(function(){
 			<jsp:include page="header.jsp" />
 		</div>
 		<div class="body clearfix" id="container" style="background-color:#DEE6FB;">
-			<div class="home-col clearfix" >
 				<div class="servicebox">
 					<div class="services" id="viewprofile">
 						<button id="viewprofile"><a><img src="supervisor/images/services/viewprofile.png" alt="profile"></a></button>
@@ -95,7 +94,6 @@ $(document).ready(function(){
 					</div>
 					
 				</div>	
-			</div>
 				
 			<div class ="newsfeed" style="height: 100%; width: 20%; float: right; background-color:#AFC6DF;">
 				

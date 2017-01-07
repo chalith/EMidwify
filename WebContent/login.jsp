@@ -10,6 +10,8 @@
 <script src="js/login.js"></script>
 <script src="js/alert.js"></script>
 <title>Insert title here</title>
+<style>
+</style>
 </head>
 <body>
 	<div id="login" class="login">
