@@ -18,6 +18,9 @@ $(document).ready(function(){
 </head>
 		
 <body>
+	<jsp:include page="alert.jsp" />
+	<jsp:include page="login.jsp" />
+	
 	<%
 		String mid = (String)session.getAttribute("mid");
 		if(mid!=null){
@@ -51,8 +54,6 @@ $(document).ready(function(){
 			</tr>
 		</table>
 	</div>
-	<jsp:include page="login.jsp" />
-	<jsp:include page="alert.jsp" />
 	<div id="container" style="margin-top: 5%;">
 		<div class="container_block" id="container_block">
 			<div class="section">
@@ -167,6 +168,7 @@ $(document).ready(function(){
 				</br>
 			</div>
 		</div>
-	</div>	
+	</div>
+		
 </body>
 </html>
