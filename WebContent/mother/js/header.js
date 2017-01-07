@@ -15,7 +15,7 @@ $(document).ready(function(){
 		endSession();
 	});
 	$('#profile').on('click',function(){
-		window.location = "mother/mother.jsp";
+		window.location = "mother/guardian.jsp";
 	});
 	$('#changepic').click(function(){
 		$('#uploadpicture').toggle("slow");

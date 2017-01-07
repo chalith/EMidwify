@@ -32,7 +32,7 @@ public class LoadChildren extends HttpServlet {
     	childbar="<table>";
     	for(int i=0;i<childrenArr.size();i++){
     		Date date = createDate(childrenArr.get(i)[2],"-");
-    		childbar = childbar + "<tr name=\"child\" id=\""+childrenArr.get(i)[0]+"\"><div class=\"baby\" name=\"child\" id=\""+childrenArr.get(i)[0]+"\"><img id=\""+childrenArr.get(i)[0]+"\" src=\""+childrenArr.get(i)[3]+"\" alt=\"user_photo\"><h1 style=\"color:gray;\" id=\""+childrenArr.get(i)[0]+"\">"+childrenArr.get(i)[1]+"</h1><a id=\""+childrenArr.get(i)[0]+"\" style=\"color:white;\">age :- ( "+date.getAge(currentDate)+" )</a></div></tr>";
+    		childbar = childbar + "<tr name=\"child\" id=\""+childrenArr.get(i)[0]+"\"><div class=\"baby\" name=\"child\" id=\""+childrenArr.get(i)[0]+"\"><img id=\""+childrenArr.get(i)[0]+"\" src=\""+childrenArr.get(i)[3]+"\" alt=\"user_photo\"><h1 id=\""+childrenArr.get(i)[0]+"\">"+childrenArr.get(i)[1]+"</h1><a id=\""+childrenArr.get(i)[0]+"\">age :- ( "+date.getAge(currentDate)+" )</a></div></tr>";
         }
     	childbar=childbar + "</table>";
     	out.println(childbar);

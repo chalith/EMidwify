@@ -9,7 +9,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-<title>Messages - Supervisor</title>
+<title>Messages - Midwife</title>
 <base href="${pageContext.request.contextPath}/" />
 <link rel="stylesheet" type="text/css" href="mother/css/midwifemessages.css">
 <link rel="stylesheet" type="text/css" href="mother/css/main.css">
@@ -33,7 +33,7 @@
 		</div>
 		<div class="backbody">
 			<div class="right_sidebar">
-				<div class ="newsfeed clearfix">
+				<div class ="newsfeed clearfix" style="height: 100%;">
 					
 					<h2>Latest News</h2>
 						

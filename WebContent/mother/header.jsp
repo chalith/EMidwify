@@ -16,8 +16,45 @@
 	<%	
 		String mid = (String) session.getAttribute("mid");
 		if(mid==null){
-			response.sendRedirect("/EMidwify");
+			out.print("<script>window.location=\"/EMidwify\";</script>");
 		}
+		String guardianpicture = null;
+		String uname = null;
+		String utype = null;
+		
+		JDBC jdbc = new JDBC();
+		try{
+			String q = "SELECT guardianName,guardianPicture FROM guardian WHERE guardianID = '"+mid+"';";
+			jdbc.st.executeQuery(q);
+			ResultSet rs = jdbc.st.getResultSet();
+			while(rs.next()){
+				guardianpicture = rs.getString("guardianPicture");
+				uname = rs.getString("guardianName");
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			try{
+				jdbc.conn.close();
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+		}
+		Main m = new Main();
+		if(m.isHave("mother", "guardianID", mid)){
+			utype = "Mother";
+		}
+		else{
+			utype = "Guardian";
+		}try{
+			jdbc.conn.close();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		if((guardianpicture == null)||(uname == null)||(utype == null)){
+			out.print("<script>window.location=\"/EMidwify\";</script>");
+		}
+		
 	%>
 <div class="header">
 	<table style="width: 100%; height: 100%;">
@@ -26,43 +63,8 @@
 				<h1 id="changepic" style="font-size: 100%; margin-left:10%; margin-bottom:-68%; width:5%; z-index:20; color: white; opacity:0.7; display: none;">
 				Change Picture</h1>
 				<img style="width: 96%; height: -5%;" src=<%
-				String guardianpicture = "";
-				String uname = "";
-				String utype = "";
-				
-				JDBC jdbc = new JDBC();
-				try{
-					String q = "SELECT guardianName,guardianPicture FROM guardian WHERE guardianID = '"+mid+"';";
-					jdbc.st.executeQuery(q);
-					ResultSet rs = jdbc.st.getResultSet();
-					while(rs.next()){
-						guardianpicture = rs.getString("guardianPicture");
-						uname = rs.getString("guardianName");
-					}
-				}catch(Exception e){
-					e.printStackTrace();
-				}finally{
-					try{
-						jdbc.conn.close();
-					}catch(Exception e){
-						e.printStackTrace();
-					}
-				}
-				Main m = new Main();
-				if(m.isHave("mother", "guardianID", mid)){
-					utype = "Mother";
-				}
-				else{
-					utype = "Guardian";
-				}try{
-					jdbc.conn.close();
-				}catch(Exception e){
-					e.printStackTrace();
-				}
-				if(guardianpicture != null){
-					out.print(guardianpicture);
-				}
-				%> alt="midwife">
+				out.print(guardianpicture);
+				%> alt="mother">
 			</th>
 			<th id="profile" style="width: 25%; color:white; padding: 0 1% 0 1%; font-size: 70%; box-shadow: 1px -2px 2px -0.5px black;">
 				<h2 id="profile" style="float: left;"><% 

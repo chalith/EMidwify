@@ -15,8 +15,35 @@
 	<%	
 		String mid = (String) session.getAttribute("mid");
 		if(mid==null){
-			response.sendRedirect("/EMidwify");
+			out.print("<script>window.location=\"/EMidwify\";</script>");
 		}
+		JDBC jdbc = new JDBC();
+		String midwifepicture = null;
+		String uname = null;
+		String utype = null;
+		try{
+			String q = "SELECT name,midwifePicture FROM midwife WHERE midwifeID = '"+mid+"';";
+			jdbc.st.executeQuery(q);
+			ResultSet rs = jdbc.st.getResultSet();
+			while(rs.next()){
+				midwifepicture = rs.getString("midwifePicture");
+				uname = rs.getString("name");
+			}
+			utype = "Midwife";
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		finally{
+			try{
+				jdbc.conn.close();
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+		}
+		if((midwifepicture == null)||(uname == null)||(utype == null)){
+			out.print("<script>window.location=\"/EMidwify\";</script>");
+		}
+		
 	%>
 <div class="header">
 	<table style="float:left; width: 25%;">
@@ -25,40 +52,14 @@
 				<h1 id="changepic" style="font-size: 100%; margin-left:5%; margin-bottom:-59%; z-index:20; color: white; opacity:0.7; display: none;">
 				Change Picture</h1>
 				<img style="width: 90%; height: -5%;" src=<%
-				JDBC jdbc = new JDBC();
-				String midwifepicture = "";
-				String uname = "";
-				String utype = "";
-				try{
-					String q = "SELECT name,midwifePicture FROM midwife WHERE midwifeID = '"+mid+"';";
-					jdbc.st.executeQuery(q);
-					ResultSet rs = jdbc.st.getResultSet();
-					while(rs.next()){
-						midwifepicture = rs.getString("midwifePicture");
-						uname = rs.getString("name");
-					}
-					utype = "Midwife";
-				}catch(Exception e){
-					e.printStackTrace();
-				}
-				finally{
-					try{
-						jdbc.conn.close();
-					}catch(Exception e){
-						e.printStackTrace();
-					}
-				}
-				if(midwifepicture != null){
-					out.print(midwifepicture);
-				}
+				out.print(midwifepicture);
 				%> alt="midwife">
 			</th>
 			<th id="profile" style="width: 75%; color:white; padding: 0 1% 0 1%; font-size: 60%; box-shadow:0px -2px 1px 0px;">
 				<h2 id="profile" style="float: left;"><% 
 				if(uname != null){
 					out.print(uname);
-				}
-				if(utype != null){
+				}if(utype != null){
 					out.print("("+utype+")");
 				}
 				%></h2>

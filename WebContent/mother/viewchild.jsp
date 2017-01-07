@@ -13,10 +13,11 @@
 <title>Baby</title>
 <head>
 <base href="${pageContext.request.contextPath}/" />
-<link rel="stylesheet" type="text/css" href="midwife/css/viewchild.css">
-<link rel="stylesheet" type="text/css" href="midwife/css/main.css">
+<link rel="stylesheet" type="text/css" href="mother/css/viewchild.css">
+<link rel="stylesheet" type="text/css" href="mother/css/main.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
-<script src="midwife/js/viewchild.js"></script>
+<script src="mother/js/viewchild.js"></script>
+<script src="mother/js/createviewforall.js"></script>
 <script type="text/javascript" src="js/jscharts.js"></script>
 <script>
 $(window).load(function(){
@@ -54,8 +55,7 @@ function loadGraph(){
 				}
 				myChart.draw();
 		        //document.getElementById("notifications").innerHTML = news;
-		
-	       	}
+			}
 		}
 	};
 	xmlhttp.open("GET",url,true);
@@ -192,8 +192,6 @@ function loadGraph(){
 					<div class="titlebar" id="titlebar">
 						<div class="title" id="detailstab"><center><h1>Details</h1></center></div>
 						<div class="title" id="vaccinationtab"><center><h1>Attended Clinics</h1></center></div>
-						<div class="title" id="editinfotab"><center><h1>Edit Info</h1></center></div>
-						<div class="title" id="updatetab"><center><h1>Update Clinics</h1></center></div>
 					</div>
 					<div style="display: inline-block; margin-top: 0; width: 84%;" class="childdetails" id="details">
 						<input type="hidden" id="childid" value="<%

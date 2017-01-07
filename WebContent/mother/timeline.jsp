@@ -15,8 +15,8 @@
 <link rel="stylesheet" type="text/css" href="supervisor/css/timeline.css">
 <link rel="stylesheet" type="text/css" href="supervisor/css/main.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
-<script src="supervisor/js/createviewforall.js"></script>
-<script src="supervisor/js/timeline.js"></script>
+<script src="mother/js/createviewforall.js"></script>
+<script src="mother/js/timeline.js"></script>
 </head>
 <body>
 	<%
@@ -52,7 +52,7 @@
 				</div>
 			</div>
 			<div class="right_sidebar">
-				<div class ="newsfeed clearfix">
+				<div class ="newsfeed clearfix" style="height: 100%;">
 					
 					<h2>Latest News</h2>
 						

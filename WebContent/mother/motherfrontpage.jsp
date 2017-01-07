@@ -18,15 +18,16 @@
 <script src="jquery.json-2.4.min.js"></script>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script src="mother/js/startpage.js"></script>
+<script src="mother/js/createviewforall.js"></script>
 <script>
 $(document).ready(function(){
 	$('#viewprofile').click(function(){
-		window.location = "mother/mother.jsp";
+		window.location = "mother/guardian.jsp";
 	});
 	$('#clinic').click(function(){
-		window.location = "mother/clinicschedule.jsp";
+		window.location = "mother/clinic.jsp";
 	});
-	$('[name="message"]').click(function(){
+	$('#message').click(function(){
 		window.location = "mother/midwifemessages.jsp";
 	});
 	$('#viewtimeline').click(function(){
@@ -45,6 +46,12 @@ $(document).ready(function(){
 		}
 	%>
 	<div class="container">
+		<input type="hidden" id="guardianid" value="<%
+			if(mid!=null){
+				out.print(mid);
+			}
+			%>">
+						
 		<div style="width:75%; height:10%; position:relative">
 			<jsp:include page="header.jsp" />
 		</div>
@@ -54,7 +61,7 @@ $(document).ready(function(){
 					<div style="display: inline-block; width: 100%; float: left;">
 					
 					<div class="services" id="viewprofile">
-						<button><a><img id="viewprofile" src="/images/services/viewprofile.png" alt="profile"></a></button>
+						<button><a><img id="viewprofile" src="mother/images/services/viewprofile.png" alt="profile"></a></button>
 						<h3 align="center" id="viewprofile">Profile</h3></br>
 						<p style="margin-left: 25%;" id="viewprofile">View my profile</p>
 					</div>
@@ -79,6 +86,12 @@ $(document).ready(function(){
 					</div>
 						
 					</div>
+					<div style="border: solid white; margin-top: 22%;">
+						<h1 style="text-align: center;color: white; margin: 0 -5px 0 -5px;">My Babies</h1>
+						<div id="babies" class="babies">
+									
+						</div>
+					</div>	
 				
 			</div>
 				

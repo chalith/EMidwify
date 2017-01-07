@@ -15,6 +15,7 @@ function loadMessagecounts(){
     xmlhttp.send(null);
 }
 $(window).load(function(){
+	loadChildren();
 	loadMessagecounts();
 	loadNews();
 });
@@ -42,8 +43,32 @@ $(document).ready(function(){
 			$('#notification').slideDown("slow");
 			document.getElementById("container").style.opacity="0.6";
 		}
-	});	
+	});
+	$('#babies').click(function(event){
+		var cid = event.target.id;
+		if(cid!="babies"){
+			//alert(cid);
+			if(cid.length>2){
+				window.location = "mother/viewchild.jsp?childid="+cid;
+			}
+		}
+	});
 });
+function loadChildren(){
+	var xmlhttp = new XMLHttpRequest();
+	var id=document.getElementById("guardianid").value;
+	var url="loadchildren"; 
+	url=url+"?guardianid="+id;
+	xmlhttp.onreadystatechange = function() {
+		if(xmlhttp.readyState==4 && xmlhttp.status==200){
+		    var out = xmlhttp.responseText;
+		    document.getElementById("babies").innerHTML = out;
+		}
+	};
+	
+	xmlhttp.open("GET",url,true);
+	xmlhttp.send(null);
+}
 function loadNotification(id){
 	var xmlhttp = new XMLHttpRequest();
     var url="loadnotification";

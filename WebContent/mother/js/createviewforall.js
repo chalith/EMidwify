@@ -18,7 +18,7 @@ function getDays(year,month){
 }
 function loadNews(){
 	var xmlhttp = new XMLHttpRequest();
-    var url="createnotification"; 
+    var url="newsfeednotifications"; 
 	xmlhttp.onreadystatechange = function() {
 		if(xmlhttp.readyState==4 && xmlhttp.status==200){
 	        var news = xmlhttp.responseText;
