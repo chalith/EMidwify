@@ -10,14 +10,14 @@
 <title>EditInfo - Midwife</title>
 <head>
 <base href="${pageContext.request.contextPath}/" />
-<link rel="stylesheet" type="text/css" href="midwife/css/registration.css">
-<link rel="stylesheet" type="text/css" href="midwife/css/form.css">
-<link rel="stylesheet" type="text/css" href="midwife/css/main.css">
+<link rel="stylesheet" type="text/css" href="supervisor/css/registration.css">
+<link rel="stylesheet" type="text/css" href="supervisor/css/form.css">
+<link rel="stylesheet" type="text/css" href="supervisor/css/main.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
 <script src="jquery.json-2.4.min.js"></script>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
-<script src="midwife/js/editmidwifeinfo.js"></script>
-<script src="midwife/js/createviewforall.js"></script>
+<script src="supervisor/js/editsupervisorinfo.js"></script>
+<script src="supervisor/js/createviewforall.js"></script>
 <script>
 </script>
 </head>
@@ -39,18 +39,6 @@
 	<div class="backbody" id="container" >
 		<div class="right_sidebar">
 			<div class="online_userbar">
-				<select name="area" id="area">
-					<%
-						Areas a = new Areas(mid);
-						ArrayList<String[]> areaArr = null;
-						areaArr = a.getAreas();
-						String areas = "";
-						for(int i=0;i<areaArr.size();i++){
-							areas = areas+"<option value="+areaArr.get(i)[0]+">("+areaArr.get(i)[0]+") "+areaArr.get(i)[1]+"</option>";
-						}
-						out.print(areas);
-					%>
-				</select>
 				<div id="onlineusers">
 					
 				</div>

@@ -8,6 +8,12 @@
 <link rel="stylesheet" type="text/css" href="css/search.css">
 <link href='http://fonts.googleapis.com/css?family=Cookie' rel='stylesheet' type='text/css'>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<%
+String utype = (String) session.getAttribute("usertype");
+if(utype==null){
+	out.print("<script>window.location=\"/EMidwify\";</script>");
+}
+%>
 <script>
 $(document).ready(function(){
 	$('#search').keyup(function(){
@@ -39,12 +45,33 @@ $(document).ready(function(){
 			//alert(cid);
 			if(id.length>2){
 				window.close();
+				<%
+					if(utype.equals("Midwife")){
+				%>
 				window.location = "midwife/viewchild.jsp?childid="+id;
+				<%
+					}else{
+				%>
+				window.location = "supervisor/viewchild.jsp?childid="+id;
+				<%
+					}
+				%>
 			}
 		}else if(person=="mother"){
 			if(id.length>2){
 				window.close();
+				window.close();
+				<%
+					if(utype.equals("Midwife")){
+				%>
 				window.location = "midwife/viewmother.jsp?guardianid="+id;
+				<%
+					}else{
+				%>
+				window.location = "supervisor/viewmother.jsp?guardianid="+id;
+				<%
+					}
+				%>
 			}
 		}
 	});
@@ -60,7 +87,7 @@ function loadSuggessions(name,result){
 			    if(out!="")
 			    	document.getElementById(result).innerHTML = out;
 			    else
-			    	document.getElementById(result).innerHTML = "";
+			    	documxent.getElementById(result).innerHTML = "";
 			}
 		}
 	};

@@ -56,7 +56,7 @@ $(document).ready(function(){
 		var id = event.target.id;
 		var pre = id.substring(0,5);
 		if(pre == "Guard"){
-			window.location = "mother/viewmother.jsp?guardianid="+id;
+			window.location = "supervisor/viewmother.jsp?guardianid="+id;
 		}
 	});
 	var timeout;

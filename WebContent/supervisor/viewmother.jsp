@@ -12,18 +12,16 @@
 <title>Mother</title>
 <head>
 <base href="${pageContext.request.contextPath}/" />
-<link rel="stylesheet" type="text/css" href="midwife/css/viewmother.css">
-<link rel="stylesheet" type="text/css" href="midwife/css/main.css">
+<link rel="stylesheet" type="text/css" href="supervisor/css/viewmother.css">
+<link rel="stylesheet" type="text/css" href="supervisor/css/main.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
-<script src="midwife/js/createviewforall.js"></script>
-<script src="midwife/js/viewmother.js"></script>
+<script src="supervisor/js/createviewforall.js"></script>
+<script src="supervisor/js/viewmother.js"></script>
 <script type="text/javascript" src="js/jscharts.js"></script>
 <script>
 $(window).load(function(){
 	loadGraph();
 	loadChildren();
-	loadMessages();
-	getUnreadMsgCount();
 	tabActive('#detailstab');
 });
 //This function is to view weigth graphs
@@ -79,7 +77,6 @@ function loadGraph(){
 		<div style="width:75%; height:10%; position:relative">
 			<jsp:include page="header.jsp"/>
 		</div>
-		<jsp:include page="/message.jsp" />
 		<div class="body">
 			<div style="float:left; width:80%;">
 			<%
@@ -168,13 +165,7 @@ function loadGraph(){
 					if(guardormother.equals("mother")){
 						out.print("<div class=\"titlebar\" id=\"titlebar\">");
 						out.print("<div class=\"title\" id=\"detailstab\"><center><h1>Details</h1></center></div>");
-						out.print("<div class=\"title\" id=\"vaccinationtab\"><center><h1>Attended Clinics</h1></center></div>");
-						out.print("<div class=\"title\" id=\"editinfotab\"><center><h1>Edit Info</h1></center></div>");
-						out.print("<div class=\"title\" id=\"updatetab\"><center><h1>Update Clinics</h1></center></div>");
-					}
-					else{
-						out.print("<div class=\"titlebar\" id=\"titlebar\" style=\"width:10%;\">");
-						out.print("<div class=\"title\" style=\"width:100%;\" id=\"editinfotab\"><center><h1>Edit Info</h1></center></div>");
+						out.print("<div class=\"title\" id=\"vaccinationtab\"><center><h1>Attended Clinics</h1></center></div>");					
 					}
 					%>
 					</div>
@@ -314,18 +305,6 @@ function loadGraph(){
 			</div>
 			<div class="right_sidebar">
 				<div class="online_userbar">
-					<select name="area" id="area">
-						<%
-							Areas a = new Areas(mid);
-							ArrayList<String[]> areaArr = null;
-							areaArr = a.getAreas();
-							String areas = "";
-							for(int i=0;i<areaArr.size();i++){
-								areas = areas+"<option value="+areaArr.get(i)[0]+">("+areaArr.get(i)[0]+") "+areaArr.get(i)[1]+"</option>";
-							}
-							out.print(areas);
-						%>
-					</select>
 					<div id="onlineusers">
 						
 					</div>			

@@ -1,21 +1,35 @@
-/**view child's vaccination fields*/
+function loadChildren(){
+	var xmlhttp = new XMLHttpRequest();
+	var id=document.getElementById("guardianid").value;
+	var url="loadchildren"; 
+	url=url+"?guardianid="+id;
+	xmlhttp.onreadystatechange = function() {
+		if(xmlhttp.readyState==4 && xmlhttp.status==200){
+		    var out = xmlhttp.responseText;
+		    document.getElementById("babies").innerHTML = out;
+		}
+	};
+	
+	xmlhttp.open("GET",url,true);
+	xmlhttp.send(null);
+}
 function loadVaccination(){
 	var xmlhttp = new XMLHttpRequest();
-	var id=document.getElementById("childid").value;
+	var id=document.getElementById("guardianid").value;
 	var date=document.getElementById("clinicdate").value;
-	var url="viewchildvaccinations";
-	url=url+"?clinicdate="+date+"&cid="+id;
+	var url="viewvaccinations";
+	url=url+"?clinicdate="+date+"&gid="+id;
 	xmlhttp.onreadystatechange = function() {
 		if(xmlhttp.readyState==4 && xmlhttp.status==200){
 			var out = JSON.parse(xmlhttp.responseText);
 			if(out.main.age!='undefined')
-		    	document.getElementById("childage").innerHTML = out.main.age;
+		    	document.getElementById("motherage").innerHTML = out.main.age;
 			else
-				document.getElementById("childage").innerHTML = "";
+				document.getElementById("motherage").innerHTML = "";
 			if(out.main.weight!='undefined')
-				document.getElementById("childweight").innerHTML = out.main.weight;
+				document.getElementById("motherweight").innerHTML = out.main.weight;
 			else
-				document.getElementById("childweight").innerHTML = "";
+				document.getElementById("motherweight").innerHTML = "";
 			if(out.main.tamount!='undefined')
 				document.getElementById("tamount").innerHTML = out.main.tamount;
 			else
@@ -47,26 +61,15 @@ function clearTable(tableid){
 	  table.deleteRow(1);
 	}
 }
-$(window).load(function(){
-	loadNews();
-	tabActive('#detailstab');
-});
 $(document).ready(function(){
-	$('#parent').on('click',function(event){
-		var id = event.target.id;
-		var pre = id.substring(0,5);
-		if(pre == "Guard"){
-			window.location = "mother/viewmother.jsp?guardianid="+id;
+	$('#babies').click(function(event){
+		var cid = event.target.id;
+		if(cid!="babies"){
+			//alert(cid);
+			if(cid.length>2){
+				window.location = "supervisor/viewchild.jsp?childid="+cid;
+			}
 		}
-	});
-	var timeout;
-	$(".dropdown").hover(function(){
-		timeout = window.setTimeout(function(){
-			$(".drop_content").slideDown("slow");
-		}, 500);
-	},function(){
-		window.clearTimeout(timeout);
-		$(".drop_content").slideUp("slow");
 	});
 	$('#clinicdate').change(function(){
 		clearTable("vaccinetable");
@@ -86,7 +89,6 @@ $(document).ready(function(){
 		$('#vaccination').css("display", "none");
 	});
 });
-/**details and vaccine tabs set active*/
 function tabActive(id){
 	$(id).css("background-color","#2E51B9");
 	$(id).css("box-shadow","0 0 10px 0px black inset");	

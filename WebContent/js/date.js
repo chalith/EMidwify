@@ -1,4 +1,3 @@
-/**validation and script for all files*/
 function isDate(date){
 	pattern=/^([0-9]{4})\/([0-9]{2})\/([0-9]{2})$/;
 	//if(!isNaN(Date.parse(date))){
@@ -67,53 +66,3 @@ function getDays(year,month){
 	}
 	return 0;
 }
-function loadUsers(){
-	var xmlhttp = new XMLHttpRequest();
-	var url="loadmidwives"; 
-    url=url;
-	xmlhttp.onreadystatechange = function() {
-		if(xmlhttp.readyState==4 && xmlhttp.status==200){
-	        var users = xmlhttp.responseText;
-	        document.getElementById("onlineusers").innerHTML = users;
-		}
-	};
-	
-	xmlhttp.open("GET",url,true);
-    xmlhttp.send(null);
-}
-function loadNews(){
-	var xmlhttp = new XMLHttpRequest();
-    var url="createnotification"; 
-	xmlhttp.onreadystatechange = function() {
-		if(xmlhttp.readyState==4 && xmlhttp.status==200){
-	        var news = xmlhttp.responseText;
-	        document.getElementById("notifications").innerHTML = news;
-		}
-	};
-	xmlhttp.open("GET",url,true);
-    xmlhttp.send(null);
-}
-$(window).load(function(){
-	loadUsers();
-	loadNews();
-});
-$(document).ready(function(){
-	$('#onlineusers').click(function(event){
-		var onlineusers = event.target.id;
-		if(onlineusers!="onlineusers"){
-			var Gid = onlineusers;
-			if(Gid.length>2){
-				window.location = "supervisor/viewmidwife.jsp?mid="+Gid;
-			}
-		}
-	});
-	var timeout;
-	$(".dropdown").hover(function(){
-		timeout = window.setTimeout(function(){
-			$(".drop_content").slideDown("slow");
-		}, 500);
-	},function(){
-		window.clearTimeout(timeout);
-		$(".drop_content").slideUp("slow");
-	});
-});

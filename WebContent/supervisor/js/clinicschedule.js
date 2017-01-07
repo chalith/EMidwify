@@ -1,5 +1,6 @@
 $(document).ready(function(){
 	$("input").keypress(function(){
+		alert();
 		if(event.which == 13){
 			event.preventDefault();
 			doSubmit();

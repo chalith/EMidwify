@@ -7,9 +7,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <base href="${pageContext.request.contextPath}/" />
-<link rel="stylesheet" type="text/css" href="midwife/css/main.css">
+<link rel="stylesheet" type="text/css" href="supervisor/css/main.css">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-<script src="midwife/js/header.js"></script>
+<script src="supervisor/js/header.js"></script>
 </head>
 <body>
 	<%	

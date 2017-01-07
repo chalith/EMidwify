@@ -14,8 +14,7 @@
 <link rel="stylesheet" type="text/css" href="supervisor/css/clinicschedule.css">
 <link rel="stylesheet" type="text/css" href="supervisor/css/main.css">
 <link rel="stylesheet" type="text/css" href="supervisor/css/form.css">
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
 <script src="supervisor/js/createviewforall.js"></script>
 <script src="supervisor/js/clinicschedule.js"></script>
 </head>
@@ -24,6 +23,7 @@
 		String mid = (String)session.getAttribute("mid");
 		if(mid==null){
 			response.sendRedirect("/EMidwify");
+			return;
 		}
 		String cDate = (String) session.getAttribute("date");
 	%>
@@ -42,7 +42,12 @@
 		</div>
 		<div class="backbody" id="container">
 			<div class="right_sidebar">
-				
+				<div class="online_userbar">
+					<div id="onlineusers">
+						
+					</div>
+				</div>
+			
 				<div class ="newsfeed clearfix">
 					
 					<h2>Latest News</h2>

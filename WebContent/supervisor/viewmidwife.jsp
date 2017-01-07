@@ -8,30 +8,23 @@
 <%@page import="java.sql.*"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-<title>My Profile</title>
+<title>Midwife</title>
 <head>
 <base href="${pageContext.request.contextPath}/" />
-<link rel="stylesheet" type="text/css" href="supervisor/css/supervisor.css">
+<link rel="stylesheet" type="text/css" href="supervisor/css/midwife.css">
 <link rel="stylesheet" type="text/css" href="supervisor/css/main.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
 <script src="supervisor/js/createviewforall.js"></script>
-<script src="supervisor/js/supervisor.js"></script>
-<script>
-$(document).ready(function(){
-	$('#editinfotab').on("click",function(){
-		window.location="supervisor/editsupervisorinfo.jsp";
-	});
-});
-
-</script>
+<script src="supervisor/js/midwife.js"></script>
 </head>
 <body>
 	<%
-		String mid = (String)session.getAttribute("mid");
-		if(mid==null){
+		String sid = (String)session.getAttribute("mid");
+		if(sid==null){
 			response.sendRedirect("/EMidwify");
 			return;
 		}
+		String mid = request.getParameter("mid");
 	%>
 <div>
 	<div class="container">
@@ -57,7 +50,7 @@ $(document).ready(function(){
 						String ccount = null;
 						try{
 							jdbc = new JDBC();
-							String q="SELECT * FROM supervisor WHERE supervisorID = '"+mid+"';";
+							String q="SELECT * FROM midwife WHERE midwifeID = '"+mid+"';";
 							jdbc.st.executeQuery(q);
 							ResultSet rs = jdbc.st.getResultSet();
 							while(rs.next()){
@@ -65,7 +58,7 @@ $(document).ready(function(){
 								address = (String)rs.getString("address");
 								dateofbirth = (String)rs.getString("dateOfBirth");
 								dateofstart = (String)rs.getString("startedDate");
-								pic = (String)rs.getString("supervisorPicture");
+								pic = (String)rs.getString("midwifePicture");
 								
 							}
 							DateFormat frmt = new SimpleDateFormat("yyyy-MM-dd");
@@ -76,7 +69,7 @@ $(document).ready(function(){
 					    	Date wDate = FormatDate.createDate(dateofstart);
 					    	experience = wDate.getAge(currentDate);
 					    	
-					    	q="SELECT areaCode,area FROM area WHERE midwifeID IN (SELECT midwifeID FROM midwife WHERE supervisorID = '"+mid+"');";
+					    	q="SELECT areaCode,area FROM area WHERE midwifeID = '"+mid+"';";
 							jdbc.st.executeQuery(q);
 							ResultSet rs2 = jdbc.st.getResultSet();
 							while(rs2.next()){
@@ -90,15 +83,14 @@ $(document).ready(function(){
 								}
 								
 							}
-							
-					    	q="SELECT COUNT(guardianID) FROM guardian WHERE guardianID IN (SELECT guardianID FROM mother) && guardianAreaCode IN (SELECT areaCode FROM area WHERE midwifeID IN (SELECT midwifeID FROM midwife WHERE supervisorID = '"+mid+"'));";
+							q="SELECT COUNT(guardianID) FROM guardian WHERE guardianID IN (SELECT guardianID FROM mother) && guardianAreaCode IN (SELECT areaCode FROM area WHERE midwifeID = '"+mid+"');";
 							jdbc.st.executeQuery(q);
 							rs2 = jdbc.st.getResultSet();
 							while(rs2.next()){
 								mcount = (String)rs2.getString(1);
 							}
 							
-							String q1="SELECT COUNT(childID) FROM child WHERE guardianID IN (SELECT guardianID FROM guardian WHERE guardianAreaCode IN (SELECT areaCode FROM area WHERE midwifeID IN (SELECT midwifeID FROM midwife WHERE supervisorID = '"+mid+"')));";
+							String q1="SELECT COUNT(childID) FROM child WHERE guardianID IN (SELECT guardianID FROM guardian WHERE guardianAreaCode IN (SELECT areaCode FROM area WHERE midwifeID = '"+mid+"'));";
 							jdbc.st.executeQuery(q1);
 							rs2 = jdbc.st.getResultSet();
 							while(rs2.next()){
@@ -122,9 +114,6 @@ $(document).ready(function(){
 						}
 						%>
 						</h1>
-					</div>
-					<div class="titlebar" id="titlebar">
-						<div class="title" id="editinfotab"><center><h1>Edit Info</h1></center></div>
 					</div>
 					<div style="display: inline-block; margin-top: 0; width: 84%;" class="midwifedetails" id="details">
 						<div  style="font-size: 120%; float:left; width:70%; color:#040C23;">

@@ -33,18 +33,6 @@
 		<div class="backbody">
 			<div class="right_sidebar">
 				<div class="online_userbar">
-					<select name="area" id="area">
-						<%
-							Areas a = new Areas(mid);
-							ArrayList<String[]> areaArr = null;
-							areaArr = a.getAreas();
-							String areas = "";
-							for(int i=0;i<areaArr.size();i++){
-								areas = areas+"<option value="+areaArr.get(i)[0]+">("+areaArr.get(i)[0]+") "+areaArr.get(i)[1]+"</option>";
-							}
-							out.print(areas);
-						%>
-					</select>
 					<div id="onlineusers">
 						
 					</div>
