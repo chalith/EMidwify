@@ -23,7 +23,7 @@ public class LogIn extends HttpServlet {
 		try{
 			String uname = request.getParameter("username");
 			String pword = request.getParameter("password");
-			
+			Main m = new Main();
 			String id = null;
 			String namepic[] = null;
 			String user = null;
@@ -39,14 +39,13 @@ public class LogIn extends HttpServlet {
 					id = (String) rs.getString("userID");
 				}
 				if(id != null){
-					String table = getPerson(id);
+					String table = m.getPerson(id);
 					if(table.equals("midwife")){
 						namepic = getName(table, "name", "midwifePicture", "midwifeID", id);
 						user = "Midwife";
 					}
 					else if(table.equals("mother")){
 						namepic = getName("guardian", "guardianName", "guardianPicture", "guardianID", id);
-						Main m = new Main();
 						if(m.isHave("mother", "guardianID", id)){
 							user = "Mother";
 						}
@@ -57,6 +56,10 @@ public class LogIn extends HttpServlet {
 					else if(table.equals("supervisor")){
 						namepic = getName(table, "name", "supervisorPicture", "supervisorID", id);
 						user = "Supervisor";
+					}
+					else if(table.equals("admin")){
+						namepic = getName(table, "name", "adminPicture", "adminID", id);
+						user = "Admin";
 					}
 				}
 				else{
@@ -99,6 +102,9 @@ public class LogIn extends HttpServlet {
 				else if(user.equals("Supervisor")){
 					response.sendRedirect("supervisor/supervisorfrontpage.jsp");
 				}
+				else if(user.equals("Admin")){
+					response.sendRedirect("admin/adminfrontpage.jsp");
+				}
 			}
 			else{
 				request.setAttribute("warning", "<script>showalert(\"The Password you've entered is incorrect\")</script>");
@@ -108,20 +114,6 @@ public class LogIn extends HttpServlet {
 		}catch (Exception e) {
 			response.sendRedirect("/EMidwify");
 		}
-	}
-	private String getPerson(String id){
-		String person = null;
-		Main m = new Main();
-		if(m.isHave("guardian", "guardianID", id)){
-			person = "mother";
-		}
-		else if(m.isHave("midwife", "midwifeID", id)){
-			person = "midwife";
-		}
-		else if(m.isHave("supervisor", "supervisorID", id)){
-			person = "supervisor";
-		}
-		return person;
 	}
 	String[] getName(String table, String column1, String column2,String idColumn, String id){
 		JDBC jdbc = new JDBC();;

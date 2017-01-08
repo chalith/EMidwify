@@ -49,12 +49,15 @@ $(document).ready(function(){
 						String areacode = "";
 						String area = "";
 						String dateofbirth = null;
+						String email = null;
 						String age = null;
 						String pic = null;
 						String dateofstart = null;
 						String experience = null;
 						String mcount = null;
 						String ccount = null;
+						ArrayList<String> mobileNumbers=new ArrayList<String>();
+						
 						try{
 							jdbc = new JDBC();
 							String q="SELECT * FROM supervisor WHERE supervisorID = '"+mid+"';";
@@ -63,11 +66,19 @@ $(document).ready(function(){
 							while(rs.next()){
 								fullname = (String)rs.getString("name");
 								address = (String)rs.getString("address");
+								email = (String)rs.getString("email");
 								dateofbirth = (String)rs.getString("dateOfBirth");
 								dateofstart = (String)rs.getString("startedDate");
 								pic = (String)rs.getString("supervisorPicture");
 								
 							}
+							q="SELECT mobileNumber FROM supervisormobilenumber WHERE supervisorID = '"+mid+"';";
+							jdbc.st.executeQuery(q);
+							rs = jdbc.st.getResultSet();
+							while(rs.next()){
+								mobileNumbers.add((String)rs.getString("mobileNumber"));
+							}
+							
 							DateFormat frmt = new SimpleDateFormat("yyyy-MM-dd");
 					    	java.util.Date dt = new java.util.Date();
 					    	Date currentDate = FormatDate.createDate(frmt.format(dt));
@@ -143,6 +154,17 @@ $(document).ready(function(){
 								if(address!=null){
 									out.print("<li>Address :-  "+address+"</li></br>");
 								}
+								if(mobileNumbers.size()!=0){
+									out.print("<li>Mobile numbers :-  ");
+									for(int i=0;i<mobileNumbers.size();i++){
+										out.print("<li>"+mobileNumbers.get(i)+"</li></br>");
+									}
+									out.print("</li>");
+								}
+								if(email!=null){
+									out.print("<li>Email Address :-  "+email+"</li></br>");
+								}
+								
 								if(dateofbirth!=null){
 									out.print("<li>Date of birth :-  "+dateofbirth+"</li></br>");
 								}

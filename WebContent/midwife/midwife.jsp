@@ -47,6 +47,8 @@
 						String experience = null;
 						String mcount = null;
 						String ccount = null;
+						ArrayList<String> mobileNumbers=new ArrayList<String>();
+						
 						try{
 							jdbc = new JDBC();
 							String q="SELECT * FROM midwife WHERE midwifeID = '"+mid+"';";
@@ -60,6 +62,13 @@
 								pic = (String)rs.getString("midwifePicture");
 								
 							}
+							q="SELECT mobileNumber FROM midwifemobilenumber WHERE midwifeID = '"+mid+"';";
+							jdbc.st.executeQuery(q);
+							rs = jdbc.st.getResultSet();
+							while(rs.next()){
+								mobileNumbers.add((String)rs.getString("mobileNumber"));
+							}
+							
 							DateFormat frmt = new SimpleDateFormat("yyyy-MM-dd");
 					    	java.util.Date dt = new java.util.Date();
 					    	Date currentDate = FormatDate.createDate(frmt.format(dt));
@@ -133,6 +142,13 @@
 								}
 								if(address!=null){
 									out.print("<li>Address :-  "+address+"</li></br>");
+								}
+								if(mobileNumbers.size()!=0){
+									out.print("<li>Mobile numbers :-  ");
+									for(int i=0;i<mobileNumbers.size();i++){
+										out.print("<li>"+mobileNumbers.get(i)+"</li></br>");
+									}
+									out.print("</li>");
 								}
 								if(dateofbirth!=null){
 									out.print("<li>Date of birth :-  "+dateofbirth+"</li></br>");

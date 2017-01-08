@@ -185,7 +185,7 @@ public class MotherRegistration extends HttpServlet {
 	        	}
             	request.setAttribute("finalAlert","<script>showsuccessmessage(\"Guardian or Mother registered successfully\")</script>");
             	request.setAttribute("gid", mother.id);
-        		getServletContext().getRequestDispatcher("/midwife/registeruser.jsp").forward(request,response);
+        		getServletContext().getRequestDispatcher("/registeruser.jsp").forward(request,response);
 	            out.println("successfully added");
 	        }catch(Exception e){
 	        	System.out.print(e);

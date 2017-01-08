@@ -263,7 +263,7 @@
     <description></description>
     <display-name>RegisterUser</display-name>
     <servlet-name>RegisterUser</servlet-name>
-    <servlet-class>com.midwife.guardian.RegisterUser</servlet-class>
+    <servlet-class>com.main.RegisterUser</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>RegisterUser</servlet-name>

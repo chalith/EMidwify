@@ -22,16 +22,19 @@ $(document).ready(function(){
 	<jsp:include page="login.jsp" />
 	
 	<%
-		String mid = (String)session.getAttribute("mid");
+		String mid = (String)session.getAttribute("usertype");
 		if(mid!=null){
-			if(mid.startsWith("Midwife")){
+			if(mid.equals("Midwife")){
 				response.sendRedirect("midwife/midwifefrontpage.jsp");
 			}
-			if(mid.startsWith("Supervisor")){
+			if(mid.equals("Supervisor")){
 				response.sendRedirect("supervisor/supervisorfrontpage.jsp");
 			}
-			else if(mid.startsWith("Guard")){
+			else if(mid.equals("Mother")){
 				response.sendRedirect("mother/motherfrontpage.jsp");
+			}
+			else if(mid.equals("Admin")){
+				response.sendRedirect("admin/adminfrontpage.jsp");
 			}
 		}
 		String warning = (String) request.getAttribute("warning");

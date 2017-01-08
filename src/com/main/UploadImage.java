@@ -26,21 +26,21 @@ public class UploadImage extends HttpServlet {
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		if((session!=null)&&(request.isRequestedSessionIdValid())){
-			String id = (String)session.getAttribute("mid");
-			String usertype = "";
-			String folder = "";
 			Main m = new Main();
-			if(m.isHave("guardian", "guardianID", id)){
-				usertype = "guardian";
+			String id = (String)session.getAttribute("mid");
+			String usertype = m.getPerson(id);
+			String folder = "";
+			if(usertype == "guardian"){
 				folder = "mother";
 			}
-			else if(m.isHave("midwife", "midwifeID", id)){
-				usertype = "midwife";
+			else if(usertype == "midwife"){
 				folder = "midwife";
 			}
-			else if(m.isHave("supervisor", "supervisorID", id)){
-				usertype = "supervisor";
+			else if(usertype == "supervisor"){
 				folder = "supervisor";
+			}
+			else if(usertype == "admin"){
+				folder = "admin";
 			}
 			Part filepart = request.getPart("txtsourcepath");
 			if(filepart!=null){

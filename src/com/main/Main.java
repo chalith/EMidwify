@@ -1,6 +1,7 @@
 package com.main;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class Main {
 	JDBC jdbc = null;
@@ -80,7 +81,33 @@ public class Main {
 		else if(isHave("supervisor", "supervisorID", id)){
 			person = "supervisor";
 		}
+		else if(isHave("admin", "adminID", id)){
+			person = "admin";
+		}
 		return person;
 	}
-	
+	public String userRegister(String id,String username,String password){
+		JDBC jdbc = new JDBC();
+		try{
+			String q = "SELECT * FROM users WHERE userName = '"+username+"'";
+			jdbc.st.executeQuery(q);
+			ResultSet rs = jdbc.st.getResultSet();
+			while(rs.next()){
+				return "already registered";
+			}
+			q = "INSERT INTO users (userID,userName,password) VALUES ('"+id+"','"+username+"','"+password+"');";
+			jdbc.st.executeUpdate(q);
+			return "User registered successfully";            
+        }catch(Exception e){
+        	System.out.print(e);
+        	return "Error occured";
+        }
+        finally{
+	        try {
+				jdbc.conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+        }
+	}
 }

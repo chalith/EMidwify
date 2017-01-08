@@ -77,6 +77,7 @@ function loadGraph(){
 		<div style="width:75%; height:10%; position:relative">
 			<jsp:include page="header.jsp"/>
 		</div>
+		<jsp:include page="/message.jsp" />
 		<div class="body">
 			<div style="float:left; width:80%;">
 			<%
@@ -87,6 +88,7 @@ function loadGraph(){
 				String area = null;
 				String guardormother = null;
 				String clinicdates = "";
+				ArrayList<String> mobileNumbers=new ArrayList<String>();
 				JDBC jdbc = new JDBC();
 				try{
 					String q="SELECT * FROM guardian WHERE guardianID = '"+Gid+"';";
@@ -110,6 +112,13 @@ function loadGraph(){
 						guardian.edulevel = (String)rs.getString("guardianEducationLevel");
 						guardianPic = (String)rs.getString("guardianPicture");
 					}
+					q="SELECT mobileNumber FROM guardianmobilenumber WHERE guardianID = '"+Gid+"';";
+					jdbc.st.executeQuery(q);
+					rs = jdbc.st.getResultSet();
+					while(rs.next()){
+						mobileNumbers.add((String)rs.getString("mobileNumber"));
+					}
+					
 					q = "SELECT area FROM area WHERE areaCode = '"+guardian.areacode+"';";
 					jdbc.st.executeQuery(q);
 					rs = jdbc.st.getResultSet();
@@ -165,7 +174,7 @@ function loadGraph(){
 					if(guardormother.equals("mother")){
 						out.print("<div class=\"titlebar\" id=\"titlebar\">");
 						out.print("<div class=\"title\" id=\"detailstab\"><center><h1>Details</h1></center></div>");
-						out.print("<div class=\"title\" id=\"vaccinationtab\"><center><h1>Attended Clinics</h1></center></div>");					
+						out.print("<div class=\"title\" id=\"vaccinationtab\"><center><h1>Attended Clinics</h1></center></div>");
 					}
 					%>
 					</div>
@@ -191,6 +200,13 @@ function loadGraph(){
 									}
 									if(guardian.address!=null){
 										out.print("<li>Address :-  "+guardian.address+"</li></br>");
+									}
+									if(mobileNumbers.size()!=0){
+										out.print("<li>Mobile numbers :-  ");
+										for(int i=0;i<mobileNumbers.size();i++){
+											out.print("<li>"+mobileNumbers.get(i)+"</li></br>");
+										}
+										out.print("</li>");
 									}
 									if(guardian.email!=null){
 										out.print("<li>Email Address :-  "+guardian.email+"</li></br>");
@@ -305,6 +321,18 @@ function loadGraph(){
 			</div>
 			<div class="right_sidebar">
 				<div class="online_userbar">
+					<select name="area" id="area">
+						<%
+							Areas a = new Areas(mid);
+							ArrayList<String[]> areaArr = null;
+							areaArr = a.getAreas();
+							String areas = "";
+							for(int i=0;i<areaArr.size();i++){
+								areas = areas+"<option value="+areaArr.get(i)[0]+">("+areaArr.get(i)[0]+") "+areaArr.get(i)[1]+"</option>";
+							}
+							out.print(areas);
+						%>
+					</select>
 					<div id="onlineusers">
 						
 					</div>			

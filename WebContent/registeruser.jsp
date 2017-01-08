@@ -7,14 +7,15 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 <title>Register - User</title>
 <base href="${pageContext.request.contextPath}/" />
-<link rel="stylesheet" type="text/css" href="midwife/css/registeruser.css">
-<script src="midwife/js/registeruser.js"></script>
+<link rel="stylesheet" type="text/css" href="css/registeruser.css">
+<script src="js/registeruser.js"></script>
 </head>
 <body>
 	<div id="container">
 	<%
 		if(session.getAttribute("mid")==null){
-			response.sendRedirect("index.jsp");
+			response.sendRedirect("/EMidwify");
+			return;
 		}
 	%>
 	<form action="registeruser" method="post" name="myForm">

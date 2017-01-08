@@ -90,6 +90,7 @@ function loadGraph(){
 				String area = null;
 				String guardormother = null;
 				String clinicdates = "";
+				ArrayList<String> mobileNumbers=new ArrayList<String>();
 				JDBC jdbc = new JDBC();
 				try{
 					String q="SELECT * FROM guardian WHERE guardianID = '"+Gid+"';";
@@ -113,6 +114,13 @@ function loadGraph(){
 						guardian.edulevel = (String)rs.getString("guardianEducationLevel");
 						guardianPic = (String)rs.getString("guardianPicture");
 					}
+					q="SELECT mobileNumber FROM guardianmobilenumber WHERE guardianID = '"+Gid+"';";
+					jdbc.st.executeQuery(q);
+					rs = jdbc.st.getResultSet();
+					while(rs.next()){
+						mobileNumbers.add((String)rs.getString("mobileNumber"));
+					}
+					
 					q = "SELECT area FROM area WHERE areaCode = '"+guardian.areacode+"';";
 					jdbc.st.executeQuery(q);
 					rs = jdbc.st.getResultSet();
@@ -200,6 +208,13 @@ function loadGraph(){
 									}
 									if(guardian.address!=null){
 										out.print("<li>Address :-  "+guardian.address+"</li></br>");
+									}
+									if(mobileNumbers.size()!=0){
+										out.print("<li>Mobile numbers :-  ");
+										for(int i=0;i<mobileNumbers.size();i++){
+											out.print("<li>"+mobileNumbers.get(i)+"</li></br>");
+										}
+										out.print("</li>");
 									}
 									if(guardian.email!=null){
 										out.print("<li>Email Address :-  "+guardian.email+"</li></br>");
