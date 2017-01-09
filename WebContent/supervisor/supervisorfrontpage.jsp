@@ -39,7 +39,8 @@ $(document).ready(function(){
 	<%	
 		String sid = (String) session.getAttribute("mid");
 		if(sid==null){
-			response.sendRedirect("/EMidwify");
+			out.print("<script>window.location=\"\";</script>");
+			return;
 		}
 	%>
 	<jsp:include page="/notification.jsp" />
@@ -90,7 +91,7 @@ $(document).ready(function(){
 						<h1 name="message" id="messagecount" class="msgnotify" style="display:none;"></h1>
 						<img name="message" src="supervisor/images/services/message.png " alt="message"></a></button>
 						<h3 name="message" align="center">Send messages</h3></br>
-						<p name="message" style="margin-left: 10%;">Send messeges to Gurdians / Supervisor</p>
+						<p name="message" style="margin-left: 10%;">Send messeges to Midwives</p>
 					</div>
 					
 				</div>	

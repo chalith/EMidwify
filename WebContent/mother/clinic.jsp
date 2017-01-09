@@ -21,7 +21,8 @@
 	<%
 		String mid = (String)session.getAttribute("mid");
 		if(mid==null){
-			response.sendRedirect("/EMidwify");
+			out.print("<script>window.location=\"\";</script>");
+			return;
 		}
 	%>
 <div>
@@ -45,8 +46,9 @@
 						ArrayList<Notification> notifications = null;
 						try{
 							String q1 = "SELECT guardianAreaCode FROM guardian WHERE guardianID = '"+mid+"'";
-							jdbc.st.execute(q1);
-							ResultSet rs1 =  jdbc.st.getResultSet();
+							Statement st = jdbc.conn.createStatement();
+							st.execute(q1);
+							ResultSet rs1 =  st.getResultSet();
 							while(rs1.next()){
 								String area = rs1.getString("guardianAreaCode");
 								ClinicDates clinicdates = new ClinicDates(area);
@@ -60,8 +62,8 @@
 								String area = null;
 								try{
 									String q = "SELECT area FROM area WHERE areaCode = '"+clinics.get(i).areaCode+"';";
-									jdbc.st.execute(q);
-									ResultSet rs = jdbc.st.getResultSet();
+									st.execute(q);
+									ResultSet rs = st.getResultSet();
 									while(rs.next()){
 										area = rs.getString("area");
 									}

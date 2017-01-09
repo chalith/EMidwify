@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -23,8 +24,9 @@ public class ViewVaccinations extends HttpServlet {
 		JSONObject parent = new JSONObject();
 		try{
 			String q2="SELECT age,weight FROM motherclinic WHERE ((clinicDate='"+date+"') && (motherID = '"+id+"'));";
-			jdbc.st.executeQuery(q2);
-			ResultSet rs2 = jdbc.st.getResultSet();
+			Statement st=jdbc.conn.createStatement();
+			st.executeQuery(q2);
+			ResultSet rs2 = st.getResultSet();
 			String age = "";
 			String weight = "";
 			while(rs2.next()){
@@ -32,8 +34,8 @@ public class ViewVaccinations extends HttpServlet {
 				weight = (String)rs2.getString("weight");
 			}
 			q2="SELECT amount FROM triposha WHERE ((date='"+date+"') && (id = '"+id+"'));";
-			jdbc.st.executeQuery(q2);
-			ResultSet rs3 = jdbc.st.getResultSet();
+			st.executeQuery(q2);
+			ResultSet rs3 = st.getResultSet();
 			
 			String tamount = "0";
 			while(rs3.next()){
@@ -51,8 +53,9 @@ public class ViewVaccinations extends HttpServlet {
 		try{
 
 			String q3="SELECT vaccineCode,vaccineName,vaccineAmount FROM mothergivenvaccines WHERE ((clinicDate='"+date+"') && (motherID = '"+id+"'));";
-			jdbc.st.executeQuery(q3);
-			ResultSet rs3 = jdbc.st.getResultSet();
+			Statement st=jdbc.conn.createStatement();
+			st.executeQuery(q3);
+			ResultSet rs3 = st.getResultSet();
 			int i=0;
 			while(rs3.next()){
 				JSONObject ob1 = new JSONObject();

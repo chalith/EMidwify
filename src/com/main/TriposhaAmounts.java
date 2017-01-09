@@ -2,6 +2,7 @@ package com.main;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
@@ -54,8 +55,9 @@ public class TriposhaAmounts {
 		if(person.equals("child")){
 			try{
 				String q = "SELECT childDateofDelivery FROM child WHERE childID = '"+id+"';";
-				jdbc.st.executeQuery(q);
-				ResultSet rs = jdbc.st.getResultSet();
+				Statement st=jdbc.conn.createStatement();
+				st.executeQuery(q);
+				ResultSet rs = st.getResultSet();
 				while(rs.next()){
 					bd = (String) rs.getString("childDateofDelivery");
 				}
@@ -73,8 +75,9 @@ public class TriposhaAmounts {
 		else if(person.equals("mother")){
 			try{
 				String q = "SELECT guardianBDate FROM guardian WHERE guardianID = '"+id+"';";
-				jdbc.st.executeQuery(q);
-				ResultSet rs = jdbc.st.getResultSet();
+				Statement st=jdbc.conn.createStatement();
+				st.executeQuery(q);
+				ResultSet rs = st.getResultSet();
 				while(rs.next()){
 					bd = (String) rs.getString("guardianBDate");
 				}
@@ -101,15 +104,16 @@ public class TriposhaAmounts {
 		if((person.equals("child")) && (age != 0)){
 			try{
 				String q = "SELECT weight,clinicDate FROM childclinic WHERE childID = '"+id+"' && clinicDate = (SELECT MAX(clinicDate) FROM childclinic WHERE clinicDate < '"+currentDate+"');";
-				jdbc.st.executeQuery(q);
-				ResultSet rs = jdbc.st.getResultSet();
+				Statement st=jdbc.conn.createStatement();
+				st.executeQuery(q);
+				ResultSet rs = st.getResultSet();
 				while(rs.next()){
 					weight = Double.parseDouble((String) rs.getString("weight"));
 					pastDate = (String) rs.getString("clinicDate");
 				}
 				q = "SELECT * FROM childweightcycle WHERE maxAge > '"+age+"' && minAge <= '"+age+"';";
-				jdbc.st.executeQuery(q);
-				rs = jdbc.st.getResultSet();
+				st.executeQuery(q);
+				rs = st.getResultSet();
 				while(rs.next()){
 					maxWeight = Double.parseDouble((String) rs.getString("maxWeight"));
 					minWeight = Double.parseDouble((String) rs.getString("minWeight"));
@@ -134,15 +138,16 @@ public class TriposhaAmounts {
 		else if((person.equals("mother")) && (age != 0)){
 			try{
 				String q = "SELECT weight,clinicDate FROM motherclinic WHERE motherID = '"+id+"' && clinicDate = (SELECT MAX(clinicDate) FROM motherclinic WHERE clinicDate < '"+currentDate+"');";
-				jdbc.st.executeQuery(q);
-				ResultSet rs = jdbc.st.getResultSet();
+				Statement st=jdbc.conn.createStatement();
+				st.executeQuery(q);
+				ResultSet rs = st.getResultSet();
 				while(rs.next()){
 					weight = Double.parseDouble((String) rs.getString("weight"));
 					pastDate = (String) rs.getString("clinicDate");
 				}
 				q = "SELECT * FROM motherweightcycle WHERE maxAge > '"+age+"' && minAge <= '"+age+"';";
-				jdbc.st.executeQuery(q);
-				rs = jdbc.st.getResultSet();
+				st.executeQuery(q);
+				rs = st.getResultSet();
 				while(rs.next()){
 					maxWeight = Double.parseDouble((String) rs.getString("maxWeight"));
 					minWeight = Double.parseDouble((String) rs.getString("minWeight"));
@@ -179,8 +184,9 @@ public class TriposhaAmounts {
 		int amount = 0;
 		try{
 			String q1 = "SELECT amount FROM triposha WHERE id = '"+id+"' && date > '"+pastDate+"' && date <= '"+currentDate+"';";
-			jdbc.st.executeQuery(q1);
-			ResultSet rs1 = jdbc.st.getResultSet();
+			Statement st=jdbc.conn.createStatement();
+			st.executeQuery(q1);
+			ResultSet rs1 = st.getResultSet();
 			while(rs1.next()){
 				amount = Integer.parseInt((String) rs1.getString("amount"));
 			}

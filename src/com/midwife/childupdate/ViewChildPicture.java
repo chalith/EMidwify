@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
@@ -27,8 +28,9 @@ public class ViewChildPicture extends HttpServlet {
 			
 		try{
 			String q = "SELECT childName,childPicture FROM child WHERE childID = '"+cid+"';";
-			jdbc.st.executeQuery(q);
-			ResultSet rs = jdbc.st.getResultSet();
+			Statement st=jdbc.conn.createStatement();
+			st.executeQuery(q);
+			ResultSet rs = st.getResultSet();
 			while(rs.next()){
 				name = rs.getString("childName");
 				picture = rs.getString("childPicture");

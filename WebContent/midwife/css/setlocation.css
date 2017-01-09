@@ -1,3 +1,15 @@
+.locationdiv{
+	z-index:10;
+	display:none;
+	margin:5% 50%;
+	width:500px;
+	left:-250px;
+	background-color:black;
+	color:white;
+	position:fixed;
+	width: 37%;
+	min-height:82%;
+}
 #mapCanvas {
   width: 495px;
   height: 400px;

@@ -1,7 +1,7 @@
 /**main front interface of mother*/
 function loadMessagecounts(){
 	var xmlhttp = new XMLHttpRequest();
-    var url="viewmidwifemsgcount"; 
+    var url="viewmessagecountsinsupervisor";
 	xmlhttp.onreadystatechange = function() {
 		if(xmlhttp.readyState==4 && xmlhttp.status==200){
 	        var counts = xmlhttp.responseText;

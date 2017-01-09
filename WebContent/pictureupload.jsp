@@ -82,7 +82,8 @@ function readURL(input,imgtg) {
 	<%
 		String id = (String)session.getAttribute("mid");
 		if(id==null){
-			response.sendRedirect("/EMidwify");
+			out.print("<script>window.location=\"\";</script>");
+			return;
 		}
 	%>
 	<div class="uploadpicture" id="uploadpicture">

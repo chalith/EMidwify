@@ -53,7 +53,7 @@ $(document).ready(function(){
 	<%
 		String mid = (String)session.getAttribute("mid");
 		if(mid==null){
-			out.print("<script>close.window(); open.window(\"/EMidwify\",\"_self\"); </script>");
+			out.print("<script>close.window(); open.window(\"/\",\"_self\"); </script>");
 		}
 	%>
 	<div class="select" id="motherselect">

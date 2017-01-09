@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="com.main.JDBC"%>
+<%@page import="java.sql.*"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -15,7 +16,7 @@
 	<%	
 		String mid = (String) session.getAttribute("mid");
 		if(mid==null){
-			out.print("<script>window.location=\"/EMidwify\";</script>");
+			out.print("<script>window.location=\"\";</script>");
 		}
 		JDBC jdbc = new JDBC();
 		String picture = null;
@@ -23,8 +24,9 @@
 		String utype = null;
 		try{
 			String q = "SELECT name,adminPicture FROM admin WHERE adminID = '"+mid+"';";
-			jdbc.st.executeQuery(q);
-			ResultSet rs = jdbc.st.getResultSet();
+			Statement st=jdbc.conn.createStatement();
+			st.executeQuery(q);
+			ResultSet rs = st.getResultSet();
 			while(rs.next()){
 				picture = rs.getString("adminPicture");
 				uname = rs.getString("name");
@@ -41,7 +43,7 @@
 			}
 		}
 		if((picture == null)||(uname == null)||(utype == null)){
-			out.print("<script>window.location=\"/EMidwify\";</script>");
+			out.print("<script>window.location=\"\";</script>");
 		}
 		
 	%>

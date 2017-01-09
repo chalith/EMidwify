@@ -3,6 +3,7 @@ package com.admin;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -77,11 +78,13 @@ public class MidwifeRegistration extends HttpServlet {
         try{
 	        String q1="INSERT INTO midwife (midwifeID,name,dateOfBirth,address,email,startedDate,supervisorID,midwifePicture,dateOfRegister) " +
 	        		"VALUES('"+id+"','"+fullname+"','"+dateofbirth+"','"+address+"','"+email+"','"+starteddate+"','"+supervisorid+"','midwife/images/midwife.png','"+cDate+"')";
-            jdbc.st.executeUpdate(q1);
+	        Statement st=jdbc.conn.createStatement();
+			st.executeUpdate(q1);
             
         	for(int i=0;i<tpnumbers.size();i++){
         		String q2="INSERT INTO midwifemobilenumber (midwifeID,mobileNumber) VALUES('"+id+"','"+tpnumbers.get(i)+"')";
-        		jdbc.st.executeUpdate(q2);
+        		st=jdbc.conn.createStatement();
+				st.executeUpdate(q2);
         	}
         	request.setAttribute("finalAlert","<script>showsuccessmessage(\"Midwife registered successfully\")</script>");
         	request.setAttribute("gid", id);

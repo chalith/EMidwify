@@ -3,6 +3,7 @@ package com.admin;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -23,7 +24,8 @@ public class AddEpidemic extends HttpServlet {
 				String ep = eps[i];
 				String epidemic[] = ep.split("~column~");
 				String q = "INSERT INTO epidemic (epidemicCode,epidemicName,description) VALUES ('"+epidemic[0].trim()+"','"+epidemic[1].trim()+"','"+epidemic[2].trim()+"');";
-				jdbc.st.executeUpdate(q);
+				Statement st=jdbc.conn.createStatement();
+				st.executeUpdate(q);
 			}
 			request.setAttribute("finalAlert","<script>showsuccessmessage(\"Epidemic added successfully\")</script>");
         	getServletContext().getRequestDispatcher("/admin/addepidemic.jsp").forward(request,response);

@@ -68,7 +68,8 @@ function loadGraph(){
 	<%
 		String mid = (String)session.getAttribute("mid");
 		if(mid==null){
-			response.sendRedirect("/EMidwify");
+			out.print("<script>window.location=\"\";</script>");
+			return;
 		}
 	%>
 <div>
@@ -81,7 +82,7 @@ function loadGraph(){
 				<div class="details" style="display:block;">
 					<div class="childdetails" style="padding-top:1%; margin:3% 3% 0 3%; border:2px solid;">
 						<img style="width:15%; border:solid; border-radius:10%; margin: 2% 0 -2% 0%;" src="<%
-							JDBC jdbc1 = new JDBC();
+							JDBC jdbc = new JDBC();
 						Child child = new Child();;
 						String childPic = "";
 						MotherDeath motherdeath = null;
@@ -96,8 +97,9 @@ function loadGraph(){
 						String fatherpic = null;
 						try{
 							String q1="SELECT * FROM child WHERE childID = '"+cid+"';";
-							jdbc1.st.executeQuery(q1);
-							ResultSet rs = jdbc1.st.getResultSet();
+							Statement st = jdbc.conn.createStatement();
+							st.executeQuery(q1);
+							ResultSet rs = st.getResultSet();
 							while(rs.next()){
 								//System.out.print((String)rs.getString("childName"));
 								child.childID = cid;
@@ -113,71 +115,60 @@ function loadGraph(){
 								}
 							}
 							String q2="SELECT DISTINCT(clinicDate) FROM childclinic WHERE childID = '"+cid+"';";
-							jdbc1.st.executeQuery(q2);
-							ResultSet rs2 = jdbc1.st.getResultSet();
+							st.executeQuery(q2);
+							ResultSet rs2 = st.getResultSet();
 							while(rs2.next()){
 								clinicdates = clinicdates+"<option>"+(String)rs2.getString("clinicDate")+"</option>";
+							}
+							
+							q1="SELECT guardianAreaCode,guardianName,guardianPicture FROM guardian WHERE guardianID = '"+child.motherguardianID+"';";
+							st.executeQuery(q1);
+							rs = st.getResultSet();
+							String guardianPic = "";
+							while(rs.next()){
+								child.motherguardianName = (String)rs.getString("guardianName");
+								areaCode = (String)rs.getString("guardianAreaCode");
+								guardianPic = (String)rs.getString("guardianPicture");
+							}
+							q1 = "SELECT area FROM area WHERE areaCode = '"+areaCode+"';";
+							st.executeQuery(q1);
+							rs = st.getResultSet();
+							while(rs.next()){
+								area = rs.getString("area");
+							}
+							
+							q1="SELECT motherID FROM mother WHERE guardianID = '"+child.motherguardianID+"';";
+							st.executeQuery(q1);
+							rs2 = st.getResultSet();
+							while(rs2.next()){
+								//request.setAttribute("mid",(String)rs2.getString("motherID"));
+								mothername = child.motherguardianName;
+								motherpic = guardianPic;
+							}
+							if(child.father!=null){
+								q1="SELECT fatherName,fatherPicture FROM father WHERE fatherID = '"+child.father.fatherID+"';";
+								st.executeQuery(q1);
+								ResultSet rs3 = st.getResultSet();
+								while(rs3.next()){
+									fathername = (String)rs3.getString("fatherName");
+									fatherpic = (String)rs3.getString("fatherPicture");
+								}
 							}
 						}catch(Exception e){
 							e.printStackTrace();
 						}finally{
 							try {
-								jdbc1.conn.close();
+								jdbc.conn.close();
 							} catch (SQLException e1) {
 								e1.printStackTrace();
 							}
 						}
-						if(child.childName!=null){
-							DateFormat frmt = new SimpleDateFormat("yyyy-MM-dd");
-					    	java.util.Date dt = new java.util.Date();
-					    	Date currentDate = FormatDate.createDate(frmt.format(dt));
-					    	Date bDate = FormatDate.createDate(child.dateofDelivery);
-					    	age = bDate.getAge(currentDate);
-					    	JDBC jdbc =  new JDBC();
-							try{
-								String q1="SELECT guardianAreaCode,guardianName,guardianPicture FROM guardian WHERE guardianID = '"+child.motherguardianID+"';";
-								jdbc.st.executeQuery(q1);
-								ResultSet rs = jdbc.st.getResultSet();
-								String guardianPic = "";
-								while(rs.next()){
-									child.motherguardianName = (String)rs.getString("guardianName");
-									areaCode = (String)rs.getString("guardianAreaCode");
-									guardianPic = (String)rs.getString("guardianPicture");
-								}
-								q1 = "SELECT area FROM area WHERE areaCode = '"+areaCode+"';";
-								jdbc.st.executeQuery(q1);
-								rs = jdbc.st.getResultSet();
-								while(rs.next()){
-									area = rs.getString("area");
-								}
-								
-								q1="SELECT motherID FROM mother WHERE guardianID = '"+child.motherguardianID+"';";
-								jdbc.st.executeQuery(q1);
-								ResultSet rs2 = jdbc.st.getResultSet();
-								while(rs2.next()){
-									//request.setAttribute("mid",(String)rs2.getString("motherID"));
-									mothername = child.motherguardianName;
-									motherpic = guardianPic;
-								}
-								if(child.father!=null){
-									q1="SELECT fatherName,fatherPicture FROM father WHERE fatherID = '"+child.father.fatherID+"';";
-									jdbc.st.executeQuery(q1);
-									ResultSet rs3 = jdbc.st.getResultSet();
-									while(rs3.next()){
-										fathername = (String)rs3.getString("fatherName");
-										fatherpic = (String)rs3.getString("fatherPicture");
-									}
-								}
-							}catch(Exception e){
-								System.out.println(e);
-							}finally{
-								try {
-									jdbc.conn.close();
-								} catch (SQLException e1) {
-									e1.printStackTrace();
-								}
-							}
-						}
+						DateFormat frmt = new SimpleDateFormat("yyyy-MM-dd");
+				    	java.util.Date dt = new java.util.Date();
+				    	Date currentDate = FormatDate.createDate(frmt.format(dt));
+				    	Date bDate = FormatDate.createDate(child.dateofDelivery);
+				    	age = bDate.getAge(currentDate);
+				    	
 						out.print(childPic);
 						%>" alt="user_photo">
 						<h1 style="width:50%; float: right;"><%

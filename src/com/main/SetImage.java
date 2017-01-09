@@ -7,6 +7,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.nio.file.Files;
+import java.sql.Statement;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -48,7 +49,8 @@ public class SetImage extends HttpServlet {
 					JDBC jdbc = new JDBC();
 					try{
 						String q = "UPDATE "+usertype+" SET "+usertype+"Picture = '"+destination+"' WHERE "+usertype+"ID = '"+id+"';";
-						jdbc.st.executeUpdate(q);
+						Statement st=jdbc.conn.createStatement();
+						st.executeUpdate(q);
 					}catch(Exception e){
 						e.printStackTrace();
 					}finally{

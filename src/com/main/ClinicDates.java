@@ -1,6 +1,7 @@
 package com.main;
 
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -22,8 +23,9 @@ public class ClinicDates {
 		try {
 			clinicDates = new ArrayList<String[]>();
 			String q = "SELECT clinicDate,venue,time FROM clinics WHERE areaCode = '"+areaCode+"' && clinicDate >= '"+cDate+"';";
-			jdbc.st.executeQuery(q);
-			ResultSet rs = jdbc.st.getResultSet();
+			Statement st=jdbc.conn.createStatement();
+			st.executeQuery(q);
+			ResultSet rs = st.getResultSet();
 			while (rs.next()) {
 				String d = rs.getString("clinicDate");
 				String v = rs.getString("venue");
@@ -33,8 +35,8 @@ public class ClinicDates {
 			}
 			pastClinicDates = new ArrayList<String[]>();
 			q = "SELECT clinicDate,venue,time FROM clinics WHERE areaCode = '"+areaCode+"' && clinicDate <= '"+cDate+"';";
-			jdbc.st.executeQuery(q);
-			rs = jdbc.st.getResultSet();
+			st.executeQuery(q);
+			rs = st.getResultSet();
 			while (rs.next()) {
 				String d = rs.getString("clinicDate");
 				String v = rs.getString("venue");

@@ -3,6 +3,7 @@ package com.admin;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
@@ -41,14 +42,16 @@ public class AdminEditInfo extends HttpServlet {
 		JDBC jdbc = new JDBC();
         try{
 	        String q1="UPDATE admin SET name = '"+fullname+"', address = '"+address+"', email = '"+email+"' WHERE adminID = '"+id+"';";
-            jdbc.st.executeUpdate(q1);
+	        Statement st=jdbc.conn.createStatement();
+			st.executeUpdate(q1);
             
             String q22 = "DELETE FROM adminmobilenumber WHERE adminID = '"+id+"';";
-    		jdbc.st.executeUpdate(q22);
+    		st.executeUpdate(q22);
         	for(int i=0;i<tpNumbers.length;i++){
         		if(!tpNumbers[i].equals("")){
 	        		q22 = "INSERT INTO adminmobilenumber (adminID,mobileNumber) VALUES ('"+id+"','"+tpNumbers[i]+"')";
-	        		jdbc.st.executeUpdate(q22);
+	        		Statement st2=jdbc.conn.createStatement();
+					st2.executeUpdate(q22);
         		}
         	}
         	request.setAttribute("finalAlert","<script>showsuccessmessage(\"Your details updated successfully\")</script>");

@@ -3,6 +3,7 @@ package com.admin;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -75,11 +76,12 @@ public class SupervisorRegistration extends HttpServlet {
         try{
 	        String q1="INSERT INTO supervisor (supervisorID,name,dateOfBirth,address,email,startedDate,supervisorPicture,dateOfRegistered) " +
 	        		"VALUES('"+id+"','"+fullname+"','"+dateofbirth+"','"+address+"','"+email+"','"+starteddate+"','supervisor/images/services/father.png','"+cDate+"')";
-            jdbc.st.executeUpdate(q1);
+	        Statement st=jdbc.conn.createStatement();
+			st.executeUpdate(q1);
             
         	for(int i=0;i<tpnumbers.size();i++){
         		String q2="INSERT INTO supervisormobilenumber (supervisorID,mobileNumber) VALUES('"+id+"','"+tpnumbers.get(i)+"')";
-        		jdbc.st.executeUpdate(q2);
+        		st.executeUpdate(q2);
         	}
         	request.setAttribute("finalAlert","<script>showsuccessmessage(\"Supervisor registered successfully\")</script>");
         	request.setAttribute("gid", id);

@@ -23,7 +23,8 @@
 	<%
 		String mid = (String)session.getAttribute("mid");
 		if(mid==null){
-			response.sendRedirect("/EMidwify");
+			out.print("<script>window.location=\"\";</script>");
+			return;
 		}
 	%>
 <div>
@@ -50,8 +51,9 @@
 				try{
 					String q = "SELECT midwifeID from area WHERE areaCode = (SELECT guardianAreaCode FROM guardian WHERE guardianID = '"+mid+"');";
 					
-					jdbc.st.executeQuery(q);
-					ResultSet rs = jdbc.st.getResultSet();
+					Statement st = jdbc.conn.createStatement();
+					st.executeQuery(q);
+					ResultSet rs = st.getResultSet();
 					while (rs.next()) {
 						sid = rs.getString("midwifeID");
 					}

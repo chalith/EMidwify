@@ -1,6 +1,7 @@
 package com.main;
 
 import java.sql.ResultSet;
+import java.sql.Statement;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -22,8 +23,9 @@ public class Event {
 		jdbc = new JDBC();
 		try{
 	    	String q = "SELECT * FROM event WHERE eventID='"+eventID+"';";
-	        jdbc.st.executeQuery(q);
-	        ResultSet rs = jdbc.st.getResultSet();
+	    	Statement st=jdbc.conn.createStatement();
+			st.executeQuery(q);
+	        ResultSet rs = st.getResultSet();
 	        while(rs.next())
 	        {
 	    		this.id = rs.getString("eventID");
@@ -34,8 +36,8 @@ public class Event {
 	    		this.venue = rs.getString("eventVenue");
 	    	}
 	        q = "SELECT guardianID FROM eventguardians WHERE eventID='"+id+"';";
-	        jdbc.st.executeQuery(q);
-	        rs = jdbc.st.getResultSet();
+	        st.executeQuery(q);
+	        rs = st.getResultSet();
 	        while(rs.next())
 	        {
 	        	this.addGuardians(rs.getString("guardianID"));
@@ -56,8 +58,9 @@ public class Event {
 		jdbc = new JDBC();
 		try{
 	    	String q = "SELECT * FROM event WHERE eventDate='"+date+"' && eventID IN (SELECT eventID FROM eventguardians WHERE guardianID = '"+id+"');";
-	        jdbc.st.executeQuery(q);
-	        ResultSet rs = jdbc.st.getResultSet();
+	    	Statement st=jdbc.conn.createStatement();
+			st.executeQuery(q);
+	        ResultSet rs = st.getResultSet();
 	        while(rs.next())
 	        {
 	    		this.id = rs.getString("eventID");
@@ -68,8 +71,8 @@ public class Event {
 	    		this.venue = rs.getString("eventVenue");
 	    	}
 	        q = "SELECT guardianID FROM eventguardians WHERE eventID='"+id+"';";
-	        jdbc.st.executeQuery(q);
-	        rs = jdbc.st.getResultSet();
+	        st.executeQuery(q);
+	        rs = st.getResultSet();
 	        while(rs.next())
 	        {
 	        	this.addGuardians(rs.getString("guardianID"));
@@ -90,8 +93,9 @@ public class Event {
 		jdbc = new JDBC();
 		try{
 	    	String q = "SELECT * FROM event WHERE eventDate = '"+date+"' && areaCode = '"+areaCode+"';";
-	        jdbc.st.executeQuery(q);
-	        ResultSet rs = jdbc.st.getResultSet();
+	    	Statement st=jdbc.conn.createStatement();
+			st.executeQuery(q);
+	        ResultSet rs = st.getResultSet();
 	        while(rs.next())
 	        {
 	        	this.id = rs.getString("eventID");
@@ -102,8 +106,8 @@ public class Event {
 	        	this.venue = rs.getString("eventVenue");
 	    	}
 	        q = "SELECT guardianID FROM eventguardians WHERE eventID='"+id+"';";
-	        jdbc.st.executeQuery(q);
-	        rs = jdbc.st.getResultSet();
+	        st.executeQuery(q);
+	        rs = st.getResultSet();
 	        while(rs.next())
 	        {
 	        	this.addGuardians(rs.getString("guardianID"));

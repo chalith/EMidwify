@@ -2,6 +2,7 @@ package com.main;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 public class Guardians {
@@ -11,8 +12,9 @@ public class Guardians {
 		JDBC jdbc = new JDBC();
 	    try{
 	    	String q = "SELECT guardianID,guardianName,guardianPicture FROM guardian WHERE guardianAreaCode='"+areaCode+"';";
-	        jdbc.st.executeQuery(q);
-	        ResultSet rs = jdbc.st.getResultSet();
+	    	Statement st=jdbc.conn.createStatement();
+			st.executeQuery(q);
+	        ResultSet rs = st.getResultSet();
 	        String motherOrguardian;
 	    	while(rs.next())
 	        {

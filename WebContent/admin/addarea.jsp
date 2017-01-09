@@ -22,7 +22,7 @@
 	<%
 		String mid = (String)session.getAttribute("mid");
 		if(mid==null){
-			response.sendRedirect("/EMidwify");
+			out.print("<script>window.location=\"\";</script>");
 			return;
 		}
 		String cDate = (String) session.getAttribute("date");
@@ -101,8 +101,9 @@
 											String options="";
 											try{
 												String q="SELECT midwifeID,name FROM midwife;";
-												jdbc.st.executeQuery(q);
-												ResultSet rs = jdbc.st.getResultSet();
+												Statement st=jdbc.conn.createStatement();
+												st.executeQuery(q);
+												ResultSet rs = st.getResultSet();
 												while(rs.next()){
 													String s[] = {(String) rs.getString("midwifeID"),(String) rs.getString("name")};
 													midwives.add(s);

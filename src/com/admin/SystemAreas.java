@@ -3,6 +3,7 @@ package com.admin;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.ResultSet;
+import java.sql.Statement;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -22,22 +23,22 @@ public class SystemAreas extends HttpServlet {
 		JDBC jdbc = new JDBC();
 		try{
 			String q = "SELECT * FROM area;";
-			jdbc.st.executeQuery(q);
-			ResultSet rs = jdbc.st.getResultSet();
+			Statement st=jdbc.conn.createStatement();
+			st.executeQuery(q);
+			ResultSet rs = st.getResultSet();
 			int i = 0;
 			while(rs.next()){
 				String areaCode = rs.getString("areaCode");
 				String area = rs.getString("area");
 				String mid = rs.getString("midwifeID");
 				String midwifename = rs.getString("midwifeID");
-				JDBC jdbc2 = new JDBC();
 				String q2 = "SELECT * FROM midwife WHERE midwifeID = '"+mid+"';";
-				jdbc2.st.executeQuery(q2);
-				ResultSet rs2 = jdbc2.st.getResultSet();
+				Statement st2=jdbc.conn.createStatement();
+				st2.executeQuery(q2);
+				ResultSet rs2 = st2.getResultSet();
 				while(rs2.next()){
 					midwifename = rs2.getString("name");
 				}
-				jdbc2.conn.close();
 				JSONObject row = new JSONObject();
 				row.put("areaCode", areaCode);
 				row.put("area",area);

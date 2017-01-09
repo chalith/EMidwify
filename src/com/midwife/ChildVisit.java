@@ -1,6 +1,7 @@
 package com.midwife;
 
 import java.sql.ResultSet;
+import java.sql.Statement;
 
 import java.sql.SQLException;
 import java.text.DateFormat;
@@ -55,8 +56,9 @@ public class ChildVisit {
 		String guardianID = child.motherguardianID;
 		try{
 			String q = "SELECT guardianName,guardianAddress,guardianLocation FROM guardian WHERE guardianID = '"+guardianID+"';";
-			jdbc.st.executeQuery(q);
-			ResultSet rs = jdbc.st.getResultSet();
+			Statement st=jdbc.conn.createStatement();
+			st.executeQuery(q);
+			ResultSet rs = st.getResultSet();
 			while(rs.next()){
 				guardianName = rs.getString("guardianName");
 				address = rs.getString("guardianAddress");

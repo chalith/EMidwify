@@ -22,7 +22,8 @@
 	<%
 		String mid = (String)session.getAttribute("mid");
 		if(mid==null){
-			response.sendRedirect("/EMidwify");
+			out.print("<script>window.location=\"\";</script>");
+			return;
 		}
 	%>
 <div>
@@ -70,7 +71,6 @@
 					<div id="motherbar">
 					
 					</div>
-					<jsp:include page="groupmessages.jsp" />
 				</div>
 				<div class="msgcontent" id="msgcontent">
 					<div id="sendername" class="sendername" style="font-size: 80%; margin-left: 20%;"></div>
@@ -97,6 +97,7 @@
 		</div>
 	</div>
 </div>
+<jsp:include page="groupmessages.jsp" />
 <jsp:include page="/alert.jsp" />
 <jsp:include page="/error.jsp" />
 </body>

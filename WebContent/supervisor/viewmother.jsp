@@ -69,7 +69,8 @@ function loadGraph(){
 	<%
 		String mid = (String)session.getAttribute("mid");
 		if(mid==null){
-			response.sendRedirect("/EMidwify");
+			out.print("<script>window.location=\"\";</script>");
+			return;
 		}
 	%>
 <div>
@@ -92,8 +93,9 @@ function loadGraph(){
 				JDBC jdbc = new JDBC();
 				try{
 					String q="SELECT * FROM guardian WHERE guardianID = '"+Gid+"';";
-					jdbc.st.executeQuery(q);
-					ResultSet rs = jdbc.st.getResultSet();
+					Statement st = jdbc.conn.createStatement();
+					st.executeQuery(q);
+					ResultSet rs = st.getResultSet();
 					while(rs.next()){
 						guardian.id = (String)rs.getString("guardianID");
 						guardian.fullname = (String)rs.getString("guardianName");
@@ -112,30 +114,30 @@ function loadGraph(){
 						guardian.edulevel = (String)rs.getString("guardianEducationLevel");
 						guardianPic = (String)rs.getString("guardianPicture");
 					}
-					q="SELECT mobileNumber FROM guardianmobilenumber WHERE guardianID = '"+Gid+"';";
-					jdbc.st.executeQuery(q);
-					rs = jdbc.st.getResultSet();
+					q="SELECT guardianMobileNumber FROM guardianmobilenumber WHERE guardianID = '"+Gid+"';";
+					st.executeQuery(q);
+					rs = st.getResultSet();
 					while(rs.next()){
-						mobileNumbers.add((String)rs.getString("mobileNumber"));
+						mobileNumbers.add((String)rs.getString("guardianMobileNumber"));
 					}
 					
 					q = "SELECT area FROM area WHERE areaCode = '"+guardian.areacode+"';";
-					jdbc.st.executeQuery(q);
-					rs = jdbc.st.getResultSet();
+					st.executeQuery(q);
+					rs = st.getResultSet();
 					while(rs.next()){
 						area = rs.getString("area");
 					}
 					String q1 = "SELECT COUNT(childID) FROM child WHERE guardianID = '"+guardian.id+"';";
-					jdbc.st.executeQuery(q1);
-					ResultSet rs1 = jdbc.st.getResultSet();
+					st.executeQuery(q1);
+					ResultSet rs1 = st.getResultSet();
 					while (rs1.next()) {
 						guardian.nofchildren = (String)rs1.getString(1);
 					}
 					Main m = new Main();
 					if(m.isHave("mother", "guardianID", guardian.id)){
 						String q2="SELECT DISTINCT(clinicDate) FROM motherclinic WHERE motherID = '"+guardian.id+"';";
-						jdbc.st.executeQuery(q2);
-						ResultSet rs2 = jdbc.st.getResultSet();
+						st.executeQuery(q2);
+						ResultSet rs2 = st.getResultSet();
 						while(rs2.next()){
 							clinicdates = clinicdates+"<option>"+(String)rs2.getString("clinicDate")+"</option>";
 						}

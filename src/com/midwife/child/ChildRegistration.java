@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
@@ -125,26 +126,27 @@ public class ChildRegistration extends HttpServlet {
 	        try{
 		        String q="INSERT INTO child (childID,guardianID,childName,childDateofDelivery,childBirthWeight,childNotes,childRegisteredDate,childPicture) " +
 		        		"VALUES('"+child.childID+"','"+child.motherguardianID+"','"+child.childName+"','"+child.dateofDelivery+"','"+child.birthWeight+"','"+child.note+"','"+cDate+"','midwife/images/services/baby.png')";
-	            jdbc.st.executeUpdate(q);
+		        Statement st=jdbc.conn.createStatement();
+				st.executeUpdate(q);
 	            
 	            for(int i=0;i<child.epidemics.size();i++){
 		            String q1="INSERT INTO childepidemics (childID,epidemicCode,epidemicName,date,note) VALUES('"+child.childID+"','"+child.epidemics.get(i)[0]+"','"+child.epidemics.get(i)[1]+"','"+child.epidemics.get(i)[2]+"','"+child.epidemics.get(i)[3]+"')";
-		            jdbc.st.executeUpdate(q1);
+		            st.executeUpdate(q1);
 	            }
 	            if(!registeredfatherName.equals("")){
 	            	String q1="UPDATE child SET childfatherID = '"+registeredfatherID+"' WHERE childID = '"+child.childID+"';";
-	            	jdbc.st.executeUpdate(q1);
+	            	st.executeUpdate(q1);
 	            }
 	            else if(father != null){
 	            	String q1="UPDATE child SET childfatherID = '"+father.fatherID+"' WHERE childID = '"+child.childID+"';";
-	            	jdbc.st.executeUpdate(q1);
+	            	st.executeUpdate(q1);
 	            	String q2="INSERT INTO father (fatherID,fatherName,fatherDateofBirth,fatherAddress,fatherOccupation,fatherEdulevel,fatherPicture) " +
 	        		"VALUES('"+father.fatherID+"','"+father.fatherName+"','"+father.dateofBirth+"','"+father.address+"','"+father.occupation+"','"+father.eduLevel+"','midwife/images/services/father.png')";
-	            	jdbc.st.executeUpdate(q2);
+	            	st.executeUpdate(q2);
 	            	
 	            	for(int i=0;i<father.epidemics.size();i++){
 			            q1="INSERT INTO fatherepidemics (fatherID,epidemicCode,epidemicName,date,note) VALUES('"+father.fatherID+"','"+father.epidemics.get(i)[0]+"','"+father.epidemics.get(i)[1]+"','"+father.epidemics.get(i)[2]+"','"+father.epidemics.get(i)[3]+"')";
-			            jdbc.st.executeUpdate(q1);
+			            st.executeUpdate(q1);
 		            }
 	            }
 	            if(motherdeath != null){
@@ -156,7 +158,7 @@ public class ChildRegistration extends HttpServlet {
 	            		q2="INSERT INTO motherdeaths (motherName,motherAreaCode,date,reason) " +
 	            		"VALUES('"+motherdeath.motherName+"','"+motherdeath.motherAreaCode+"','"+motherdeath.dateofDeath+"','"+motherdeath.reason+"')";	
 	            	}
-	            	jdbc.st.executeUpdate(q2);
+	            	st.executeUpdate(q2);
 	            }
 	            
 	        	request.setAttribute("finalAlert","<script>showsuccessmessage(\"Child registered successfully\")</script>");

@@ -2,6 +2,7 @@ package com.main;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 import com.main.JDBC;
@@ -31,8 +32,9 @@ public class Guardian {
 		jdbc = new JDBC();
 		try{
 	    	String q = "SELECT * FROM guardian WHERE guardianID='"+id+"';";
-	        jdbc.st.executeQuery(q);
-	        ResultSet rs = jdbc.st.getResultSet();
+	    	Statement st=jdbc.conn.createStatement();
+			st.executeQuery(q);
+	        ResultSet rs = st.getResultSet();
 	        while(rs.next())
 	        {
 	    		fullname = rs.getString("guardianName");
@@ -47,8 +49,8 @@ public class Guardian {
 	    		picture = rs.getString("guardianPicture");
 	    	}
 	        q = "SELECT guardianMobileNumber FROM guardianmobilenumber WHERE guardianID='"+id+"';";
-	        jdbc.st.executeQuery(q);
-	        rs = jdbc.st.getResultSet();
+	        st.executeQuery(q);
+	        rs = st.getResultSet();
 	        while(rs.next())
 	        {
 	        	addTPnumber(rs.getString(1));

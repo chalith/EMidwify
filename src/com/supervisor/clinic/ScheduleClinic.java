@@ -3,6 +3,7 @@ package com.supervisor.clinic;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -24,7 +25,8 @@ public class ScheduleClinic extends HttpServlet {
 				String ep = eps[i];
 				String epidemic[] = ep.split("~column~");
 				String q = "INSERT INTO clinics (clinicDate,areaCode,venue,time) VALUES ('"+epidemic[0].trim()+"','"+epidemic[1].trim()+"','"+epidemic[2].trim()+"','"+epidemic[3].trim()+"');";
-				jdbc.st.executeUpdate(q);
+				Statement st=jdbc.conn.createStatement();
+				st.executeUpdate(q);
 			}
 			request.setAttribute("finalAlert","<script>showsuccessmessage(\"Schedule updated successfully\")</script>");
         	getServletContext().getRequestDispatcher("/supervisor/clinicschedule.jsp").forward(request,response);

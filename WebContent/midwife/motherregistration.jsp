@@ -60,7 +60,8 @@ function initialize() {
 	<%
 		String mid = (String)session.getAttribute("mid");
 		if(mid==null){
-			response.sendRedirect("/EMidwify");
+			out.print("<script>window.location=\"\";</script>");
+			return;
 		}
 		String cDate = (String) session.getAttribute("date");
 	%>

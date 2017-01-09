@@ -2,8 +2,11 @@ package com.admin;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -27,7 +30,8 @@ public class AddArea extends HttpServlet {
 				String ar = ars[i];
 				String area[] = ar.split("~column~");
 				String q = "INSERT INTO Area (areaCode,area,midwifeID) VALUES ('"+area[0].trim()+"','"+area[1].trim()+"','"+area[2].trim()+"');";
-				jdbc.st.executeUpdate(q);
+				Statement st=jdbc.conn.createStatement();
+				st.executeUpdate(q);
 			}
 			request.setAttribute("finalAlert","<script>showsuccessmessage(\"Area added successfully\")</script>");
         	getServletContext().getRequestDispatcher("/admin/addarea.jsp").forward(request,response);

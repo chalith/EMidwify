@@ -41,7 +41,7 @@ $(document).ready(function(){
 	<%	
 		String mid = (String) session.getAttribute("mid");
 		if(mid==null){
-			response.sendRedirect("/EMidwify");
+			out.print("<script>window.location=\"\";</script>");
 			return;
 		}
 	%>
@@ -82,7 +82,7 @@ $(document).ready(function(){
 						<h1 id="messagecount" class="msgnotify" style="display:none;"></h1>
 						<img src="mother/images/services/message.png " alt="message"></a></button>
 						<h3 align="center">Send messages</h3></br>
-						<p style="margin-left: 10%;">Send messeges to Gurdians / Supervisor</p>
+						<p style="margin-left: 10%;">Send messeges to Midwife</p>
 					</div>
 						
 					</div>

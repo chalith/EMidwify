@@ -13,7 +13,7 @@
 <%
 	String cDate = (String) session.getAttribute("date");
 	if(cDate==null){
-		response.sendRedirect("/EMidwify");
+		response.sendRedirect("");
 		return;
 	}
 %>

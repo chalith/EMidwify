@@ -2,9 +2,12 @@ package com.main;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+
+import org.json.JSONObject;
 
 public class VaccineAmounts {
 	String id = null;
@@ -14,7 +17,6 @@ public class VaccineAmounts {
 	String person = null;
 	int remindPeriod;
 	public ArrayList<String[]> vAmounts = null;
-	JDBC jdbc = null;
 	public VaccineAmounts(String id, int remindPeriod){
 		this.remindPeriod = remindPeriod;
 		this.id = id;
@@ -51,13 +53,14 @@ public class VaccineAmounts {
 		}
 	}
 	void getAge(){
-		jdbc = new JDBC();
+		JDBC jdbc = new JDBC();
 		String bd = null;
 		if(person.equals("child")){
 			try{
 				String q = "SELECT childDateofDelivery FROM child WHERE childID = '"+id+"';";
-				jdbc.st.executeQuery(q);
-				ResultSet rs = jdbc.st.getResultSet();
+				Statement st=jdbc.conn.createStatement();
+				st.executeQuery(q);
+				ResultSet rs = st.getResultSet();
 				while(rs.next()){
 					bd = (String) rs.getString("childDateofDelivery");
 				}
@@ -75,8 +78,9 @@ public class VaccineAmounts {
 		else if(person.equals("mother")){
 			try{
 				String q = "SELECT guardianBDate FROM guardian WHERE guardianID = '"+id+"';";
-				jdbc.st.executeQuery(q);
-				ResultSet rs = jdbc.st.getResultSet();
+				Statement st=jdbc.conn.createStatement();
+				st.executeQuery(q);
+				ResultSet rs = st.getResultSet();
 				while(rs.next()){
 					bd = (String) rs.getString("guardianBDate");
 				}
@@ -97,213 +101,135 @@ public class VaccineAmounts {
 	public ArrayList<String[]> getVaccines(){
 		vAmounts = new ArrayList<String[]>();
 		Date visitDate = null;
-		jdbc = new JDBC();
+		JDBC jdbc = new JDBC();
+		String q=null;
 		if((person.equals("child")) && (age != 0)){
-			try{
-				String q = "SELECT * FROM childvaccineamounts";
-				jdbc.st.executeQuery(q);
-				ResultSet rs = jdbc.st.getResultSet();
-				while(rs.next()){
-					int vaage = Integer.parseInt((String) rs.getString("age"));
-					String vCode = (String) rs.getString("vaccineCode");
-					String vName = null;
-					String vAmount = (String) rs.getString("amount");
-					if((((age%vaage)>=vaage-remindPeriod)||((age%vaage)==0))&&(!(checkVaccineGiven(vCode)))){
-						if((age%vaage)!=0){
-							visitDate = cdate.increase(vaage-(age%vaage));
-						}
-						else{
-							visitDate = cdate;
-						}
-						JDBC jdbc2 = new JDBC();
-						try{
-							String q2 = "SELECT vaccineName FROM vaccine WHERE vaccineCode = '"+vCode+"';";
-							jdbc2.st.executeQuery(q2);
-							ResultSet rs2 = jdbc2.st.getResultSet();
-							while(rs2.next()){
-								vName = (String) rs2.getString("vaccineName");
-							}
-							String vDate = visitDate.year+"/"+visitDate.month+"/"+visitDate.day;
-							String s[] = {vCode,vName,vAmount,vDate};
-							vAmounts.add(s);
-						}
-						catch(Exception e){
-							e.printStackTrace();
-						}
-						finally{
-							jdbc2.conn.close();
-						}
-					}
-				}
-			}catch(Exception e){
-				e.printStackTrace();
-			}
-			finally{
-				try {
-					jdbc.conn.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
+			q = "SELECT * FROM childvaccineamounts";	
 		}
 		else if((person.equals("mother")) && (age != 0)){
-			try{
-				String q = "SELECT * FROM mothervaccineamounts";
-				jdbc.st.executeQuery(q);
-				ResultSet rs = jdbc.st.getResultSet();
-				while(rs.next()){
-					int vaage = Integer.parseInt((String) rs.getString("age"));
-					String vCode = (String) rs.getString("vaccineCode");
-					String vName = null;
-					String vAmount = (String) rs.getString("amount");
-					if((((age%vaage)>=vaage-remindPeriod)||((age%vaage)==0))&&(!(checkVaccineGiven(vCode)))){
-						if((age%vaage)!=0){
-							visitDate = cdate.increase(vaage-(age%vaage));
-						}
-						else{
-							visitDate = cdate;
-						}
-						JDBC jdbc2 = new JDBC();
-						try{
-							String q2 = "SELECT vaccineName FROM vaccine WHERE vaccineCode = '"+vCode+"';";
-							jdbc2.st.executeQuery(q2);
-							ResultSet rs2 = jdbc2.st.getResultSet();
-							while(rs2.next()){
-								vName = (String) rs2.getString("vaccineName");
-							}
-							String vDate = visitDate.year+"/"+visitDate.month+"/"+visitDate.day;
-							String s[] = {vCode,vName,vAmount,vDate};
-							vAmounts.add(s);
-						}
-						catch(Exception e){
-							e.printStackTrace();
-						}
-						finally{
-							jdbc2.conn.close();
-						}
-					}
-				}
-			}catch(Exception e){
-				e.printStackTrace();
+			q = "SELECT * FROM mothervaccineamounts";
+		}
+		try{
+			Statement st=jdbc.conn.createStatement();
+			st.executeQuery(q);
+			ResultSet rs = st.getResultSet();
+			JSONObject vaccnines = new JSONObject();
+			int i=0;
+			while(rs.next()){
+				JSONObject vaccnine = new JSONObject();	
+				vaccnine.put("vage", (String) rs.getString("age"));
+				vaccnine.put("vCode", (String) rs.getString("vaccineCode"));
+				vaccnine.put("vAmount", (String) rs.getString("amount"));
+				vaccnines.put(Integer.toString(i), vaccnine);
+				i++;
 			}
-			finally{
-				try {
-					jdbc.conn.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
+			for(int j=0;j<i;j++){
+				int vaage = Integer.parseInt((String) ((JSONObject) vaccnines.get(Integer.toString(j))).get("vage"));
+				String vCode = (String) ((JSONObject) vaccnines.get(Integer.toString(j))).get("vCode");
+				String vName = (String) ((JSONObject) vaccnines.get(Integer.toString(j))).get("vCode");
+				String vAmount = (String) ((JSONObject) vaccnines.get(Integer.toString(j))).get("vAmount");
+				
+				if((((age%vaage)>=vaage-remindPeriod)||((age%vaage)==0))&&(!(checkVaccineGiven(vCode)))){
+					if((age%vaage)!=0){
+						visitDate = cdate.increase(vaage-(age%vaage));
+					}
+					else{
+						visitDate = cdate;
+					}
+					String q2 = "SELECT vaccineName FROM vaccine WHERE vaccineCode = '"+vCode+"';";
+					st.executeQuery(q2);
+					ResultSet rs2 = st.getResultSet();
+					while(rs2.next()){
+						vName = (String) rs2.getString("vaccineName");
+					}
+					String vDate = visitDate.year+"/"+visitDate.month+"/"+visitDate.day;
+					String s[] = {vCode,vName,vAmount,vDate};
+					vAmounts.add(s);
 				}
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		finally{
+			try {
+				jdbc.conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
 			}
 		}
 		return vAmounts;
 	}
 	public String getAmount(String vCode){
-		jdbc = new JDBC();
+		JDBC jdbc = new JDBC();
 		String amount = null;
+		String q = null;
 		if((person.equals("child")) && (age != 0)){
-			try{
-				String q = "SELECT amount,age FROM childvaccineamounts WHERE vaccineCode = '"+vCode+"' HAVING age > "+age+"%age";
-				jdbc.st.executeQuery(q);
-				ResultSet rs = jdbc.st.getResultSet();
-				while(rs.next()){
-					 amount = (String) rs.getString("amount");
-				}
-			}catch(Exception e){
-				e.printStackTrace();
-			}
-			finally{
-				try {
-					jdbc.conn.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
+			q = "SELECT amount,age FROM childvaccineamounts WHERE vaccineCode = '"+vCode+"' HAVING age > "+age+"%age";
 		}
 		if((person.equals("mother")) && (age != 0)){
-			try{
-				String q = "SELECT amount,age FROM mothervaccineamounts WHERE vaccineCode = '"+vCode+"' HAVING age > "+age+"%age";
-				jdbc.st.executeQuery(q);
-				ResultSet rs = jdbc.st.getResultSet();
-				while(rs.next()){
-					 amount = (String) rs.getString("amount");
-				}
-			}catch(Exception e){
-				e.printStackTrace();
+			q = "SELECT amount,age FROM mothervaccineamounts WHERE vaccineCode = '"+vCode+"' HAVING age > "+age+"%age";	
+		}
+		try{
+			Statement st=jdbc.conn.createStatement();
+			st.executeQuery(q);
+			ResultSet rs = st.getResultSet();
+			while(rs.next()){
+				 amount = (String) rs.getString("amount");
 			}
-			finally{
-				try {
-					jdbc.conn.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		finally{
+			try {
+				jdbc.conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
 			}
 		}
 		return amount;
 	}
 	public boolean checkVaccineGiven(String vCode){
-		jdbc = new JDBC();
+		JDBC jdbc = new JDBC();
 		String givenDate = null;
 		int period = 0;
+		String q1=null;
+		String q=null;
 		if((person.equals("child")) && (age != 0)){
-			try{
-				String q1 = "SELECT age FROM childvaccineamounts WHERE vaccineCode = '"+vCode+"'";
-				jdbc.st.executeQuery(q1);
-				ResultSet rs1 = jdbc.st.getResultSet();
-				while(rs1.next()){
-					period = Integer.parseInt((String) rs1.getString("age"));
-				}
-				String q = "SELECT clinicDate FROM childgivenvaccines WHERE ((vaccineCode = '"+vCode+"') && (childID = '"+id+"'))";
-				jdbc.st.executeQuery(q);
-				ResultSet rs = jdbc.st.getResultSet();
-				while(rs.next()){
-					givenDate = (String) rs.getString("clinicDate");
-					Date gDate = createDate(givenDate,"-");
-					int difference = gDate.getDeference(cdate);
-					if(difference<=period){
-						return true;
-					}
-				}
-			}catch(Exception e){
-				e.printStackTrace();
-			}
-			finally{
-				try {
-					jdbc.conn.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
+			q1 = "SELECT age FROM childvaccineamounts WHERE vaccineCode = '"+vCode+"'";
+			q = "SELECT clinicDate FROM childgivenvaccines WHERE ((vaccineCode = '"+vCode+"') && (childID = '"+id+"'))";
 			return false;
 		}
 		else if((person.equals("mother")) && (age != 0)){
-			try{
-				String q1 = "SELECT age FROM mothervaccineamounts WHERE vaccineCode = '"+vCode+"'";
-				jdbc.st.executeQuery(q1);
-				ResultSet rs1 = jdbc.st.getResultSet();
-				while(rs1.next()){
-					period = Integer.parseInt((String) rs1.getString("age"));
+			q1 = "SELECT age FROM mothervaccineamounts WHERE vaccineCode = '"+vCode+"'";
+			q = "SELECT clinicDate FROM mothergivenvaccines WHERE ((vaccineCode = '"+vCode+"') && (motherID = '"+id+"'))";
+			return false;
+		}
+		try{	
+			Statement st=jdbc.conn.createStatement();
+			st.executeQuery(q1);
+			ResultSet rs1 = st.getResultSet();
+			while(rs1.next()){
+				period = Integer.parseInt((String) rs1.getString("age"));
+			}
+			st.executeQuery(q);
+			ResultSet rs = st.getResultSet();
+			while(rs.next()){
+				givenDate = (String) rs.getString("clinicDate");
+				Date gDate = createDate(givenDate,"-");
+				int difference = gDate.getDeference(cdate);
+				if(difference<=period){
+					return true;
 				}
-				String q = "SELECT clinicDate FROM mothergivenvaccines WHERE ((vaccineCode = '"+vCode+"') && (motherID = '"+id+"'))";
-				jdbc.st.executeQuery(q);
-				ResultSet rs = jdbc.st.getResultSet();
-				while(rs.next()){
-					givenDate = (String) rs.getString("clinicDate");
-					Date gDate = createDate(givenDate,"-");
-					int difference = gDate.getDeference(cdate);
-					if(difference<=period){
-						return true;
-					}
-				}
-			}catch(Exception e){
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		finally{
+			try {
+				jdbc.conn.close();
+			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-			finally{
-				try {
-					jdbc.conn.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-			return false;
 		}
 		return false;
 	}

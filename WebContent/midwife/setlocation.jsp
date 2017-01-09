@@ -13,7 +13,7 @@
 <script type="text/javascript" src="midwife/js/setlocation.js"></script>
 </head>
 <body>
-	<div id="setlocation" style="z-index:10; display:none; margin:5% 30% 5% 30%; background-color:black; color:white; position:absolute; width: 37%; min-height:82%;">
+	<div id="setlocation" class="locationdiv">
   		<div style="widows: 98%; height: 73%; overflow: hidden;">
   			<div id="mapCanvas" style="display:none;"></div>
   		</div>

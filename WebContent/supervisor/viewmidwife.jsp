@@ -21,7 +21,7 @@
 	<%
 		String sid = (String)session.getAttribute("mid");
 		if(sid==null){
-			response.sendRedirect("/EMidwify");
+			out.print("<script>window.location=\"\";</script>");
 			return;
 		}
 		String mid = request.getParameter("mid");
@@ -54,8 +54,9 @@
 						try{
 							jdbc = new JDBC();
 							String q="SELECT * FROM midwife WHERE midwifeID = '"+mid+"';";
-							jdbc.st.executeQuery(q);
-							ResultSet rs = jdbc.st.getResultSet();
+							Statement st = jdbc.conn.createStatement();
+							st.executeQuery(q);
+							ResultSet rs = st.getResultSet();
 							while(rs.next()){
 								fullname = (String)rs.getString("name");
 								address = (String)rs.getString("address");
@@ -66,8 +67,8 @@
 								
 							}
 							q="SELECT mobileNumber FROM midwifemobilenumber WHERE midwifeID = '"+mid+"';";
-							jdbc.st.executeQuery(q);
-							rs = jdbc.st.getResultSet();
+							st.executeQuery(q);
+							rs = st.getResultSet();
 							while(rs.next()){
 								mobileNumbers.add((String)rs.getString("mobileNumber"));
 							}
@@ -81,8 +82,8 @@
 					    	experience = wDate.getAge(currentDate);
 					    	
 					    	q="SELECT areaCode,area FROM area WHERE midwifeID = '"+mid+"';";
-							jdbc.st.executeQuery(q);
-							ResultSet rs2 = jdbc.st.getResultSet();
+							st.executeQuery(q);
+							ResultSet rs2 = st.getResultSet();
 							while(rs2.next()){
 								if(area.equals("")){
 									areacode = (String)rs2.getString("areaCode");
@@ -95,15 +96,15 @@
 								
 							}
 							q="SELECT COUNT(guardianID) FROM guardian WHERE guardianID IN (SELECT guardianID FROM mother) && guardianAreaCode IN (SELECT areaCode FROM area WHERE midwifeID = '"+mid+"');";
-							jdbc.st.executeQuery(q);
-							rs2 = jdbc.st.getResultSet();
+							st.executeQuery(q);
+							rs2 = st.getResultSet();
 							while(rs2.next()){
 								mcount = (String)rs2.getString(1);
 							}
 							
 							String q1="SELECT COUNT(childID) FROM child WHERE guardianID IN (SELECT guardianID FROM guardian WHERE guardianAreaCode IN (SELECT areaCode FROM area WHERE midwifeID = '"+mid+"'));";
-							jdbc.st.executeQuery(q1);
-							rs2 = jdbc.st.getResultSet();
+							st.executeQuery(q1);
+							rs2 = st.getResultSet();
 							while(rs2.next()){
 								ccount = (String)rs2.getString(1);
 							}

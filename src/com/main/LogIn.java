@@ -3,6 +3,7 @@ package com.main;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
@@ -32,8 +33,9 @@ public class LogIn extends HttpServlet {
 			HttpSession session = null;
 			try{
 				String q = "SELECT * FROM users WHERE userName = '"+uname+"'";
-				jdbc.st.executeQuery(q);
-				ResultSet rs = jdbc.st.getResultSet();
+				Statement st=jdbc.conn.createStatement();
+				st.executeQuery(q);
+				ResultSet rs = st.getResultSet();
 				while(rs.next()){
 					password = (String) rs.getString("password");
 					id = (String) rs.getString("userID");
@@ -121,8 +123,9 @@ public class LogIn extends HttpServlet {
 		String picture = null;
 		try{
 			String q = "SELECT "+column1+","+column2+" FROM "+table+" WHERE "+idColumn+" = '"+id+"';";
-			jdbc.st.execute(q);
-			ResultSet rs = jdbc.st.getResultSet();
+			Statement st=jdbc.conn.createStatement();
+			st.execute(q);
+			ResultSet rs = st.getResultSet();
 			while(rs.next()){
 				name = (String) rs.getString(column1);
 				picture = (String) rs.getString(column2);

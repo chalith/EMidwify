@@ -10,15 +10,15 @@
 	position: absolute;
 }
 .groupicon{
-	padding-top:1%;
+	padding-top:5px;
 	cursor:pointer;
-	width: 20%;
-	height: 10%;
+	width: 50px;
+	height: 45px;
 	background-color:white;
 	border-radius:50%;
-	left:75%;
-	top:-14%;
-	position: relative;
+	left:330px;
+	top:10%;
+	position: fixed;
 	box-shadow:1px 1px 2px 1px inset;
 }
 .groupicon:hover{

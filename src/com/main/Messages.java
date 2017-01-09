@@ -1,6 +1,7 @@
 package com.main;
 
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -13,8 +14,9 @@ public class Messages {
 		try{
 			jdbc = new JDBC();
 			String q = "SELECT senderID,message,sendTime FROM messages WHERE ((senderID = '"+sender+"') && (receiverID = '"+receiver+"')) || (senderID = '"+receiver+"') && (receiverID = '"+sender+"') ORDER BY sendTime;";
-			jdbc.st.executeQuery(q);
-			ResultSet rs = jdbc.st.getResultSet();
+			Statement st=jdbc.conn.createStatement();
+			st.executeQuery(q);
+			ResultSet rs = st.getResultSet();
 			messages = new ArrayList<String[]>();
 			while(rs.next()){
 				String messagesender = (String) rs.getString("senderID");
@@ -42,7 +44,8 @@ public class Messages {
 			DateFormat frmt = new SimpleDateFormat("yyyy/MM/dd/hh/mm/ss");
 			String currentDate = frmt.format(cDate);
 			String q = "INSERT INTO messages (senderID,receiverID,message,sendTime) VALUES('"+sender+"','"+receiver+"','"+message+"','"+currentDate+"');";
-			jdbc.st.executeUpdate(q);
+			Statement st=jdbc.conn.createStatement();
+			st.executeUpdate(q);
 		}catch(Exception e){
 			e.printStackTrace();
 		}
@@ -59,8 +62,9 @@ public class Messages {
 		int messageCount = 0;
 		try{
 			String q = "SELECT COUNT(senderID) FROM messages WHERE ( senderID = '"+sender+"' ) && ( receiverID = '"+receiver+"' ) && (receiveTime IS NULL);";
-			jdbc.st.executeQuery(q);
-			ResultSet rs = jdbc.st.getResultSet();
+			Statement st=jdbc.conn.createStatement();
+			st.executeQuery(q);
+			ResultSet rs = st.getResultSet();
 			while(rs.next()){
 				messageCount = Integer.parseInt((String) rs.getString(1));
 			}
@@ -83,7 +87,8 @@ public class Messages {
 			DateFormat frmt = new SimpleDateFormat("yyyy/MM/dd/hh/mm/ss");
 			String currentDate = frmt.format(cDate);
 			String q = "UPDATE messages SET receiveTime = '"+currentDate+"' WHERE ( senderID = '"+sender+"' ) && ( receiverID = '"+receiver+"' ) && (receiveTime IS NULL);";
-			jdbc.st.executeUpdate(q);
+			Statement st=jdbc.conn.createStatement();
+			st.executeUpdate(q);
 		}catch (Exception e) {
 			e.printStackTrace();
 		}

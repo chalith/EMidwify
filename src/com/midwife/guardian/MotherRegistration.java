@@ -158,28 +158,29 @@ public class MotherRegistration extends HttpServlet {
 	        try{
 		        String q1="INSERT INTO guardian (guardianID,guardianName,guardianAddress,guardianLocation,guardianEmail,guardianBDate,guardianOccupation,guardianNofchildren,guardianEducationLevel,guardianAreaCode,guardianNote,guardianDateOfRegistered,guardianPicture) " +
 		        		"VALUES('"+mother.id+"','"+mother.fullname+"','"+mother.address+"','"+location+"','"+mother.email+"','"+mother.dateofbirth+"','"+mother.occupation+"','"+mother.nofchildren+"','"+mother.edulevel+"','"+mother.areacode+"','"+mother.mothernotes+"','"+cDate+"','midwife/images/services/profile.png')";
-	            jdbc.st.executeUpdate(q1);
+		        Statement st=jdbc.conn.createStatement();
+				st.executeUpdate(q1);
 	            
             	for(int i=0;i<mother.tpnumbers.size();i++){
             		String q2="INSERT INTO guardianmobilenumber (guardianID,guardianMobileNumber) VALUES('"+mother.id+"','"+mother.tpnumbers.get(i)+"')";
-            		jdbc.st.executeUpdate(q2);
+            		st.executeUpdate(q2);
             	}
             	if(motherguardian.equals("mother")){
             		String MID = m.generateID("mother", "Mother");
 	            	String q="INSERT INTO mother (guardianID,motherID) VALUES('"+mother.id+"','"+MID+"')";
-		            jdbc.st.executeUpdate(q);
+		            st.executeUpdate(q);
 		            for(int i=0;i<mother.epidemics.size();i++){
 			            String q2="INSERT INTO motherepidemics (motherID,epidemicCode,epidemicName,date,note) VALUES('"+MID+"','"+mother.epidemics.get(i)[0]+"','"+mother.epidemics.get(i)[1]+"','"+mother.epidemics.get(i)[2]+"','"+mother.epidemics.get(i)[3]+"')";
-			            jdbc.st.executeUpdate(q2);
+			            st.executeUpdate(q2);
 		            }
 		            for(int i=0;i<mother.abortions.size();i++){
 			            String q2="INSERT INTO motherabortions (motherID,abortionDate,abortionReason) VALUES('"+MID+"','"+mother.abortions.get(i)[0]+"','"+mother.abortions.get(i)[1]+"')";
-			            jdbc.st.executeUpdate(q2);
+			            st.executeUpdate(q2);
 			            //out.println("ab");
 		            }
 		            for(int i=0;i<mother.childdeaths.size();i++){
 			            String q2="INSERT INTO motherchilddeaths (motherID,childName,date,reason) VALUES('"+MID+"','"+mother.childdeaths.get(i)[0]+"','"+mother.childdeaths.get(i)[1]+"','"+mother.childdeaths.get(i)[2]+"')";
-			            jdbc.st.executeUpdate(q2);
+			            st.executeUpdate(q2);
 			            //out.println("cd");
 		            }
 	        	}

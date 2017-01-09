@@ -1,6 +1,7 @@
 package com.main;
 
 import java.sql.ResultSet;
+import java.sql.Statement;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -14,8 +15,9 @@ public class Children {
 		try{
 			jdbc = new JDBC();
 			String q = "SELECT childID,childName,childDateofDelivery,childPicture FROM child WHERE guardianID = '"+gid+"';";
-	        jdbc.st.executeQuery(q);
-	        ResultSet rs = jdbc.st.getResultSet();
+			Statement st=jdbc.conn.createStatement();
+			st.executeQuery(q);
+	        ResultSet rs = st.getResultSet();
 	        while(rs.next()){
 	    		String cid = rs.getString("childID");
 	    		String cpic = rs.getString("childPicture");
@@ -40,8 +42,9 @@ public class Children {
 	    try{
 	    	jdbc = new JDBC();
 	    	String q = "SELECT childID,childName,childPicture FROM child WHERE guardianID IN (SELECT guardianID FROM guardian WHERE guardianAreaCode = '"+areaCode+"' );";
-	        jdbc.st.executeQuery(q);
-	        ResultSet rs = jdbc.st.getResultSet();
+	    	Statement st=jdbc.conn.createStatement();
+			st.executeQuery(q);
+	        ResultSet rs = st.getResultSet();
 	    	while(rs.next())
 	        {
 	    		String cid = rs.getString("childID");

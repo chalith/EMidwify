@@ -24,7 +24,8 @@
 	<%
 		String mid = (String)session.getAttribute("mid");
 		if(mid==null){
-			response.sendRedirect("/EMidwify");
+			response.sendRedirect("");
+			return;
 		}
 		String cDate = (String) session.getAttribute("date");
 	%>
@@ -81,11 +82,21 @@
 								String fatherID = "";
 								String notes = "";
 								String picture = "";
+								String guardianName = null;
+								String guardianAreaCode = null;
+								String area = null;
+								String fname = "";
+								String fdob = "";
+								String foccupation = "";
+								String faddress = "";
+								String fedulevel = "";
+								String fpicture = "";
 								
 								try{
 									String q = "SELECT * FROM child WHERE childID = '"+id+"';";
-									jdbc.st.executeQuery(q);
-									ResultSet rs = jdbc.st.getResultSet();
+									Statement st=jdbc.conn.createStatement();
+									st.executeQuery(q);
+									ResultSet rs = st.getResultSet();
 									while(rs.next()){
 										guardianID = rs.getString(2).trim();
 										name = rs.getString(3).trim();
@@ -94,6 +105,32 @@
 										fatherID = rs.getString(6).trim();
 										notes = rs.getString(7).trim();
 										picture = rs.getString(9);
+									}
+									q = "SELECT guardianName,guardianAreaCode FROM guardian WHERE guardianID = '"+guardianID+"';";
+									st=jdbc.conn.createStatement();
+									st.executeQuery(q);
+									rs = st.getResultSet();
+									while(rs.next()){
+										guardianName = rs.getString("guardianName");
+										guardianAreaCode = rs.getString("guardianAreaCode");
+									}
+									q = "SELECT area FROM area WHERE areaCode = '"+guardianAreaCode+"';";
+									st.executeQuery(q);
+									rs = st.getResultSet();
+									while(rs.next()){
+										area = rs.getString("area");
+									}
+									
+									q = "SELECT * FROM father WHERE fatherID = '"+fatherID+"';";
+									st.executeQuery(q);
+									rs = st.getResultSet();
+									while(rs.next()){
+										fname = rs.getString(2).trim();
+										faddress = rs.getString(4).trim();
+										fdob = rs.getString(3).trim();
+										foccupation = rs.getString(5).trim();
+										fedulevel = rs.getString(6).trim();
+										fpicture = rs.getString(7);
 									}
 								}catch(Exception e){
 									e.printStackTrace();
@@ -113,33 +150,6 @@
 							<label>Mother Guardian's Name</label>
 							<input style="width:60%; background:#E6E6E6;" type="text" id="motherguardianname" placeholder="MotherGuardian'sName" name="txtmotherguardianname" value=
 							"<%
-								String guardianName = null;
-								String guardianAreaCode = null;
-								String area = null;
-								JDBC jdbc2 = new JDBC();
-								try{
-									String q = "SELECT guardianName,guardianAreaCode FROM guardian WHERE guardianID = '"+guardianID+"';";
-									jdbc2.st.executeQuery(q);
-									ResultSet rs = jdbc2.st.getResultSet();
-									while(rs.next()){
-										guardianName = rs.getString("guardianName");
-										guardianAreaCode = rs.getString("guardianAreaCode");
-									}
-									q = "SELECT area FROM area WHERE areaCode = '"+guardianAreaCode+"';";
-									jdbc2.st.executeQuery(q);
-									rs = jdbc2.st.getResultSet();
-									while(rs.next()){
-										area = rs.getString("area");
-									}
-								}catch(Exception e){
-									e.printStackTrace();
-								}finally{
-									try{
-										jdbc2.conn.close();
-									}catch(Exception e){
-										e.printStackTrace();
-									}
-								}
 								out.print(guardianName);
 							%>"
 							readonly/>
@@ -279,34 +289,6 @@
 									<div style="float:left; width:80%;">
 										<input style="width:100%;" type="text" id="fatherfullname" placeholder="Fullname" name="txtfatherfullname" value=
 										"<%
-											String fname = "";
-											String fdob = "";
-											String foccupation = "";
-											String faddress = "";
-											String fedulevel = "";
-											String fpicture = "";
-											JDBC jdbc3 = new JDBC();
-											try{
-												String q = "SELECT * FROM father WHERE fatherID = '"+fatherID+"';";
-												jdbc3.st.executeQuery(q);
-												ResultSet rs = jdbc3.st.getResultSet();
-												while(rs.next()){
-													fname = rs.getString(2).trim();
-													faddress = rs.getString(4).trim();
-													fdob = rs.getString(3).trim();
-													foccupation = rs.getString(5).trim();
-													fedulevel = rs.getString(6).trim();
-													fpicture = rs.getString(7);
-												}
-											}catch(Exception e){
-												e.printStackTrace();
-											}finally{
-												try{
-													jdbc3.conn.close();
-												}catch(Exception e){
-													e.printStackTrace();
-												}
-											}
 											out.print(fname);
 										%>"
 										>

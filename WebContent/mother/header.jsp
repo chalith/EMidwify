@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="com.main.*"%>
+<%@page import="java.sql.*"%>
 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
@@ -16,7 +17,7 @@
 	<%	
 		String mid = (String) session.getAttribute("mid");
 		if(mid==null){
-			out.print("<script>window.location=\"/EMidwify\";</script>");
+			out.print("<script>window.location=\"\";</script>");
 		}
 		String guardianpicture = null;
 		String uname = null;
@@ -25,8 +26,9 @@
 		JDBC jdbc = new JDBC();
 		try{
 			String q = "SELECT guardianName,guardianPicture FROM guardian WHERE guardianID = '"+mid+"';";
-			jdbc.st.executeQuery(q);
-			ResultSet rs = jdbc.st.getResultSet();
+			Statement st = jdbc.conn.createStatement();
+			st.executeQuery(q);
+			ResultSet rs = st.getResultSet();
 			while(rs.next()){
 				guardianpicture = rs.getString("guardianPicture");
 				uname = rs.getString("guardianName");
@@ -52,7 +54,7 @@
 			e.printStackTrace();
 		}
 		if((guardianpicture == null)||(uname == null)||(utype == null)){
-			out.print("<script>window.location=\"/EMidwify\";</script>");
+			out.print("<script>window.location=\"\";</script>");
 		}
 		
 	%>

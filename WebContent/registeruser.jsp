@@ -14,7 +14,7 @@
 	<div id="container">
 	<%
 		if(session.getAttribute("mid")==null){
-			response.sendRedirect("/EMidwify");
+			out.print("<script>window.location=\"\";</script>");
 			return;
 		}
 	%>

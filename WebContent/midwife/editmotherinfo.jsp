@@ -51,7 +51,8 @@ function initialize() {
 	<%
 		String mid = (String)session.getAttribute("mid");
 		if(mid==null){
-			response.sendRedirect("/EMidwify");
+			out.print("<script>window.location=\"\";</script>");
+			return;
 		}
 		String cDate = (String) session.getAttribute("date");
 	%>
@@ -115,24 +116,42 @@ function initialize() {
 								String motherorguardian = "";
 								String notes = "";
 								String picture = "";
+								String area = "";
+								
 								JDBC jdbc = new JDBC();
 								try{
 									String q = "SELECT * FROM guardian WHERE guardianID = '"+id+"';";
-									jdbc.st.executeQuery(q);
-									ResultSet rs = jdbc.st.getResultSet();
+									Statement st=jdbc.conn.createStatement();
+									st.executeQuery(q);
+									ResultSet rs = st.getResultSet();
 									while(rs.next()){
-										name = rs.getString(2).trim();
-										address = rs.getString(3).trim();
-										location = rs.getString(4).trim();
-										email = rs.getString(5).trim();
-										dob = rs.getString(6).trim();
-										occupation = rs.getString(7).trim();
-										nofchildren = rs.getString(8).trim();
-										edulevel = rs.getString(9).trim();
-										areaCode = rs.getString(10).trim();
-										notes = rs.getString(13).trim();
-										picture = rs.getString(14);
+										name = rs.getString("guardianName").trim();
+										address = rs.getString("guardianAddress").trim();
+										location = rs.getString("guardianLocation").trim();
+										email = rs.getString("guardianEmail").trim();
+										dob = rs.getString("guardianBDate").trim();
+										occupation = rs.getString("guardianOccupation").trim();
+										nofchildren = rs.getString("guardianNofchildren").trim();
+										edulevel = rs.getString("guardianEducationLevel").trim();
+										areaCode = rs.getString("guardianAreaCode").trim();
+										notes = rs.getString("guardianNote").trim();
+										picture = rs.getString("guardianPicture");
 									}
+									q = "SELECT guardianMobileNumber FROM guardianmobilenumber WHERE guardianID = '"+id+"';";
+									st.executeQuery(q);
+									rs = st.getResultSet();
+									while(rs.next()){
+										tpnumbers.add(rs.getString("guardianMobileNumber").trim());
+									}
+									
+									q = "SELECT area FROM area WHERE areaCode = '"+areaCode+"';";
+									st.executeQuery(q);
+									rs = st.getResultSet();
+									while(rs.next()){
+										area = rs.getString("area");
+									}
+									
+									
 								}catch(Exception e){
 									e.printStackTrace();
 								}finally{
@@ -148,23 +167,6 @@ function initialize() {
 								}
 								else{
 									motherorguardian = "guardian";
-								}
-								JDBC jdbc2 = new JDBC();
-								try{
-									String q = "SELECT guardianMobileNumber FROM guardianmobilenumber WHERE guardianID = '"+id+"';";
-									jdbc2.st.executeQuery(q);
-									ResultSet rs = jdbc2.st.getResultSet();
-									while(rs.next()){
-										tpnumbers.add(rs.getString("guardianMobileNumber").trim());
-									}
-								}catch(Exception e){
-									e.printStackTrace();
-								}finally{
-									try{
-										jdbc2.conn.close();
-									}catch(Exception e){
-										e.printStackTrace();
-									}
 								}
 								out.print(picture);
 							%>"
@@ -224,32 +226,15 @@ function initialize() {
 					<div style="float:left; width:80%;">
 						<select style="width:39%;" type="text" id="areacode" placeholder="AreaCode" name="txtareacode">
 							<option selected value="<%out.print(areaCode);%>"><%
-								JDBC jdbc3 = new JDBC();
-								String area = "";
-								try{
-									String q = "SELECT area FROM area WHERE areaCode = '"+areaCode+"';";
-									jdbc3.st.executeQuery(q);
-									ResultSet rs = jdbc3.st.getResultSet();
-									while(rs.next()){
-										area = rs.getString("area");
-									}
-								}catch(Exception e){
-									e.printStackTrace();
-								}finally{
-									try{
-										jdbc3.conn.close();
-									}catch(Exception e){
-										e.printStackTrace();
-									}
-								}
 								out.print("("+areaCode+") "+area);
 							%></option>
 							<%
 								JDBC jdbc4 = new JDBC();
 								try{
 									String q = "SELECT * FROM area;";
-									jdbc4.st.executeQuery(q);
-									ResultSet rs = jdbc4.st.getResultSet();
+									Statement st = jdbc4.conn.createStatement();
+									st.executeQuery(q);
+									ResultSet rs = st.getResultSet();
 									while(rs.next()){
 										out.print("<option value="+rs.getString("areaCode")+">");
 										out.print("("+rs.getString("areaCode")+") "+rs.getString("area"));

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
@@ -43,14 +44,15 @@ public class MidwifeEditInfo extends HttpServlet {
 		JDBC jdbc = new JDBC();
         try{
 	        String q1="UPDATE midwife SET name = '"+fullname+"', address = '"+address+"', email = '"+email+"' WHERE midwifeID = '"+id+"';";
-            jdbc.st.executeUpdate(q1);
+	        Statement st=jdbc.conn.createStatement();
+			st.executeUpdate(q1);
             
             String q22 = "DELETE FROM midwifemobilenumber WHERE midwifeID = '"+id+"';";
-    		jdbc.st.executeUpdate(q22);
+    		st.executeUpdate(q22);
         	for(int i=0;i<tpNumbers.length;i++){
         		if(!tpNumbers[i].equals("")){
 	        		q22 = "INSERT INTO midwifemobilenumber (midwifeID,mobileNumber) VALUES ('"+id+"','"+tpNumbers[i]+"')";
-	        		jdbc.st.executeUpdate(q22);
+	        		st.executeUpdate(q22);
         		}
         	}
         	request.setAttribute("finalAlert","<script>showsuccessmessage(\"Your details updated successfully\")</script>");

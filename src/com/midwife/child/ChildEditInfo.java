@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
@@ -121,18 +122,19 @@ public class ChildEditInfo extends HttpServlet {
 			JDBC jdbc = new JDBC();
 	        try{
 		        String q="UPDATE child SET guardianID = '"+child.motherguardianID+"',childName = '"+child.childName+"',childNotes = '"+child.note+"' WHERE childID = '"+id+"';";
-	            jdbc.st.executeUpdate(q);
+		        Statement st=jdbc.conn.createStatement();
+				st.executeUpdate(q);
 	            
 	            for(int i=0;i<child.epidemics.size();i++){
 		            String q1="INSERT INTO childepidemics (childID,epidemicCode,epidemicName,date,note) VALUES('"+child.childID+"','"+child.epidemics.get(i)[0]+"','"+child.epidemics.get(i)[1]+"','"+child.epidemics.get(i)[2]+"','"+child.epidemics.get(i)[3]+"')";
-		            jdbc.st.executeUpdate(q1);
+		            st.executeUpdate(q1);
 	            }
 	            if(father != null){
 	            	String q1="UPDATE father SET fatherAddress = '"+father.address+"', fatherOccupation = '"+father.occupation+"',fatherEdulevel = '"+father.eduLevel+"' WHERE fatherID = '"+father.fatherID+"';";
-	            	jdbc.st.executeUpdate(q1);
+	            	st.executeUpdate(q1);
 	            	for(int i=0;i<father.epidemics.size();i++){
 			            q1="INSERT INTO fatherepidemics (fatherID,epidemicCode,epidemicName,date,note) VALUES('"+father.fatherID+"','"+father.epidemics.get(i)[0]+"','"+father.epidemics.get(i)[1]+"','"+father.epidemics.get(i)[2]+"','"+father.epidemics.get(i)[3]+"')";
-			            jdbc.st.executeUpdate(q1);
+			            st.executeUpdate(q1);
 		            }
 	            }
 	            if(motherdeath != null){
@@ -144,7 +146,7 @@ public class ChildEditInfo extends HttpServlet {
 	            		q2="INSERT INTO motherdeaths (motherName,motherAreaCode,date,reason) " +
 	            		"VALUES('"+motherdeath.motherName+"','"+motherdeath.motherAreaCode+"','"+motherdeath.dateofDeath+"','"+motherdeath.reason+"')";	
 	            	}
-	            	jdbc.st.executeUpdate(q2);
+	            	st.executeUpdate(q2);
 	            }
 	            
 	        	request.setAttribute("finalAlert","<script>showsuccessmessage(\"Child updated successfully\")</script>");

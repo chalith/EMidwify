@@ -3,6 +3,8 @@ package com.mother.message;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -24,16 +26,14 @@ public class ViewMidwifeMsgCount extends HttpServlet {
 		Messages msgs = new Messages();
 		JDBC jdbc = new JDBC();;
 		int midwifeMsgCount = 0;
+		String midwifeID=null;
 		try{
-			String q = "SELECT DISTINCT(senderID) FROM messages WHERE receiverID = '"+mid+"';";;
-			jdbc.st.executeQuery(q);
-			ResultSet rs = jdbc.st.getResultSet();
+			String q = "SELECT midwifeID FROM area WHERE areaCode = (SELECT guardianAreaCode FROM guardian WHERE guardianID = '"+mid+"') ;";
+			Statement st=jdbc.conn.createStatement();
+			st.executeQuery(q);
+			ResultSet rs = st.getResultSet();
 			while(rs.next()){
-				String s = rs.getString("senderID");
-				Main m = new Main();
-				if(m.isHave("midwife", "midwifeID", s)){
-					midwifeMsgCount += msgs.getUnreadMessageCount(s, mid);
-				}
+				midwifeID = rs.getString("midwifeID");
 			}
 		}catch(Exception e){
 			e.printStackTrace();
@@ -45,6 +45,8 @@ public class ViewMidwifeMsgCount extends HttpServlet {
 				e2.printStackTrace();
 			}
 		}
+		Main m = new Main();
+		midwifeMsgCount += msgs.getUnreadMessageCount(midwifeID, mid);
 		String messageCount = Integer.toString(midwifeMsgCount);
 		out.print(messageCount);
 	}

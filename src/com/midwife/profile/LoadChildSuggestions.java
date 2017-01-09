@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -31,8 +32,9 @@ public class LoadChildSuggestions extends HttpServlet {
 			String mid = (String) session.getAttribute("mid");
 			try{
 				String q = "SELECT areaCode FROM area WHERE midwifeID = '"+mid+"';";
-				jdbc.st.executeQuery(q);
-				ResultSet rs = jdbc.st.getResultSet();
+				Statement st=jdbc.conn.createStatement();
+				st.executeQuery(q);
+				ResultSet rs = st.getResultSet();
 				while (rs.next()) {
 					Children children = new Children(rs.getString("areaCode"),"");
 				    ArrayList<String[]> childrenArr = children.getChildren();

@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -27,8 +28,9 @@ public class UpdateMother extends HttpServlet {
 		String bDate = "";
 		try{
 			String q="SELECT guardianBDate FROM guardian WHERE guardianID = '"+id+"';";
-			jdbc.st.executeQuery(q);
-			ResultSet rs = jdbc.st.getResultSet();
+			Statement st=jdbc.conn.createStatement();
+			st.executeQuery(q);
+			ResultSet rs = st.getResultSet();
 			while(rs.next()){
 				bDate = (String)rs.getString("guardianBDate");
 			}
@@ -87,30 +89,31 @@ public class UpdateMother extends HttpServlet {
 		if(!id.equals("")){		
 	        try{
 		        String q1="INSERT INTO motherclinic (motherID,clinicDate,age,weight,updatedDate) VALUES('"+id+"','"+clinicDate+"','"+age+"','"+weight+"','"+cDate+"')";
-		        jdbc.st.executeUpdate(q1);
+		        Statement st=jdbc.conn.createStatement();
+				st.executeUpdate(q1);
 	            
             	for(int i=0;i<epidemics.size();i++){
 		            String q2="INSERT INTO motherepidemics (motherID,epidemicCode,epidemicName,date,note) VALUES('"+id+"','"+epidemics.get(i)[0]+"','"+epidemics.get(i)[1]+"','"+epidemics.get(i)[2]+"','"+epidemics.get(i)[3]+"')";
-		            jdbc.st.executeUpdate(q2);
+		            st.executeUpdate(q2);
 	            }
 	            for(int i=0;i<diseases.size();i++){
 		            String q2="INSERT INTO motherdiseases (motherID,diseaseCode,diseaseName,diseaseDate,diseasenote) VALUES('"+id+"','"+diseases.get(i)[0]+"','"+diseases.get(i)[1]+"','"+diseases.get(i)[2]+"','"+diseases.get(i)[3]+"')";
-		            jdbc.st.executeUpdate(q2);
+		            st.executeUpdate(q2);
 		            //out.println("ab");
 	            }
 	            for(int i=0;i<vaccines.size();i++){
 		            String q2="INSERT INTO mothergivenvaccines (motherID,vaccineCode,vaccineName,vaccineAmount,clinicDate) VALUES('"+id+"','"+vaccines.get(i)[0]+"','"+vaccines.get(i)[1]+"','"+vaccines.get(i)[2]+"','"+vaccines.get(i)[3]+"')";
-		            jdbc.st.executeUpdate(q2);
+		            st.executeUpdate(q2);
 		            //out.println("ab");
 	            }
 	            for(int i=0;i<childDeaths.size();i++){
 		            String q2="INSERT INTO childdeath (motherID,childID,date,reason) VALUES('"+id+"','"+childDeaths.get(i)[1]+"','"+childDeaths.get(i)[2]+"','"+childDeaths.get(i)[3]+"')";
-		            jdbc.st.executeUpdate(q2);
+		            st.executeUpdate(q2);
 		            //out.println("cd");
 	            }
 	            for(int i=0;i<triposhas.size();i++){
 		            String q2="INSERT INTO triposha (id,amount,date) VALUES('"+id+"','"+triposhas.get(i)[0]+"','"+triposhas.get(i)[1]+"')";
-		            jdbc.st.executeUpdate(q2);
+		            st.executeUpdate(q2);
 		            //out.println("cd");
 	            }
 	        	request.setAttribute("finalAlert","<script>showsuccessmessage(\"Clinic details updated successfully\")</script>");

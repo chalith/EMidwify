@@ -20,7 +20,8 @@
 	<%
 		String mid = (String)session.getAttribute("mid");
 		if(mid==null){
-			response.sendRedirect("/EMidwify");
+			out.print("<script>window.location=\"\";</script>");
+			return;
 		}
 	%>
 	<div class="groupicon" id="groupicon"><center><img src="midwife/images/services/group.png" alt="group"/></center></div>

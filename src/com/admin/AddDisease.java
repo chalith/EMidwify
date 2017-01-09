@@ -3,6 +3,7 @@ package com.admin;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -23,7 +24,8 @@ public class AddDisease extends HttpServlet {
 				String dis = diss[i];
 				String disease[] = dis.split("~column~");
 				String q = "INSERT INTO disease (diseaseCode,diseaseName,description) VALUES ('"+disease[0].trim()+"','"+disease[1].trim()+"','"+disease[2].trim()+"');";
-				jdbc.st.executeUpdate(q);
+				Statement st=jdbc.conn.createStatement();
+				st.executeUpdate(q);
 			}
 			request.setAttribute("finalAlert","<script>showsuccessmessage(\"Disease added successfully\")</script>");
         	getServletContext().getRequestDispatcher("/admin/adddisease.jsp").forward(request,response);

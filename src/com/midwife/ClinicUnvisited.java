@@ -1,6 +1,7 @@
 package com.midwife;
 
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 import com.main.ChildInClinic;
@@ -19,13 +20,14 @@ public class ClinicUnvisited {
 		Main m = new Main();
 		clinic = new Clinic(area, date);
 		mothers = clinic.getMothers();
+		JDBC jdbc = null;
 		for(int i=0;i<mothers.size();i++){
-			JDBC jdbc = null;
+			jdbc = new JDBC();
 			try{
-				jdbc = new JDBC();
 				String q = "SELECT * FROM motherclinic WHERE motherID = '"+mothers.get(i).id+"' AND clinicDate = '"+date+"';";
-				jdbc.st.executeQuery(q);
-				ResultSet rs =  jdbc.st.getResultSet();
+				Statement st=jdbc.conn.createStatement();
+				st.executeQuery(q);
+				ResultSet rs =  st.getResultSet();
 				if(!rs.next()){
 					unvisitedmothers.add(mothers.get(i));
 				}
@@ -37,16 +39,16 @@ public class ClinicUnvisited {
 				}catch(Exception e){
 					e.printStackTrace();
 				}
-			}
+			}	
 		}
 		children = clinic.getChildren();
 		for(int i=0;i<children.size();i++){
-			JDBC jdbc = null;
+			jdbc = new JDBC();
 			try{
-				jdbc = new JDBC();
 				String q = "SELECT * FROM childclinic WHERE childID = '"+children.get(i).id+"' AND clinicDate = '"+date+"';";
-				jdbc.st.executeQuery(q);
-				ResultSet rs =  jdbc.st.getResultSet();
+				Statement st=jdbc.conn.createStatement();
+				st.executeQuery(q);
+				ResultSet rs =  st.getResultSet();
 				if(!rs.next()){
 					unvisitedchildren.add(children.get(i));
 				}

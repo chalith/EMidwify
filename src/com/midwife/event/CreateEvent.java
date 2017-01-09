@@ -3,6 +3,7 @@ package com.midwife.event;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -33,10 +34,11 @@ public class CreateEvent extends HttpServlet {
 			Main m = new Main();
 			String eventID = m.generateID("event", "Event");
 			String q = "INSERT INTO event (eventID,eventName,areaCode,eventDate,eventTime,eventVenue) VALUES ('"+eventID+"','"+event.name+"','"+event.area+"','"+event.date+"','"+event.time+"','"+event.venue+"');";
-			jdbc.st.executeUpdate(q);
+			Statement st=jdbc.conn.createStatement();
+			st.executeUpdate(q);
 			for(int i=0;i<event.guardians.size();i++){
 				q = "INSERT INTO eventguardians (eventID,guardianID) VALUES ('"+eventID+"','"+event.guardians.get(i).id+"');";
-				jdbc.st.executeUpdate(q);
+				st.executeUpdate(q);
 			}
 			request.setAttribute("finalAlert","<script>showsuccessmessage(\"Event created successfully\")</script>");
         	getServletContext().getRequestDispatcher("/midwife/createevent.jsp").forward(request,response);

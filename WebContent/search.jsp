@@ -11,7 +11,7 @@
 <%
 String utype = (String) session.getAttribute("usertype");
 if(utype==null){
-	out.print("<script>window.location=\"/EMidwify\";</script>");
+	out.print("<script>window.location=\"\";</script>");
 }
 %>
 <script>

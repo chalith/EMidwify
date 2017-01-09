@@ -3,6 +3,8 @@ package com.supervisor.message;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -24,16 +26,15 @@ public class ViewMessageCountsInSupervisor extends HttpServlet {
 		Messages msgs = new Messages();
 		JDBC jdbc = new JDBC();;
 		int midwifeMsgCount = 0;
+		ArrayList<String> messagedMidwives = new ArrayList<String>();
+		
 		try{
 			String q = "SELECT DISTINCT(senderID) FROM messages WHERE receiverID = '"+sid+"';";
-			jdbc.st.executeQuery(q);
-			ResultSet rs = jdbc.st.getResultSet();
+			Statement st=jdbc.conn.createStatement();
+			st.executeQuery(q);
+			ResultSet rs = st.getResultSet();
 			while(rs.next()){
-				String s = rs.getString("senderID");
-				Main m = new Main();
-				if(m.isHave("midwife", "midwifeID", s)){
-					midwifeMsgCount += msgs.getUnreadMessageCount(s, sid);
-				}
+				messagedMidwives.add(rs.getString("senderID"));
 			}
 		}catch(Exception e){
 			e.printStackTrace();
@@ -43,6 +44,12 @@ public class ViewMessageCountsInSupervisor extends HttpServlet {
 				jdbc.conn.close();
 			}catch (Exception e2) {
 				e2.printStackTrace();
+			}
+		}
+		for(int i=0;i<messagedMidwives.size();i++){
+			Main m = new Main();
+			if(m.isHave("midwife", "midwifeID", messagedMidwives.get(i))){
+				midwifeMsgCount += msgs.getUnreadMessageCount(messagedMidwives.get(i), sid);
 			}
 		}
 		String messageCount = Integer.toString(midwifeMsgCount);

@@ -20,6 +20,7 @@ import org.apache.tomcat.util.http.fileupload.IOUtils;
 
 import java.io.File;
 import java.nio.file.Files;
+import java.sql.Statement;
 @MultipartConfig(maxFileSize=169999999)
 public class UploadImage extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -62,7 +63,8 @@ public class UploadImage extends HttpServlet {
 					JDBC jdbc = new JDBC();
 					try{
 						String q = "UPDATE "+usertype+" SET "+usertype+"Picture = '"+destination+"' WHERE "+usertype+"ID = '"+id+"';";
-						jdbc.st.executeUpdate(q);
+						Statement st=jdbc.conn.createStatement();
+						st.executeUpdate(q);
 					}catch(Exception e){
 						e.printStackTrace();
 					}finally{

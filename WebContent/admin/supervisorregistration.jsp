@@ -19,6 +19,7 @@
 <script src="admin/js/supervisorregistration.js"></script>
 <script src="admin/js/createviewforall.js"></script>
 <script>
+$(document).ready(function(){
 	 $('#nonic').on('change',function(){
 		$('#supervisorid').css('display','none');
 		$('#supervisornic').css('display','block');
@@ -35,7 +36,7 @@
 	<%
 		String mid = (String)session.getAttribute("mid");
 		if(mid==null){
-			response.sendRedirect("/EMidwify");
+			out.print("<script>window.location=\"\";</script>");
 			return;
 		}
 		String cDate = (String) session.getAttribute("date");

@@ -69,7 +69,8 @@ function loadGraph(){
 	<%
 		String mid = (String)session.getAttribute("mid");
 		if(mid==null){
-			response.sendRedirect("/EMidwify");
+			out.print("<script>window.location=\"\";</script>");
+			return;
 		}
 	%>
 <div>
@@ -86,11 +87,14 @@ function loadGraph(){
 				String area = null;
 				String guardormother = null;
 				String clinicdates = "";
+				ArrayList<String> mobileNumbers=new ArrayList<String>();
+				
 				JDBC jdbc = new JDBC();
 				try{
 					String q="SELECT * FROM guardian WHERE guardianID = '"+mid+"';";
-					jdbc.st.executeQuery(q);
-					ResultSet rs = jdbc.st.getResultSet();
+					Statement st = jdbc.conn.createStatement();
+					st.executeQuery(q);
+					ResultSet rs = st.getResultSet();
 					while(rs.next()){
 						guardian.id = (String)rs.getString("guardianID");
 						guardian.fullname = (String)rs.getString("guardianName");
@@ -110,22 +114,29 @@ function loadGraph(){
 						guardianPic = (String)rs.getString("guardianPicture");
 					}
 					q = "SELECT area FROM area WHERE areaCode = '"+guardian.areacode+"';";
-					jdbc.st.executeQuery(q);
-					rs = jdbc.st.getResultSet();
+					st.executeQuery(q);
+					rs = st.getResultSet();
 					while(rs.next()){
 						area = rs.getString("area");
 					}
+					q="SELECT guardianMobileNumber FROM guardianmobilenumber WHERE guardianID = '"+mid+"';";
+					st.executeQuery(q);
+					rs = st.getResultSet();
+					while(rs.next()){
+						mobileNumbers.add((String)rs.getString("guardianMobileNumber"));
+					}
+					
 					String q1 = "SELECT COUNT(childID) FROM child WHERE guardianID = '"+guardian.id+"';";
-					jdbc.st.executeQuery(q1);
-					ResultSet rs1 = jdbc.st.getResultSet();
+					st.executeQuery(q1);
+					ResultSet rs1 = st.getResultSet();
 					while (rs1.next()) {
 						guardian.nofchildren = (String)rs1.getString(1);
 					}
 					Main m = new Main();
 					if(m.isHave("mother", "guardianID", guardian.id)){
 						String q2="SELECT DISTINCT(clinicDate) FROM motherclinic WHERE motherID = '"+guardian.id+"';";
-						jdbc.st.executeQuery(q2);
-						ResultSet rs2 = jdbc.st.getResultSet();
+						st.executeQuery(q2);
+						ResultSet rs2 = st.getResultSet();
 						while(rs2.next()){
 							clinicdates = clinicdates+"<option>"+(String)rs2.getString("clinicDate")+"</option>";
 						}
@@ -191,6 +202,14 @@ function loadGraph(){
 									if(guardian.address!=null){
 										out.print("<li>Address :-  "+guardian.address+"</li></br>");
 									}
+									if(mobileNumbers.size()!=0){
+										out.print("<li>Mobile numbers :-  ");
+										for(int i=0;i<mobileNumbers.size();i++){
+											out.print("<li>"+mobileNumbers.get(i)+"</li></br>");
+										}
+										out.print("</li>");
+									}
+									
 									if(guardian.email!=null){
 										out.print("<li>Email Address :-  "+guardian.email+"</li></br>");
 									}

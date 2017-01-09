@@ -25,7 +25,8 @@
 	<%
 		String mid = (String)session.getAttribute("mid");
 		if(mid==null){
-			response.sendRedirect("/EMidwify");
+			out.print("<script>window.location=\"\";</script>");
+			return;
 		}
 		String cDate = (String) session.getAttribute("date");
 	%>
@@ -55,8 +56,9 @@
 								JDBC jdbc = new JDBC();
 								try{
 									String q = "SELECT * FROM admin WHERE adminID = '"+id+"';";
-									jdbc.st.executeQuery(q);
-									ResultSet rs = jdbc.st.getResultSet();
+									Statement st=jdbc.conn.createStatement();
+									st.executeQuery(q);
+									ResultSet rs = st.getResultSet();
 									while(rs.next()){
 										name = rs.getString("name").trim();
 										dob = rs.getString("dateOfBirth").trim();
@@ -64,20 +66,8 @@
 										email = rs.getString("email").trim();
 										picture = rs.getString("adminpicture").trim();
 									}
-								}catch(Exception e){
-									e.printStackTrace();
-								}finally{
-									try{
-										jdbc.conn.close();
-									}catch(Exception e){
-										e.printStackTrace();
-									}
-								}
-								JDBC jdbc2 = new JDBC();
-								try{
-									String q = "SELECT mobileNumber FROM adminmobilenumber WHERE adminID = '"+id+"';";
-									jdbc2.st.executeQuery(q);
-									ResultSet rs = jdbc2.st.getResultSet();
+									q = "SELECT mobileNumber FROM adminmobilenumber WHERE adminID = '"+id+"';";
+									rs = st.getResultSet();
 									while(rs.next()){
 										tpnumbers.add(rs.getString("mobileNumber").trim());
 									}
@@ -85,7 +75,7 @@
 									e.printStackTrace();
 								}finally{
 									try{
-										jdbc2.conn.close();
+										jdbc.conn.close();
 									}catch(Exception e){
 										e.printStackTrace();
 									}

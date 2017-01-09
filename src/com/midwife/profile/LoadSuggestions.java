@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -29,6 +30,7 @@ public class LoadSuggestions extends HttpServlet {
 		String childr = "";
 		String guardian = "";
 		HttpSession session = request.getSession(false);
+		ArrayList<String> areas=new ArrayList<String>();
 		if((session != null) && (request.isRequestedSessionIdValid())){
 			String mid = (String) session.getAttribute("mid");
 			try{
@@ -39,23 +41,11 @@ public class LoadSuggestions extends HttpServlet {
 				else if(m.getPerson(mid)=="supervisor"){
 					q = "SELECT areaCode FROM area WHERE midwifeID IN (SELECT midwifeID FROM midwife WHERE supervisorID = '"+mid+"');";
 				}
-				jdbc.st.executeQuery(q);
-				ResultSet rs = jdbc.st.getResultSet();
+				Statement st=jdbc.conn.createStatement();
+				st.executeQuery(q);
+				ResultSet rs = st.getResultSet();
 				while (rs.next()) {
-					Children children = new Children(rs.getString("areaCode"),"");
-				    ArrayList<String[]> childrenArr = children.getChildren();
-				    for(int i=0;i<childrenArr.size();i++){
-			    		String s[] = childrenArr.get(i);
-			    		if(Search.isSuggestion(s[1] , name))
-			    			childr = childr + "<div class=\"result\" id=\""+s[0]+"\"><img id=\""+s[0]+"\" src=\""+s[2]+"\" alt=\"user_photo\"><a id=\""+s[0]+"\">"+s[1]+"</a></div>";
-			        }
-			    	Guardians guardians = new Guardians(rs.getString("areaCode"));
-				    ArrayList<String[]> guardianArr = guardians.getGuardians();
-			    	for(int i=0;i<guardianArr.size();i++){
-			    		String s[] = guardianArr.get(i);
-			    		if(Search.isSuggestion(s[1] , name))
-			    			guardian = guardian + "<div class=\"result\" id=\""+s[0]+"\"><img id=\""+s[0]+"\" src=\""+s[2]+"\" alt=\"user_photo\"><a id=\""+s[0]+"\">"+s[1]+"    ( "+s[3]+" )</a></div>";
-			        }
+					areas.add(rs.getString("areaCode"));
 				}
 			}
 			catch (Exception e) {
@@ -67,6 +57,23 @@ public class LoadSuggestions extends HttpServlet {
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}
+			}
+			for(int j=0;j<areas.size();j++){
+				String areaCode=areas.get(j);
+				Children children = new Children(areaCode,"");
+			    ArrayList<String[]> childrenArr = children.getChildren();
+			    for(int i=0;i<childrenArr.size();i++){
+		    		String s[] = childrenArr.get(i);
+		    		if(Search.isSuggestion(s[1] , name))
+		    			childr = childr + "<div class=\"result\" id=\""+s[0]+"\"><img id=\""+s[0]+"\" src=\""+s[2]+"\" alt=\"user_photo\"><a id=\""+s[0]+"\">"+s[1]+"</a></div>";
+		        }
+		    	Guardians guardians = new Guardians(areaCode);
+			    ArrayList<String[]> guardianArr = guardians.getGuardians();
+		    	for(int i=0;i<guardianArr.size();i++){
+		    		String s[] = guardianArr.get(i);
+		    		if(Search.isSuggestion(s[1] , name))
+		    			guardian = guardian + "<div class=\"result\" id=\""+s[0]+"\"><img id=\""+s[0]+"\" src=\""+s[2]+"\" alt=\"user_photo\"><a id=\""+s[0]+"\">"+s[1]+"    ( "+s[3]+" )</a></div>";
+		        }
 			}
 			out.print("<div id=\"childrenresults\">"+childr+"</div><div id=\"motherresults\">"+guardian+"</div>");
 		}

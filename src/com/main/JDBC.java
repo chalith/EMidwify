@@ -13,12 +13,10 @@ public class JDBC {
 	String driver = "com.mysql.jdbc.Driver";
 	String userName = "root";
 	String password = "";
-	public Statement st = null;
 	public JDBC(){
 		try{
 			Class.forName(driver).newInstance();
 	        conn = DriverManager.getConnection(url+dbName,userName,password);
-	        st=(Statement) conn.createStatement();
 		}catch(Exception e){
 			System.out.print(e);
 		}

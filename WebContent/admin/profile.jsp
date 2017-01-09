@@ -21,7 +21,7 @@
 	<%
 		String mid = (String)session.getAttribute("mid");
 		if(mid==null){
-			response.sendRedirect("/EMidwify");
+			out.print("<script>window.location=\"\";</script>");
 			return;
 		}
 	%>
@@ -53,8 +53,9 @@
 						try{
 							jdbc = new JDBC();
 							String q="SELECT * FROM admin WHERE adminID = '"+mid+"';";
-							jdbc.st.executeQuery(q);
-							ResultSet rs = jdbc.st.getResultSet();
+							Statement st=jdbc.conn.createStatement();
+							st.executeQuery(q);
+							ResultSet rs = st.getResultSet();
 							while(rs.next()){
 								fullname = (String)rs.getString("name");
 								address = (String)rs.getString("address");
@@ -64,8 +65,8 @@
 								
 							}
 							q="SELECT mobileNumber FROM adminmobilenumber WHERE adminID = '"+mid+"';";
-							jdbc.st.executeQuery(q);
-							rs = jdbc.st.getResultSet();
+							st.executeQuery(q);
+							rs = st.getResultSet();
 							while(rs.next()){
 								mobileNumbers.add((String)rs.getString("mobileNumber"));
 							}
@@ -78,15 +79,15 @@
 					    	
 					    	
 					    	q="SELECT COUNT(midwifeID) FROM midwife";
-							jdbc.st.executeQuery(q);
-							ResultSet rs2 = jdbc.st.getResultSet();
+							st.executeQuery(q);
+							ResultSet rs2 = st.getResultSet();
 							while(rs2.next()){
 								mcount = (String)rs2.getString(1);
 							}
 							
 							String q1="SELECT COUNT(supervisorID) FROM supervisor;";
-							jdbc.st.executeQuery(q1);
-							rs2 = jdbc.st.getResultSet();
+							st.executeQuery(q1);
+							rs2 = st.getResultSet();
 							while(rs2.next()){
 								scount = (String)rs2.getString(1);
 							}

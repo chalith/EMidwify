@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -18,8 +19,9 @@ public class LoadVaccine extends HttpServlet {
 		JDBC jdbc = new JDBC();
 		try{
 			String q = "SELECT vaccineName FROM vaccine WHERE vaccineCode = '"+vCode+"';";
-			jdbc.st.executeQuery(q);
-			ResultSet rs = jdbc.st.getResultSet();
+			Statement st=jdbc.conn.createStatement();
+			st.executeQuery(q);
+			ResultSet rs = st.getResultSet();
 			while(rs.next()){
 				vName = (String) rs.getString("vaccineName");
 			}

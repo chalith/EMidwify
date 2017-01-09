@@ -110,49 +110,50 @@ public class MotherEditInfo extends HttpServlet {
 	        try{
 		        String q1="UPDATE guardian SET guardianName = '"+mother.fullname+"',guardianAddress = '"+mother.address+"',guardianLocation = '"+location+"',guardianEmail = '"+mother.email+"',guardianOccupation = '"+mother.occupation+"',guardianNofchildren = '"+mother.nofchildren+"',guardianEducationLevel = '"+mother.edulevel+"',guardianAreaCode = '"+mother.areacode+"',guardianNote = '"+mother.mothernotes+"'" +
 		        		"WHERE guardianID = '"+mother.id+"';";
-	            jdbc.st.executeUpdate(q1);
+		        Statement st=jdbc.conn.createStatement();
+				st.executeUpdate(q1);
 	            
 	            String q22 = "DELETE FROM guardianmobilenumber WHERE guardianID = '"+mother.id+"';";
-        		jdbc.st.executeUpdate(q22);
+        		st.executeUpdate(q22);
             	for(int i=0;i<mother.tpnumbers.size();i++){
             		q22 = "INSERT INTO guardianmobilenumber (guardianID,guardianMobileNumber) VALUES ('"+mother.id+"','"+mother.tpnumbers.get(i)+"')";
-            		jdbc.st.executeUpdate(q22);
+            		st.executeUpdate(q22);
             	}
             	if(motherguardian.equals("mother")&&(!(m.isHave("mother", "guardianID", mother.id)))){
             		String MID = m.generateID("mother", "Mother");
             		String q="INSERT INTO mother (guardianID,motherID) VALUES('"+mother.id+"','"+MID+"')";
-		            jdbc.st.executeUpdate(q);
+		            st.executeUpdate(q);
             		for(int i=0;i<mother.epidemics.size();i++){
 			            String q2="INSERT INTO motherepidemics (motherID,epidemicCode,epidemicName,date,note) VALUES('"+MID+"','"+mother.epidemics.get(i)[0]+"','"+mother.epidemics.get(i)[1]+"','"+mother.epidemics.get(i)[2]+"','"+mother.epidemics.get(i)[3]+"')";
-			            jdbc.st.executeUpdate(q2);
+			            st.executeUpdate(q2);
 		            }
 		            for(int i=0;i<mother.abortions.size();i++){
 			            String q2="INSERT INTO motherabortions (motherID,abortionDate,abortionReason) VALUES('"+MID+"','"+mother.abortions.get(i)[0]+"','"+mother.abortions.get(i)[1]+"')";
-			            jdbc.st.executeUpdate(q2);
+			            st.executeUpdate(q2);
 			            //out.println("ab");
 		            }
 		            for(int i=0;i<mother.childdeaths.size();i++){
 			            String q2="INSERT INTO motherchilddeaths (motherID,childName,date,reason) VALUES('"+MID+"','"+mother.childdeaths.get(i)[0]+"','"+mother.childdeaths.get(i)[1]+"','"+mother.childdeaths.get(i)[2]+"')";
-			            jdbc.st.executeUpdate(q2);
+			            st.executeUpdate(q2);
 			            //out.println("cd");
 		            }
 	        	}
             	else if(motherguardian.equals("guardian")){
             		String MID = "";
             		String q="SELECT motherID FROM mother WHERE guardianID = '"+mother.id+"';";
-		            jdbc.st.executeQuery(q);
-		            ResultSet rs = jdbc.st.getResultSet();
+		            st.executeQuery(q);
+		            ResultSet rs = st.getResultSet();
 		            while (rs.next()) {
 						MID = rs.getString("motherID");
 					}
             		q="DELETE FROM mother WHERE guardianID = '"+mother.id+"';";
-		            jdbc.st.executeUpdate(q);
+		            st.executeUpdate(q);
         		    String q2="DELETE FROM motherepidemics WHERE motherID = '"+MID+"';";
-		            jdbc.st.executeUpdate(q2);
+		            st.executeUpdate(q2);
 		            q2="DELETE FROM motherabortions WHERE motherID = '"+MID+"';";
-			        jdbc.st.executeUpdate(q2);
+			        st.executeUpdate(q2);
 		            q2="DELETE FROM motherchilddeaths WHERE motherID = '"+MID+"';";
-			        jdbc.st.executeUpdate(q2);
+			        st.executeUpdate(q2);
 			    }
             	request.setAttribute("finalAlert","<script>showsuccessmessage(\"Guardian or Mother updated successfully\")</script>");
             	out.println("successfully added");

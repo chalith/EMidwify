@@ -36,7 +36,7 @@
 	<%
 		String mid = (String)session.getAttribute("mid");
 		if(mid==null){
-			response.sendRedirect("/EMidwify");
+			out.print("<script>window.location=\"\";</script>");
 			return;
 		}
 		String cDate = (String) session.getAttribute("date");
@@ -110,8 +110,9 @@
 								String options="";
 								try{
 									String q="SELECT supervisorID,name FROM supervisor;";
-									jdbc.st.executeQuery(q);
-									ResultSet rs = jdbc.st.getResultSet();
+									Statement st=jdbc.conn.createStatement();
+									st.executeQuery(q);
+									ResultSet rs = st.getResultSet();
 									while(rs.next()){
 										String s[] = {(String) rs.getString("supervisorID"),(String) rs.getString("name")};
 										supervisors.add(s);

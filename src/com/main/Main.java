@@ -2,6 +2,7 @@ package com.main;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 public class Main {
 	JDBC jdbc = null;
@@ -10,8 +11,9 @@ public class Main {
 		jdbc = new JDBC();
 		try{
 			String q = "SELECT * FROM "+table+" WHERE "+column+" = '"+compare+"';";
-			jdbc.st.executeQuery(q);
-			ResultSet rs = jdbc.st.getResultSet();
+			Statement st=jdbc.conn.createStatement();
+			st.executeQuery(q);
+			ResultSet rs = st.getResultSet();
 			if(rs.next()){
 				re = true;
 			}
@@ -31,8 +33,9 @@ public class Main {
 		jdbc = new JDBC();
 		try{
 			String q="SELECT "+table+"ID FROM "+table+" WHERE "+table+"ID NOT LIKE '%v' OR "+table+"ID NOT LIKE '%V'";
-			jdbc.st.executeQuery(q);
-			ResultSet rs = jdbc.st.getResultSet();
+			Statement st=jdbc.conn.createStatement();
+			st.executeQuery(q);
+			ResultSet rs = st.getResultSet();
 			int max = 0;
 			while(rs.next()){
 				String curstr = rs.getString(1);
@@ -58,8 +61,9 @@ public class Main {
 		jdbc = new JDBC();
 		try{
 			String q="SELECT * FROM "+table+";";
-			jdbc.st.executeQuery(q);
-			ResultSet rs = jdbc.st.getResultSet();
+			Statement st=jdbc.conn.createStatement();
+			st.executeQuery(q);
+			ResultSet rs = st.getResultSet();
 			int max = 0;
 			while(rs.next()){
 				String curstr = rs.getString(1);
@@ -117,13 +121,14 @@ public class Main {
 		JDBC jdbc = new JDBC();
 		try{
 			String q = "SELECT * FROM users WHERE userName = '"+username+"'";
-			jdbc.st.executeQuery(q);
-			ResultSet rs = jdbc.st.getResultSet();
+			Statement st=jdbc.conn.createStatement();
+			st.executeQuery(q);
+			ResultSet rs = st.getResultSet();
 			while(rs.next()){
 				return "already registered";
 			}
 			q = "INSERT INTO users (userID,userName,password) VALUES ('"+id+"','"+username+"','"+password+"');";
-			jdbc.st.executeUpdate(q);
+			st.executeUpdate(q);
 			return "User registered successfully";            
         }catch(Exception e){
         	System.out.print(e);

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -21,8 +22,9 @@ public class UpdateLoadChildren extends HttpServlet {
 	    try{
 	    	//out.println(areaCode);
 	    	String q = "SELECT childID,childName FROM child WHERE guardianID='"+id+"';";
-	        jdbc.st.executeQuery(q);
-	        ResultSet rs = jdbc.st.getResultSet();
+	    	Statement st=jdbc.conn.createStatement();
+			st.executeQuery(q);
+	        ResultSet rs = st.getResultSet();
 	    	while(rs.next())
 	        {
 	    		String cid = rs.getString("childID");

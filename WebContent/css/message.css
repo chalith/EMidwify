@@ -30,9 +30,9 @@
 }
 .msgheader{
 	cursor:pointer;
-	width:4%;
-	height:8%;
-	margin-left:76%;
+	width:50px;
+	height:50px;
+	margin-left:0;
 	background-color:#AAB8E1 ;
 	box-shadow:-3px -3px 20px 0px black inset;
 	border-radius:10%;
@@ -49,10 +49,10 @@
 	z-index:10;
 	display:none;
 	cursor:pointer;
-	width:20%;
-	height:55%;
-	margin-left:59.3%;
-	margin-top:4%;
+	width:250px;
+	height:400px;
+	margin-left:0;
+	margin-top:50px;
 	background-color:#9CC2CB;
 	box-shadow:-3px -3px 20px 0px black inset;
 	position: fixed;

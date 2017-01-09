@@ -1,6 +1,7 @@
 package com.midwife;
 
 import java.sql.ResultSet;
+import java.sql.Statement;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -15,8 +16,9 @@ public class VisitNotifications {
 		JDBC jdbc = new JDBC();;
 		try{
 			String q = "SELECT childID,guardianID,childName,childDateofDelivery FROM child WHERE guardianID IN (SELECT guardianID FROM guardian WHERE guardianAreaCode = '"+areaCode+"');";
-			jdbc.st.executeQuery(q);
-			ResultSet rs = jdbc.st.getResultSet();
+			Statement st=jdbc.conn.createStatement();
+			st.executeQuery(q);
+			ResultSet rs = st.getResultSet();
 			while(rs.next()){
 				Child child = new Child();
 				child.childID = rs.getString("childID");
