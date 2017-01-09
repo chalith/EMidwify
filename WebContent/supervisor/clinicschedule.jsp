@@ -157,9 +157,11 @@
 								</div>
 							</div>
 						</div></br>
-						<div style="margin: 2% 2% 7% 43%;">
+						<div style="margin: 5% 2% 8% 39%;">
 							<div class="btn" style="float:left;" onclick="addEvent()">Add</div>
+							<div class="btn" style="float:left;" onclick="removefromTable(eventtable)">Remove</div>
 						</div>
+						
 						<table id="eventtable" Style="width:100%;">
 							<tr class="thead" id="thead">
 								<th id="thead">Date</th>

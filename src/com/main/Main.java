@@ -53,6 +53,33 @@ public class Main {
 		}
 		return ID;
 	}
+	public String generateCode(String table, String prefix){
+		String ID = null;
+		jdbc = new JDBC();
+		try{
+			String q="SELECT * FROM "+table+";";
+			jdbc.st.executeQuery(q);
+			ResultSet rs = jdbc.st.getResultSet();
+			int max = 0;
+			while(rs.next()){
+				String curstr = rs.getString(1);
+				int cur = Integer.parseInt(curstr.substring(prefix.length())); 
+				if(max<cur){
+					max = cur;
+				}
+			}
+			ID = prefix+Long.toString(max+1);
+		}catch(Exception e){
+			System.out.print(e);
+		}finally{
+			try {
+				jdbc.conn.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		return ID;
+	}
 	public String convertID(String id){
 		String prefix;
 		String sufix;

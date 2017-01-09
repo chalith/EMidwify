@@ -1,6 +1,5 @@
 $(document).ready(function(){
 	$("input").keypress(function(){
-		alert();
 		if(event.which == 13){
 			event.preventDefault();
 			doSubmit();
@@ -17,7 +16,20 @@ $(document).ready(function(){
 			loadClinic(year, area);
 		}
 	});
+	$(document).on("click","tr",function(e){
+		if(e.target.id != "thead"){
+			$('.selected').removeClass("selected");
+			$(this).addClass("selected");
+		}
+	});
+	
 });
+function removefromTable(table){
+	var row = $('.selected').closest("tr").index();
+	if(row>0){
+		table.deleteRow(row);
+	}
+}
 function loadClinic(year,area){
 	var xmlhttp = new XMLHttpRequest();
     var url="loadclinicschedule";

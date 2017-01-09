@@ -23,14 +23,17 @@ $(document).ready(function(){
 	$('#viewprofile').click(function(){
 		window.location = "admin/profile.jsp";
 	});
-	$('#viewviewlocation').click(function(){
-		window.location = "midwife/viewlocation.jsp";
+	$('#epidemics').click(function(){
+		window.location = "admin/addepidemic.jsp";
 	});
-	$('#viewcreateevent').click(function(){
-		window.location = "midwife/createevent.jsp";
+	$('#diseases').click(function(){
+		window.location = "admin/adddisease.jsp";
 	});
-	$('#viewtimeline').click(function(){
-		window.location = "midwife/timeline.jsp";
+	$('#vaccine').click(function(){
+		window.location = "admin/addvaccine.jsp";
+	});
+	$('#area').click(function(){
+		window.location = "admin/addarea.jsp";
 	});
 });
 </script>
