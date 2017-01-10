@@ -24,6 +24,14 @@ public class LogIn extends HttpServlet {
 		try{
 			String uname = request.getParameter("username");
 			String pword = request.getParameter("password");
+			Encryptor en;
+			try {
+				en = new Encryptor();
+				pword=en.encrypt(pword);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			Main m = new Main();
 			String id = null;
 			String namepic[] = null;

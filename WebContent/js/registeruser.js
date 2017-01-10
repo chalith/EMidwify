@@ -16,6 +16,10 @@ function testSubmit() {
 		setError(password);
 		return false;
 	}
+	else if (!validatePassword(password.value)){
+		setError(password);
+		return false;
+	}
 	else if(confirmpassword.value == ""){
 		showError("Please enter the password again");
 		setError(confirmpassword);
@@ -28,6 +32,20 @@ function testSubmit() {
 		return false;
 	}
 	return true;
+}
+function validatePassword(password) {
+	if(password.length<6){
+		alert("Password length must be grater than 5");
+		return false;
+	}
+	var passw = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
+	if(password.match(passw)){
+		return true;
+	}
+	else{
+		alert("Password must be combination of upper case lower case and digit");
+		return false;
+	}
 }
 function doSubmit() {
 	if(testSubmit()){

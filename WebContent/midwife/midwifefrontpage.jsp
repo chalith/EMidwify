@@ -182,7 +182,7 @@ $(document).ready(function(){
 					website by: FordSlash
 				</div>
 			</div>
-		</div>	
+		</div>
 	</div>	
 	<jsp:include page="/alert.jsp" />
 	<jsp:include page="/error.jsp" />

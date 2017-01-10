@@ -4,6 +4,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import com.mysql.jdbc.PreparedStatement;
+
 public class Main {
 	JDBC jdbc = null;
 	public boolean isHave(String table ,String column ,String compare){
@@ -127,8 +129,12 @@ public class Main {
 			while(rs.next()){
 				return "already registered";
 			}
-			q = "INSERT INTO users (userID,userName,password) VALUES ('"+id+"','"+username+"','"+password+"');";
-			st.executeUpdate(q);
+			q = "INSERT INTO users (userID,userName,password) VALUES (?,?,?);";
+			java.sql.PreparedStatement pst=jdbc.conn.prepareStatement(q);
+			pst.setString(1, id);
+			pst.setString(2, username);
+			pst.setString(3, encript(password));
+			pst.executeUpdate();
 			return "User registered successfully";            
         }catch(Exception e){
         	System.out.print(e);
@@ -141,5 +147,17 @@ public class Main {
 				e.printStackTrace();
 			}
         }
+	}
+	String encript(String in){
+		Encryptor en;
+		String out=null;
+		try {
+			en = new Encryptor();
+			out=en.encrypt(in);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return out;
 	}
 }
