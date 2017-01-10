@@ -20,7 +20,8 @@ public class Messages {
 			messages = new ArrayList<String[]>();
 			while(rs.next()){
 				String messagesender = (String) rs.getString("senderID");
-				String message = (String) rs.getString("message");
+				Main m = new Main();
+				String message = m.stripSlashes((String) rs.getString("message"));
 				String sendTime = (String) rs.getString("sendTime");
 				String s[] = {messagesender,message,sendTime};
 				messages.add(s);
@@ -43,9 +44,13 @@ public class Messages {
 			java.util.Date cDate = new java.util.Date();
 			DateFormat frmt = new SimpleDateFormat("yyyy/MM/dd/hh/mm/ss");
 			String currentDate = frmt.format(cDate);
-			String q = "INSERT INTO messages (senderID,receiverID,message,sendTime) VALUES('"+sender+"','"+receiver+"','"+message+"','"+currentDate+"');";
-			Statement st=jdbc.conn.createStatement();
-			st.executeUpdate(q);
+			String q = "INSERT INTO messages (senderID,receiverID,message,sendTime) VALUES(?,?,?,?);";
+			java.sql.PreparedStatement pst=jdbc.conn.prepareStatement(q);
+			pst.setString(1, sender);
+			pst.setString(2, receiver);
+			pst.setString(3, message);
+			pst.setString(4, currentDate);
+			pst.executeUpdate();
 		}catch(Exception e){
 			e.printStackTrace();
 		}

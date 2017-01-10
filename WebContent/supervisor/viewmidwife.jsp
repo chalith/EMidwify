@@ -31,6 +31,8 @@
 		<div style="width:75%; height:10%; position:relative">
 			<jsp:include page="header.jsp"/>
 		</div>
+		<jsp:include page="/message.jsp" />
+		
 		<div class="body">
 			<div style="float:left; width:80%;">					
 				<div class="details" style="display:block;">
@@ -127,6 +129,12 @@
 						%>
 						</h1>
 					</div>
+					<input type="hidden" id="midwifeid" value="<%
+						if(mid!=null){
+							out.print(mid);
+						}
+						%>">
+						
 					<div style="display: inline-block; margin-top: 0; width: 84%;" class="midwifedetails" id="details">
 						<div  style="font-size: 120%; float:left; width:70%; color:#040C23;">
 							<ul>
