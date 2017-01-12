@@ -1,8 +1,16 @@
 package com.main;
 
+import java.io.BufferedReader;
+
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 
 import com.mysql.jdbc.PreparedStatement;
 
@@ -170,5 +178,58 @@ public class Main {
 			}
 		}
 		return s;
+	}
+	public void sendSms(String number,String message) {
+		JDBC jdbc = new JDBC();
+		try {
+			String q = "SELECT * FROM smsalerts WHERE number = ? && message = ?;";
+			java.sql.PreparedStatement pst=jdbc.conn.prepareStatement(q);
+			pst.setString(1, number);
+			pst.setString(2, message);
+			pst.executeQuery();
+			ResultSet rs = pst.getResultSet();
+			if(!rs.next()){
+				q = "INSERT INTO smsalerts (number,message) VALUES(?,?);";
+				pst=jdbc.conn.prepareStatement(q);
+				pst.setString(1, number);
+				pst.setString(2, message);
+				pst.executeUpdate();
+				
+				
+				
+				// Construct data
+				String user = "username=" + "desaman.chalith@gmail.com";
+				String hash = "&hash=" + "6d08961b353066a98e29f9e399bd9440717cf9d8";
+				message = "&message=" + message;
+				String sender = "&sender=" + "Emidwify";
+				String numbers = "&numbers=" + "94"+number.substring(1);
+				
+				// Send data
+				HttpURLConnection conn = (HttpURLConnection) new URL("http://api.txtlocal.com/send/?").openConnection();
+				String data = user + hash + numbers + message + sender;
+				conn.setDoOutput(true);
+				conn.setRequestMethod("POST");
+				conn.setRequestProperty("Content-Length", Integer.toString(data.length()));
+				conn.getOutputStream().write(data.getBytes("UTF-8"));
+				final BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+				final StringBuffer stringBuffer = new StringBuffer();
+				String line;
+				while ((line = rd.readLine()) != null) {
+					stringBuffer.append(line);
+				}
+				rd.close();
+			}
+			
+			
+			
+		} catch (Exception e) {
+			System.out.println("Error SMS "+e);
+		}finally{
+			try {
+				jdbc.conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 }

@@ -43,20 +43,22 @@ function loadGraph(){
 				//alert(json[k[i]].date+" "+json[k[i]].age+" "+json[k[i]].weight);
 			}
 	        //var myData = new Array([1, 20], [2, 10], [3, 30], [4, 10], [5, 5]);
-			var myChart = new JSChart('chartcontainer', 'line');
-			myChart.setDataArray(myData);
-			myChart.setAxisNameX("Date");
-			myChart.setAxisNameY("Weight");
-			myChart.setShowXValues(false);
-			myChart.setIntervalStartY(0);
-			myChart.setIntervalEndY(120);
-			myChart.resize(800, 500);
-			myChart.setAxisValuesNumberY(40);
-			for(var i=0;i<k.length;i++){
-				myChart.setLabelX([i, json[k[i]].age]);
-				//alert(json[k[i]].date+" "+json[k[i]].age+" "+json[k[i]].weight);
-			}
-			myChart.draw();
+	        if(k.length>1){
+				var myChart = new JSChart('chartcontainer', 'line');
+				myChart.setDataArray(myData);
+				myChart.setAxisNameX("Date");
+				myChart.setAxisNameY("Weight");
+				myChart.setShowXValues(false);
+				myChart.setIntervalStartY(0);
+				myChart.setIntervalEndY(120);
+				myChart.resize(800, 500);
+				myChart.setAxisValuesNumberY(40);
+				for(var i=0;i<k.length;i++){
+					myChart.setLabelX([i, json[k[i]].age]);
+					//alert(json[k[i]].date+" "+json[k[i]].age+" "+json[k[i]].weight);
+				}
+				myChart.draw();
+	        }
 	        //document.getElementById("notifications").innerHTML = news;
 		}
 	};

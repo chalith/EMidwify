@@ -1,6 +1,6 @@
 /**header for all files*/
 $(window).load(function(){
-	document.getElementById("title").innerHTML = document.title;
+	//document.getElementById("title").innerHTML = document.title;
 });
 $(document).ready(function(){
 	$('#picture').hover(function(){
