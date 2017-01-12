@@ -1,21 +1,21 @@
 /**header for all files*/
 $(window).load(function(){
-	document.getElementById("title").innerHTML = document.title;
+	//document.getElementById("title").innerHTML = document.title;
 });
 $(document).ready(function(){
-	$('#picture').hover(function(){
+	$('#userpicture').hover(function(){
 		$('#changepic').css({'display':'block'});
 	},function(){
 		$('#changepic').css({'display':'none'});
 	});
 	$('#home').on('click',function(){
-		window.location = "/EMidwify";
+		window.location = "index.jsp";
 	});
 	$('#logout').on('click',function(){
 		endSession();
 	});
 	$('#profile').on('click',function(){
-		window.location = "midwife/midwife.jsp";
+		window.location = "supervisor/supervisor.jsp";
 	});
 	$('#changepic').click(function(){
 		$('#uploadpicture').toggle("slow");

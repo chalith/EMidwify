@@ -44,7 +44,7 @@ public class VisitNotifications {
 	public ArrayList<ChildVisit> getVisits(){
 		return visits;
 	}
-	String viewVisits(){
+	public String viewVisits(){
 		String view = "";
 		if(visits != null){
 			for(int i=0;i<visits.size();i++){

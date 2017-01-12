@@ -1,6 +1,7 @@
 package com.midwife;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
@@ -16,8 +17,11 @@ public class ClinicUnvisited {
 	ArrayList<MotherInClinic> unvisitedmothers = new ArrayList<MotherInClinic>();
 	ArrayList<ChildInClinic> unvisitedchildren = new ArrayList<ChildInClinic>();
 	Clinic clinic = null;
+	String date = null;
+	String area = null;
 	public ClinicUnvisited(String area, String date){
-		Main m = new Main();
+		this.date = date;
+		this.area = area;
 		clinic = new Clinic(area, date);
 		mothers = clinic.getMothers();
 		JDBC jdbc = null;
@@ -58,6 +62,47 @@ public class ClinicUnvisited {
 				try{
 					jdbc.conn.close();
 				}catch(Exception e){
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+	public void sendAlert(){
+		JDBC jdbc = new JDBC();
+		Main m = new Main();
+		
+		//notify to midwife
+		int umothercount = getUnvisitedMotherCount();
+		int uchildcount = getUnvisitedChildrenCount();
+		String part1="";
+		String part2="";
+		if(umothercount>0){
+			part1 = umothercount+" mothers";
+		}
+		if(uchildcount>0){
+			part2 = uchildcount+" babies";
+		}
+		String unvisitedmsg = null;
+		if(!(part1.equals("")&&part2.equals(""))){
+			unvisitedmsg = part1+"   "+part2+"  didn't attend for the clinic scheduled on "+date+" in "+area;
+		}
+		if(unvisitedmsg!=null){
+			jdbc = new JDBC();
+			try{
+				String q = "SELECT mobileNumber FROM midwifemobilenumber WHERE midwifeID = (SELECT midwifeID FROM area WHERE areaCode = '"+area+"');";
+				Statement st = jdbc.conn.createStatement();
+				st.executeQuery(q);
+				ResultSet rs = st.getResultSet();
+				while(rs.next()){
+					m.sendSms(rs.getString("mobileNumber"), unvisitedmsg);
+				}
+			}catch(Exception e){
+				e.printStackTrace();
+			}finally{
+				try {
+					jdbc.conn.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}

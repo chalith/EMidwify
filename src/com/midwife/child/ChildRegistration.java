@@ -70,7 +70,9 @@ public class ChildRegistration extends HttpServlet {
 		child.birthWeight=birthhweight;
 		child.note=childNotes;
 		
-		registeredfatherID = m.convertID(registeredfatherID);
+		if(!registeredfatherID.endsWith("")){
+			registeredfatherID = m.convertID(registeredfatherID);
+		}
 		
 		//System.out.println("cepArray  "+request.getParameter("cepArray"));
 		String epidemics[] = request.getParameter("cepArray").split("~row~");

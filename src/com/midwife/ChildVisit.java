@@ -10,6 +10,7 @@ import java.text.SimpleDateFormat;
 import com.main.Child;
 import com.main.Date;
 import com.main.JDBC;
+import com.main.Main;
 
 
 public class ChildVisit {
@@ -21,7 +22,7 @@ public class ChildVisit {
 	public String location = null;
 	Child child = null;
 	public String visitType = null;
-	ChildVisit(Child c){
+	public ChildVisit(Child c){
 		child = c;
 		DateFormat frmt = new SimpleDateFormat("yyyy-MM-dd");
     	java.util.Date dt = new java.util.Date();
@@ -31,27 +32,28 @@ public class ChildVisit {
     	visitAge = bDate.getAge(currentDate);
     	Date d = null;
     	if(age<=5){
-			createVisit();
 			d = currentDate.increase(5-age);
 			visitType = "5 days";
 			visitDate = d.year+"/"+d.month+"/"+d.day;
+			createVisit();
 		}
     	else if((age<=13)&&(age>=8)){
-			createVisit();
 			d = currentDate.increase(13-age);
 			visitType = "13 days";
 			visitDate = d.year+"/"+d.month+"/"+d.day;
+			createVisit();
 		}
     	else if((age<=30)&&(age>=25)){
-			createVisit();
 			d = currentDate.increase(30-age);
 			visitType = "30 days";
 			visitDate = d.year+"/"+d.month+"/"+d.day;
+			createVisit();
 		}
 		
 	}
 	void createVisit(){
 		JDBC jdbc = new JDBC();
+		Main m = new Main();
 		childName = child.childName;
 		String guardianID = child.motherguardianID;
 		try{
