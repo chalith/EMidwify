@@ -34,7 +34,7 @@
 			<div style="float:left; width:80%;">					
 				<div class="details" style="display:block;">
 					<div class="midwifedetails" style="padding-top:1%; margin:3% 3% 0 3%; border:2px solid;">
-						<img style="width:15%; border:solid; border-radius:10%; margin: 2% 0 -2% 0%;" src="<%
+						<img style="width:10%; border:solid; border-radius:6%; margin: 2% 0 -2% 0%;" src="<%
 						JDBC jdbc = null;
 						String fullname = null;
 						String address = null;
@@ -117,23 +117,23 @@
 				        }
 						out.print(pic);
 						%>" alt="user_photo">
-						<h1 style="width:50%; float: right;"><%	
+						<h2 style="width:60%; font-size:120%;float:right; margin-right: 15%; margin-top: 4%;"><%	
 						if(fullname != null){
 							out.print(fullname);
 						}
 						%>
-						</h1>
+						</h2>
 					</div>
 					<div class="titlebar" id="titlebar">
 						<div class="title" id="editinfotab"><center><h1>Edit Info</h1></center></div>
 					</div>
 					<div style="display: inline-block; margin-top: 0; width: 84%;" class="midwifedetails" id="details">
-						<div  style="font-size: 120%; float:left; width:70%; color:#040C23;">
+						<div  style="font-size: 100%; float:left; width:70%; color:#040C23;">
 							<ul>
 								<%
 								
 								if(areacode!=null){
-									out.print("<li>Area :-  "+areacode+"</li></br>");
+									out.print("<li>Area Code :-  "+areacode+"</li></br>");
 								}
 								if(area!=null){
 									out.print("<li>Area :-  "+area+"</li></br>");
@@ -145,9 +145,9 @@
 									out.print("<li>Address :-  "+address+"</li></br>");
 								}
 								if(mobileNumbers.size()!=0){
-									out.print("<li>Mobile numbers :-  ");
+									out.print("<li>Mobile numbers :-   ");
 									for(int i=0;i<mobileNumbers.size();i++){
-										out.print("<li>"+mobileNumbers.get(i)+"</li></br>");
+										out.print(mobileNumbers.get(i)+"</li></br>");
 									}
 									out.print("</li>");
 								}

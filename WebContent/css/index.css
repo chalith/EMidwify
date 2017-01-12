@@ -97,11 +97,13 @@ body{
 }
 .sec{
 	text-align:center;
-	width:44%;
-	float:left;
-	margin:2.5%;
+	width:60%;
+	//float:left;
+	margin:1.5%;
+	padding-left:2.5%;
+	padding-right:2.5%;
 	min-height:100%;
-	border: 1.6px solid grey;
+	//border: 1.6px solid grey;
 	border-radius: 14px;
 }
 .rightsec{
