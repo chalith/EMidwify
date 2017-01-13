@@ -11,8 +11,8 @@
 <head>
 <base href="${pageContext.request.contextPath}/" />
 <link rel="stylesheet" type="text/css" href="midwife/css/registration.css">
-<link rel="stylesheet" type="text/css" href="midwife/css/form.css">
 <link rel="stylesheet" type="text/css" href="midwife/css/main.css">
+<link rel="stylesheet" type="text/css" href="midwife/css/form.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
 <script src="jquery.json-2.4.min.js"></script>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
@@ -222,7 +222,7 @@
 					</div>
 				</div></br>
 				</div>
-				<div class="form_content" style="float:right;">
+				<div class="form_content"  style="float:right; ">
 					<button type="button" onclick="doSubmit()" id="myform">Add Changes</button>
 				</div>
 			</form>

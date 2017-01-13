@@ -94,6 +94,10 @@ $(document).ready(function(){
 						<p name="message" style="margin-left: 10%;">Send messeges to Midwives</p>
 					</div>
 					
+					<form action="ReportServlet">
+					<input type="submit" value="Generate PDF report">
+					</form>
+					
 				</div>	
 				
 			<div class ="newsfeed" style="height: 100%; width: 20%; float: right; background-color:#AFC6DF;">
