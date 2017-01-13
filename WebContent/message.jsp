@@ -15,7 +15,7 @@
 		</a>
 		<img id="msgheader" src="images/services/msg.png" alt="Message" />
 	</div>
-	<div class="msgcontent" id="msgcontent">
+	<div class="msgcontent" style="border-radius:0%;" id="msgcontent">
 		<center><p style="font-size: 110%; color: white;">
 		<%	
 			String name = (String) request.getAttribute("name");

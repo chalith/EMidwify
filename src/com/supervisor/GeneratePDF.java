@@ -104,6 +104,7 @@ public class GeneratePDF {
 	table.addCell(c1);
 	table.setHeaderRows(1);
 	
+	
 	for (int i = 0; i < 5; i++) {
 		table.setWidthPercentage(100);
 		table.getDefaultCell().setHorizontalAlignment(Element.ALIGN_CENTER);

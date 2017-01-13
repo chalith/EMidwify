@@ -35,7 +35,7 @@ $(document).ready(function(){
 });
 </script>
 </head>
-<body>
+<body >
 	<%	
 		String sid = (String) session.getAttribute("mid");
 		if(sid==null){
@@ -98,6 +98,8 @@ $(document).ready(function(){
 					<input type="submit" value="Generate PDF report">
 					</form>
 					
+				
+  					
 				</div>	
 				
 			<div class ="newsfeed" style="height: 100%; width: 20%; float: right; background-color:#AFC6DF;">

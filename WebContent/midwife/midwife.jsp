@@ -33,8 +33,8 @@
 		<div class="body">
 			<div style="float:left; width:80%;">					
 				<div class="details" style="display:block;">
-					<div class="midwifedetails" style="padding-top:1%; margin:3% 3% 0 3%; border:2px solid;">
-						<img style="width:10%; border:solid; border-radius:6%; margin: 2% 0 -2% 0%;" src="<%
+					<div class="midwifedetails" style="height:8%;padding-top:1%; margin:3% 3% 0 3%; border:2px solid;">
+						<img style="width:10%; border:solid; border-radius:6%; margin: 1% 0% 1% 0%;" src="<%
 						JDBC jdbc = null;
 						String fullname = null;
 						String address = null;
@@ -117,7 +117,7 @@
 				        }
 						out.print(pic);
 						%>" alt="user_photo">
-						<h2 style="width:60%; font-size:120%;float:right; margin-right: 15%; margin-top: 4%;"><%	
+						<h2 style="width:60%; font-size:120%;float:right; margin-right: 20%; margin-top: 4%;"><%	
 						if(fullname != null){
 							out.print(fullname);
 						}
