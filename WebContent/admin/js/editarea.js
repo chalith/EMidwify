@@ -6,18 +6,22 @@ $(document).ready(function(){
 		if(e.target.id != "thead"){
 			$('.selected').removeClass("selected");
 			$(this).addClass("selected");
+			selectIt();
 		}
 	});
 	$("input").change(function(){
 		$(this).css({"background-color":'white'});
 	});
 });
-function removefromTable(table){
-	var row = $('.selected').closest("tr").index();
-	if(row>0){
-		table.deleteRow(row);
-	}
+function selectIt(){
+	var code = $('.selected').closest("tr").find('td:eq(0)').text();
+	var name = $('.selected').closest("tr").find('td:eq(1)').text();
+	var mid = $('.selected').closest("tr").find('td:eq(2)').text();
+	document.getElementById('areacode').value = code;
+	document.getElementById('areaname').value = name;
+	document.getElementById('midwifeid').value = mid;
 }
+
 function getRowID(row){
 	return $(tr).find('td:eq(0)').text();
 }
@@ -25,7 +29,7 @@ function loadArea(){
 	var xmlhttp = new XMLHttpRequest();
     var url="systemareas";
     xmlhttp.onreadystatechange = function() {
-		if(xmlhttp.readyState==4 && xmlhttp.status==200){
+    	if(xmlhttp.readyState==4 && xmlhttp.status==200){
 	        var objct = JSON.parse(xmlhttp.responseText);
 	        var k = Object.keys(objct);
 	        for(var i=0;i<k.length;i++){
@@ -48,37 +52,6 @@ function addAreaRow(areacode,area,midwifeid,midwifename) {
 	cell3.innerHTML=midwifeid;
 	cell4.innerHTML=midwifename;
 }
-function increaseCode(code){
-	var prefix="";
-	var number="";
-	var i=0;
-	while(isNaN(code.charAt(i))){
-		prefix += code.charAt(i);
-		i++;
-	}
-	while((i<code.length)&&(!isNaN(code.charAt(i)))){
-		number += code.charAt(i);
-		i++;
-	}
-	var number=parseInt(number)+1;
-	return prefix+number;
-}
-function decreaseCode(code){
-	var prefix="";
-	var number="";
-	var i=0;
-	while(isNaN(code.charAt(i))){
-		prefix += code.charAt(i);
-		i++;
-	}
-	while((i<code.length)&&(!isNaN(code.charAt(i)))){
-		number += code.charAt(i);
-		i++;
-	}
-	var number=parseInt(number)-1;
-	return prefix+number;
-}
-
 function clearTable(tableid){
 	var table = document.getElementById(tableid);
 	var rowcount = table.rows.length;
@@ -86,49 +59,21 @@ function clearTable(tableid){
 	  table.deleteRow(1);
 	}
 }
+
 function setError(element){
 	element.style.backgroundColor = "#FFB6C1";
 }
-function testSubmit(){
-	var code = document.getElementById("areacode");
-	var name = document.getElementById("areaname");
-	var midwifeid = document.getElementById("midwifeid");
-	if(code.value==""){
-		setError(code);
-		showError("Please enter the Area code");
-		return false;
-	}
-	else if(name.value==""){
-		setError(name);
-		showError("Please enter the Area name");
-		return false;
-	}
-	else if(midwifeid.value==""){
-		setError(midwifeid);
-		showError("Please select a midwife");
-		return false;
-	}
-	return true;
-
-}
-function doSubmit(){
-	var ok = confirm("Do you wan't to save edited?");
+function deleteArea(){
+	var ok = confirm("Do you wan't to delete?");
 	if(testSubmit()&&ok==true){
-		addArea();
-	}
-}
-function addArea(){
-	if(testSubmit()){
 		var code = document.getElementById('areacode').value;
-		var name = document.getElementById('areaname').value;
-		var midwifeid = document.getElementById('midwifeid').value;
 		var xmlhttp = new XMLHttpRequest();
-	    var url="adddata";
-	    url = url+"?table=area&code="+code+"&name="+name+"&midwifeid="+midwifeid;
+	    var url="deletedata";
+	    url = url+"?table=area&code="+code;
 	    xmlhttp.onreadystatechange = function() {
 			if(xmlhttp.readyState==4 && xmlhttp.status==200){
 				showsuccessmessage(xmlhttp.responseText);
-				document.getElementById('areacode').value=increaseCode(code);
+				document.getElementById('areacode').value = "";
 				document.getElementById('areaname').value = "";
 				document.getElementById('midwifeid').value = "";
 				clearTable('areatbl');				
@@ -139,10 +84,40 @@ function addArea(){
 	    xmlhttp.send(null);
 	}
 }
-function validateNumber(txtnumber){
-	var number = document.forms["midwifeidForm"][txtnumber];
-	if(isNaN(number.value)){
-		showError("This field only contain numeric values");
-		number.value = "";
+
+function testSubmit(){
+	var code = document.getElementById('areacode').value;
+	if(code==""){
+		showError("Please select a area");
+		return false;
+	}
+	return true;
+}
+function doSubmit(){
+	var ok = confirm("Do you wan't to save edited?");
+	if(testSubmit()&&ok==true){
+		editArea();
+	}
+}
+function editArea(){
+	if(testSubmit()){
+		var code = document.getElementById('areacode').value;
+		var name = document.getElementById('areaname').value;
+		var midwifeid = document.getElementById('midwifeid').value;
+		var xmlhttp = new XMLHttpRequest();
+	    var url="editdata";
+	    url = url+"?table=area&code="+code+"&name="+name+"&midwifeid="+midwifeid;
+	    xmlhttp.onreadystatechange = function() {
+			if(xmlhttp.readyState==4 && xmlhttp.status==200){
+				showsuccessmessage(xmlhttp.responseText);
+				document.getElementById('areacode').value = "";
+				document.getElementById('areaname').value = "";
+				document.getElementById('midwifeid').value = "";
+				clearTable('areatbl');				
+				loadArea();
+			}
+		};
+		xmlhttp.open("GET",url,true);
+	    xmlhttp.send(null);
 	}
 }

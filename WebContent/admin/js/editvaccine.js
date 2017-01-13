@@ -6,17 +6,20 @@ $(document).ready(function(){
 		if(e.target.id != "thead"){
 			$('.selected').removeClass("selected");
 			$(this).addClass("selected");
+			selectIt();
 		}
 	});
 	$("input").change(function(){
 		$(this).css({"background-color":'white'});
 	});
 });
-function removefromTable(table){
-	var row = $('.selected').closest("tr").index();
-	if(row>0){
-		table.deleteRow(row);
-	}
+function selectIt(){
+	var vcode = $('.selected').closest("tr").find('td:eq(0)').text();
+	var vname = $('.selected').closest("tr").find('td:eq(1)').text();
+	var description = $('.selected').closest("tr").find('td:eq(2)').text();
+	document.getElementById('vaccinecode').value = vcode;
+	document.getElementById('vaccinename').value = vname;
+	document.getElementById('description').value = description;
 }
 function getRowID(row){
 	return $(tr).find('td:eq(0)').text();
@@ -46,82 +49,36 @@ function addVaccineRow(vaccinecode,vaccinename,discription) {
 	cell2.innerHTML=vaccinename;
 	cell3.innerHTML=discription;
 }
-function clearTable(tableid){
-	var table = document.getElementById(tableid);
-	var rowcount = table.rows.length;
-	for(var i=1;i<rowcount;i++){
-	  table.deleteRow(1);
-	}
-}
-
-function increaseCode(code){
-	var prefix="";
-	var number="";
-	var i=0;
-	while(isNaN(code.charAt(i))){
-		prefix += code.charAt(i);
-		i++;
-	}
-	while((i<code.length)&&(!isNaN(code.charAt(i)))){
-		number += code.charAt(i);
-		i++;
-	}
-	var number=parseInt(number)+1;
-	return prefix+number;
-}
-function decreaseCode(code){
-	var prefix="";
-	var number="";
-	var i=0;
-	while(isNaN(code.charAt(i))){
-		prefix += code.charAt(i);
-		i++;
-	}
-	while((i<code.length)&&(!isNaN(code.charAt(i)))){
-		number += code.charAt(i);
-		i++;
-	}
-	var number=parseInt(number)-1;
-	return prefix+number;
-}
 function setError(element){
 	element.style.backgroundColor = "#FFB6C1";
 }
 
 function testSubmit(){
-	var code = document.getElementById("vaccinecode");
-	var name = document.getElementById("vaccinename");
-	var description = document.getElementById("description");
-	if(code.value==""){
-		setError(code);
-		showError("Please enter the Vaccine code");
-		return false;
-	}
-	else if(name.value==""){
-		setError(name);
-		showError("Please enter the Vaccine name");
+	var code = document.getElementById('vaccinecode').value;
+	if(code==""){
+		showError("Please select vaccine");
 		return false;
 	}
 	return true;
 }
 function doSubmit(){
-	var ok = confirm("Do you wan't to add?");
+	var ok = confirm("Do you wan't to save edited?");
 	if(testSubmit()&&ok==true){
-		addVaccine();
+		editVaccine();
 	}
 }
-function addVaccine(){
+function editVaccine(){
 	if(testSubmit()){
 		var code = document.getElementById('vaccinecode').value;
 		var name = document.getElementById('vaccinename').value;
 		var description = document.getElementById('description').value;
 		var xmlhttp = new XMLHttpRequest();
-	    var url="adddata";
+	    var url="editdata";
 	    url = url+"?table=vaccine&code="+code+"&name="+name+"&description="+description;
 	    xmlhttp.onreadystatechange = function() {
 			if(xmlhttp.readyState==4 && xmlhttp.status==200){
 				showsuccessmessage(xmlhttp.responseText);
-				document.getElementById('vaccinecode').value=increaseCode(code);
+				document.getElementById('vaccinecode').value = "";
 				document.getElementById('vaccinename').value = "";
 				document.getElementById('description').value = "";
 				clearTable('vaccinetbl');				
@@ -130,6 +87,34 @@ function addVaccine(){
 		};
 		xmlhttp.open("GET",url,true);
 	    xmlhttp.send(null);
+	}
+}
+function deleteVaccine(){
+	var ok = confirm("Do you wan't to delete?");
+	if(testSubmit()&&ok==true){
+		var code = document.getElementById('vaccinecode').value;
+		var xmlhttp = new XMLHttpRequest();
+	    var url="deletedata";
+	    url = url+"?table=vaccine&code="+code;
+	    xmlhttp.onreadystatechange = function() {
+			if(xmlhttp.readyState==4 && xmlhttp.status==200){
+				showsuccessmessage(xmlhttp.responseText);
+				document.getElementById('vaccinecode').value = "";
+				document.getElementById('vaccinename').value = "";
+				document.getElementById('description').value = "";
+				clearTable('vaccinetbl');				
+				loadVaccines();
+			}
+		};
+		xmlhttp.open("GET",url,true);
+	    xmlhttp.send(null);
+	}
+}
+function clearTable(tableid){
+	var table = document.getElementById(tableid);
+	var rowcount = table.rows.length;
+	for(var i=1;i<rowcount;i++){
+	  table.deleteRow(1);
 	}
 }
 function validateNumber(txtnumber){

@@ -23,18 +23,6 @@ $(document).ready(function(){
 	$('#viewprofile').click(function(){
 		window.location = "admin/profile.jsp";
 	});
-	$('#epidemics').click(function(){
-		window.location = "admin/addepidemic.jsp";
-	});
-	$('#diseases').click(function(){
-		window.location = "admin/adddisease.jsp";
-	});
-	$('#vaccine').click(function(){
-		window.location = "admin/addvaccine.jsp";
-	});
-	$('#area').click(function(){
-		window.location = "admin/addarea.jsp";
-	});
 });
 </script>
 </head>
@@ -83,18 +71,54 @@ $(document).ready(function(){
 						<button><a><img id="vaccine" src="admin/images/services/clinic.png " alt="vaccinetriposha"></a></button>
 						<h3 align="center" id="vaccine" >Vaccine</h3></br>
 						<p id="vaccine" style="margin-left: 10%;">Add / Edit / Delete Vaccine</p>
+						<div class="dropdown-content">
+						<table>
+						<tr>
+						<th>
+						<a style="padding-left: 10%; padding-right: 10%;" href="admin/addvaccine.jsp">Add</a>
+						</th>
+						<th>
+						<a style="padding-left: 10%; padding-right: 10%;" href ="admin/editvaccine.jsp">Edit</a>
+						</th>
+						</tr>
+						</table>
+						</div>
 					</div>
 					
 					<div id="epidemics" class="services">
 						<button><a><img id="epidemics" src="admin/images/services/epidemics.png " alt="epidemics"></a></button>
 						<h3 align="center" id="epidemics">Epidemics</h3></br>
 						<p id="epidemics" style="margin-left: 10%;">Add / Edit / Delete Epidemics</p>
+						<div class="dropdown-content">
+						<table>
+						<tr>
+						<th>
+						<a style="padding-left: 10%; padding-right: 10%;" href="admin/addepidemic.jsp">Add</a>
+						</th>
+						<th>
+						<a style="padding-left: 10%; padding-right: 10%;" href ="admin/editepidemic.jsp">Edit</a>
+						</th>
+						</tr>
+						</table>
+						</div>
 					</div>
 					
 					<div class="services" id="diseases">
 						<button><a><img id="diseases" src="admin/images/services/diseases.png" alt="diseases"></a></button>
 						<h3 align="center" id="diseases">Diseases</h3></br>
 						<p id="diseases" style="margin-left: 5%;">Add / Edit / Delete Diseases</p>
+						<div class="dropdown-content">
+						<table>
+						<tr>
+						<th>
+						<a style="padding-left: 10%; padding-right: 10%;" href="admin/adddisease.jsp">Add</a>
+						</th>
+						<th>
+						<a style="padding-left: 10%; padding-right: 10%;" href ="admin/editdisease.jsp">Edit</a>
+						</th>
+						</tr>
+						</table>
+						</div>
 					</div>
 					
 					</div>
@@ -104,6 +128,18 @@ $(document).ready(function(){
 						<button><a><img id="area" src="admin/images/services/location.png"area.png " alt="area"></a></button>
 						<h3 id="area" align="center">Area</h3></br>
 						<p id="area" style="margin-left: 3%;">Add / Edit / Delete Area</p>
+						<div class="dropdown-content">
+						<table>
+						<tr>
+						<th>
+						<a style="padding-left: 10%; padding-right: 10%;" href="admin/addarea.jsp">Add</a>
+						</th>
+						<th>
+						<a style="padding-left: 10%; padding-right: 10%;" href ="admin/editarea.jsp">Edit</a>
+						</th>
+						</tr>
+						</table>
+						</div>
 					</div>
 					
 					</div>

@@ -42,7 +42,7 @@
 		</div>
 		<div class="backbody" id="container">
 			<div class="body">
-				<form name="epidemicForm" method="post" action="addepidemic">
+				<form name="epidemicForm" method="post">
 					<div class="form_content" style="border: solid;">
 						<center>
 							<h1>Epidemics</h1>
@@ -98,22 +98,9 @@
 						</div>
 						</br>
 						<div style="margin: 5% 2% 8% 39%;">
-							<div class="btn" style="float:left;" onclick="addEpidemicToAdd()">Add</div>
-							<div class="btn" style="float:left;" onclick="removefromTable(epidemictoaddtbl)">Remove</div>
-						</div>
-						<div class="area">
-							<table id="epidemictoaddtbl" Style="width:100%;">
-								<tr class="thead" id="thead">
-									<th id="thead">EpidemicCode</th>
-									<th id="thead">EpidemicName</th>
-									<th id="thead">Description</th>
-								</tr>
-							</table>
+							<div class="btn" style="float:left;" onclick="doSubmit()">Add</div>
 						</div>
 					</div>
-					</div>
-					<div class="form_content" style="float:right;">
-						<button type="button" id="myForm" onclick="doSubmit()">Add</button>
 					</div>
 				</form>
 			</div>
