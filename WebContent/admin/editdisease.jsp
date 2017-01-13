@@ -8,14 +8,14 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <html>
-<title>Add Disease</title>
+<title>Edit Disease</title>
 <head>
 <base href="${pageContext.request.contextPath}/" />
-<link rel="stylesheet" type="text/css" href="admin/css/adddisease.css">
+<link rel="stylesheet" type="text/css" href="admin/css/editvaccine.css">
 <link rel="stylesheet" type="text/css" href="admin/css/main.css">
 <link rel="stylesheet" type="text/css" href="admin/css/form.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
-<script src="admin/js/adddisease.js"></script>
+<script src="admin/js/editdisease.js"></script>
 <script src="admin/js/createviewforall.js"></script>
 </head>
 <body>
@@ -57,7 +57,6 @@
 							</table>
 						</div>
 					</div>
-					<input type="hidden" id="diseases" name="txtdiseases"/>
 					<div class="form_content">
 					<div class="form_content" style="padding-top:4%; padding-bottom: 5%;">
 						<div class="form_content">
@@ -66,14 +65,7 @@
 									<label style="float:left; margin-right: 5%;">DiseaseCode</label>
 								</div>
 								<div style="float:right; width:70%;">
-									<input style="width:80%; background:#E6E6E6; " type="text" id="diseasecode" placeholder="DiseaseCode" name="txtdiseasecode"
-									value="<%
-										Main m = new Main();
-										String id = m.generateCode("disease","dis");
-										if(id!=null){
-											out.println(id);
-										}
-									%>" readonly="readonly"/>
+									<input style="width:80%; background:#E6E6E6; " type="text" id="diseasecode" placeholder="DiseaseCode" name="txtdiseasecode" readonly="readonly"/>
 								</div>
 							</div>
 							<div style="float:right; width:50%;">
@@ -98,9 +90,10 @@
 						</div>
 						</br>
 						<div style="margin: 5% 2% 8% 39%;">
-							<div class="btn" style="float:left;" onclick="doSubmit()">Add</div>
+							<div class="btn" style="float:left;" onclick="doSubmit()">Edit</div>
+							<div class="btn" style="float:left;" onclick="deleteDisease()">Delete</div>
 						</div>
-					</div>
+						</div>
 					</div>
 				</form>
 			</div>

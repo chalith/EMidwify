@@ -8,14 +8,14 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <html>
-<title>Add Disease</title>
+<title>Edit Area</title>
 <head>
 <base href="${pageContext.request.contextPath}/" />
-<link rel="stylesheet" type="text/css" href="admin/css/adddisease.css">
+<link rel="stylesheet" type="text/css" href="admin/css/editvaccine.css">
 <link rel="stylesheet" type="text/css" href="admin/css/main.css">
 <link rel="stylesheet" type="text/css" href="admin/css/form.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
-<script src="admin/js/adddisease.js"></script>
+<script src="admin/js/editarea.js"></script>
 <script src="admin/js/createviewforall.js"></script>
 </head>
 <body>
@@ -42,65 +42,89 @@
 		</div>
 		<div class="backbody" id="container">
 			<div class="body">
-				<form name="diseaseForm" method="post">
+				<form name="areaForm" method="post">
 					<div class="form_content" style="border: solid;">
 						<center>
-							<h1>Diseases</h1>
+							<h1>Area</h1>
 						</center>
 						<div class="area">
-							<table id="diseasetbl" Style="width:100%;">
+							<table id="areatbl" Style="width:100%;">
 								<tr class="thead" id="thead">
-									<th id="thead">DiseaseCode</th>
-									<th id="thead">DiseaseName</th>
-									<th id="thead">Description</th>
+									<th id="thead">AreaCode</th>
+									<th id="thead">AreaName</th>
+									<th id="thead">MidwifeID</th>
+									<th id="thead">MidwifeName</th>
 								</tr>
 							</table>
 						</div>
 					</div>
-					<input type="hidden" id="diseases" name="txtdiseases"/>
 					<div class="form_content">
 					<div class="form_content" style="padding-top:4%; padding-bottom: 5%;">
 						<div class="form_content">
 							<div style="float:left; width:50%;">
 								<div style="float:left; width:30%;">
-									<label style="float:left; margin-right: 5%;">DiseaseCode</label>
+									<label style="float:left; margin-right: 5%;">AreaCode</label>
 								</div>
 								<div style="float:right; width:70%;">
-									<input style="width:80%; background:#E6E6E6; " type="text" id="diseasecode" placeholder="DiseaseCode" name="txtdiseasecode"
-									value="<%
-										Main m = new Main();
-										String id = m.generateCode("disease","dis");
-										if(id!=null){
-											out.println(id);
-										}
-									%>" readonly="readonly"/>
+									<input style="width:80%; background:#E6E6E6; " type="text" id="areacode" placeholder="AreaCode" name="txtareacode" readonly="readonly"/>
 								</div>
 							</div>
 							<div style="float:right; width:50%;">
 								<div style="float:left; width:30%;">
-									<label style="float:left; margin-right: 5%;">DiseaseName</label>
+									<label style="float:left; margin-right: 5%;">AreaName</label>
 								</div>
 								<div style="float:left; width:70%;">
-									<input style="width:80%;" type="text" id="diseasename" placeholder="DiseaseName" name="txtdiseasename">
+									<input style="width:80%;" type="text" id="areaname" placeholder="AreaName" name="txtareaname">
 								</div>
 							</div>
 							
 						</div>
 						<div class="form_content">
-							<div style="width:80%; float: center;">
-								<div style="float:left; width:20%;">
-									<label style="float:left; margin-right: 5%;">Description</label>
+							<div style="width:50%; float: center;">
+								<div style="float:left; width:30%;">
+									<label style="float:left; margin-right: 5%;">Midwife</label>
 								</div>
-								<div style="float:left; width:80%;">
-									<textarea style="width: 90%; height: 90%;" rows="4" cols="50" id="description" placeholder="Description" name="txtdescription"></textarea></br>
+								<div style="float:left; width:70%;">
+									<select name="txtmidwifeid" id="midwifeid" style="width: 80%;">
+										<option selected disabled option value="">Midwife</option>
+										<%
+											JDBC jdbc = new JDBC();
+											ArrayList<String[]> midwives = new ArrayList<String[]>();
+											String options="";
+											try{
+												String q="SELECT midwifeID,name FROM midwife;";
+												Statement st=jdbc.conn.createStatement();
+												st.executeQuery(q);
+												ResultSet rs = st.getResultSet();
+												while(rs.next()){
+													String s[] = {(String) rs.getString("midwifeID"),(String) rs.getString("name")};
+													midwives.add(s);
+												}
+											}catch(Exception e){
+												System.out.println(e);
+											}
+											finally{	
+												try {
+													jdbc.conn.close();
+												} catch (SQLException e1) {
+													e1.printStackTrace();
+												}
+											}
+											for(int i=0;i<midwives.size();i++){
+												options = options+"<option value="+midwives.get(i)[0]+">("+midwives.get(i)[0]+") "+midwives.get(i)[1]+"</option>";
+											}
+											out.print(options);
+										%>
+									</select>
 								</div>
 							</div>
 						</div>
 						</br>
 						<div style="margin: 5% 2% 8% 39%;">
-							<div class="btn" style="float:left;" onclick="doSubmit()">Add</div>
+							<div class="btn" style="float:left;" onclick="doSubmit()">Edit</div>
+							<div class="btn" style="float:left;" onclick="deleteArea()">Delete</div>
 						</div>
-					</div>
+						</div>
 					</div>
 				</form>
 			</div>

@@ -1,4 +1,4 @@
-package com.midwife.profile;
+package com.main;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -14,11 +14,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.main.Children;
-import com.main.Guardians;
-import com.main.JDBC;
-import com.main.Main;
-import com.main.Search;
 @WebServlet("/loadsuggestions")
 public class LoadSuggestions extends HttpServlet {
 	private static final long serialVersionUID = 1L;
