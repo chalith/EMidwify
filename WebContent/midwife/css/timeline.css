@@ -6,11 +6,11 @@
 	width: 90%;
 }
 .timeline table{
-	font-size:120%;
+	font-size:90%;
 	width: 100%;
 	position: static;
-	color: #2C2C32;
-	font-style: "Comic Sans MS", cursive, sans-serif;
+	//color: #2C2C32;
+	//font-style: "Comic Sans MS", cursive, sans-serif;
 }
 .timeline tr{
 	border-style:solid;

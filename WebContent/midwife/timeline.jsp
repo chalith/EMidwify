@@ -36,7 +36,7 @@
 		<div class="body">
 			<div style="float:left; width:80%; overflow:hidden; background-color:#E2E4F2;">
 				<div class="timeline">
-					<center><div style="background-color: white; width: 99%; float: left; border-radius:10%; border: solid #3C405B;">
+					<center><div style="background-color: rgb(120, 150, 170); font-size:70%; width: 99%; float: left; border-radius:3%; border: solid #3C405B;">
 						<h2>Timeline</h2>
 					</div></center>
 					<table>

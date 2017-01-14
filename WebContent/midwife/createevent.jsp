@@ -76,7 +76,7 @@
 					<input type="hidden" id="evnts" name="txtevnts"/>
 					<div class="form_content">
 					<div class="form_content" style="padding-top:4%; padding-bottom: 5%;">
-						<center>
+						
 						<div class="form_content">
 							<div style="width:50%; float: left;">
 								<label>Event Name</label>
@@ -92,41 +92,41 @@
 								</select>
 							</div>
 						</div>
-						</center></br>
-						<center>
-						<div class="form_content" style="width: 80%;">
+						</br>
+						
+						<div class="form_content" style="width: 90%;">
 							<div style="width:50%; float: left;">
-								<div style="float:left; width:10%;">
-									<label>Date</label>
+								<div style="float:left; width:21%;">
+									<labelstyle="float:right;>Date</label>
 								</div>
-								<div id="date_eventdate" style="float:left; width:90%;">
+								<div id="date_eventdate" style=" width:79%;">
 									<jsp:include page="/date.jsp" />
 								</div>
 								<input type="hidden" id="eventdate" name="txteventdate"/>
 							</div>
 							<div style="width:50%; float: left;">
-								<div style="float:left; width:10%;">
-									<label>Time</label>
+								<div style="float:left;  width:25%; ">
+									<label style="float:left; margin-left: 22%; ">Time</label>
 								</div>
-								<div id="time_eventtime" style="float:left; width:90%;">
+								<div id="time_eventtime" style="float:left; width:60%;">
 									<jsp:include page="/time.jsp" />
 								</div>
 								<input type="hidden" id="eventtime" name="txteventtime"/>
 							</div>
 						</div>
-						</center></br>
-						<center>
+						</br>
+						
 						<div class="form_content">
 							<div style="width:50%;">
-								<div style="float:left; width:30%;">
-									<label style="float:right; margin-right: 5%;">Venue</label>
+								<div style="float:left; width:20%;">
+									<label style="float:; margin-right: 5%;">Venue</label>
 								</div>
-								<div style="float:left; width:70%;">
+								<div style="float:left; width:50%;">
 									<input style="width:100%;" type="text" id="eventvenue" placeholder="Venue" name="txteventvenue">
 								</div>
 							</div>
 						</div>
-						</center></br>
+						</br>
 						<div class="form_content" style="display: inline-block; width: 100%; background-color: white;">
 							<input style="width: 49%;" class="search" id="mothersearch" placeholder="Enter the mother name here  &#128270"></input>
 							<div style="float:left; width: 50%;">
