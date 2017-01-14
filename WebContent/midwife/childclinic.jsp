@@ -71,7 +71,7 @@
 					<div class="form_content" style="font-size: 120%;">
 						<div style="float:left; width:50%;">
 							<label>Area</label>
-							<select id="clinicareas" style="margin-left:13%; font-size: 80%; width:50%; background:#34495E; color: white;">
+							<select id="clinicareas" style="font-size: 80%; width:53%; background:#34495E; color: white; float: right; margin-right: 20%;">
 								<option selected disabled option>Area</option>
 								<%
 									out.print(areas);
@@ -80,7 +80,7 @@
 						</div>
 						<div style="float:left; width:50%;">
 							<label>Scheduled Date</label>
-							<select id="clinicdates" style="font-size: 80%; width:50%; background:#34495E; color: white;">
+							<select id="clinicdates" style="font-size: 80%; width:53%; background:#34495E; color: white; float: right;margin-right: 5%;">
 								<option selected disabled option>Clinic Dates</option>
 								
 							</select>
@@ -89,11 +89,11 @@
 					<div class="form_content" style="font-size: 120%;">
 						<div style="float:left; width:50%;">
 							<label>Venue</label>
-							<input id="venue" style="font-size: 80%; width:60%; background:#E6E6E6;" type="text" id="venue" placeholder="Venue" name="txtvenue" /readonly>
+							<input id="venue" style=" font-size: 80%; width:53%; float:right; background:#E6E6E6; margin-right: 20% " type="text" id="venue" placeholder="Venue" name="txtvenue" /readonly>
 						</div>
 						<div style="float:left; width:50%;">
 							<label>Time</label>
-							<input id="time" style="margin-left:10%; font-size: 80%; width:60%; background:#E6E6E6;" type="text" id="time" placeholder="Time" name="txttime" /readonly>
+							<input id="time" style=" font-size: 80%; width:53%; float:right; background:#E6E6E6;margin-right: 5%; " type="text" id="time" placeholder="Time" name="txttime" /readonly>
 						</div></br>
 					</div>
 					<div class="form_content">
@@ -122,7 +122,7 @@
 					<div class="form_content" style="font-size: 120%;">
 						<div style="float:left; width:50%;">
 							<label>Area</label>
-							<select id="pastclinicareas" style="margin-left:13%; font-size: 80%; width:50%; background:#34495E; color: white;">
+							<select id="pastclinicareas" style="font-size: 80%; width:53%; background:#34495E; color: white; float: right; margin-right: 20%;">
 								<option selected disabled option>Area</option>
 								<%
 									out.print(areas);
@@ -131,7 +131,7 @@
 						</div>
 						<div style="float:left; width:50%;">
 							<label>Scheduled Date</label>
-							<select id="pastclinicdates" style="font-size: 80%; width:50%; background:#34495E; color: white;">
+							<select id="pastclinicdates" style="font-size: 80%; width:53%; background:#34495E; color: white; float: right;margin-right: 5%;">
 								<option selected disabled option>Clinic Dates</option>
 								
 							</select>
@@ -140,11 +140,11 @@
 					<div class="form_content" style="font-size: 120%;">
 						<div style="float:left; width:50%;">
 							<label>Venue</label>
-							<input id="pastvenue" style="font-size: 80%; width:60%; background:#E6E6E6;" type="text" placeholder="Venue" name="txtvenue" /readonly>
+							<input id="pastvenue" style=" font-size: 80%; width:53%; float:right; background:#E6E6E6; margin-right: 20% " type="text" placeholder="Venue" name="txtvenue" /readonly>
 						</div>
 						<div style="float:left; width:50%;">
 							<label>Time</label>
-							<input id="pasttime" style="margin-left:10%; font-size: 80%; width:60%; background:#E6E6E6;" type="text" placeholder="Time" name="txttime" /readonly>
+							<input id="pasttime" style=" font-size: 80%; width:53%; float:right; background:#E6E6E6;margin-right: 5%; " type="text" placeholder="Time" name="txttime" /readonly>
 						</div></br>
 					</div>
 					<div class="form_content" id="count">

@@ -175,14 +175,14 @@ function initialize() {
 						<input style="width:40%; type="text" id="addressline4" placeholder="Line4" name="txtaddressline4">
 					</div>
 				</div></br>
-				<div class="form_content">
-					<div style="float:left; width: 20%;">
+				<div class="form_content" style="width: 63%;">
+					<!--<div style="float:left; width: 20%;">
 						<label>Location</label>
-					</div>
+					</div>-->
 					<div style="float:left; width: 32.5%;">
-						<input style="width: 100%; background:#E6E6E6;"  name="txtlocation" placeholder="Location" id="location" readonly></input>
+						<input type="hidden" style="width: 100%; background:#E6E6E6;"  name="txtlocation" placeholder="Location" id="location" readonly></input>
 					</div>
-					<div style="float:left; width: 35%;">
+					<div style="float:right; width: 40%;">
 						<div class="btn" id="map" style="width: 40%; float:left; margin-left: 10%;">Set Location</div>
 						<lable id="setted" style="margin-left: 10%; float:left; color:blue;"></lable>
 					</div>
