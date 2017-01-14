@@ -33,13 +33,8 @@
 		<div class="body">
 			<div style="float:left; width:80%;">					
 				<div class="details" style="display:block;">
-<<<<<<< HEAD
 					<div class="midwifedetails" style="padding-top:1%; margin:3% 3% 0 3%; border:2px solid;">
 						<img style="width:15%; border:solid; border-radius:10%; margin: 2% 0 -2% 0%;" src="<%
-=======
-					<div class="midwifedetails" style="height:8%;padding-top:1%; margin:3% 3% 0 3%; border:2px solid;">
-						<img style="width:10%; border:solid; border-radius:6%; margin: 1% 0% 1% 0%;" src="<%
->>>>>>> 79eced1e358d02e19391b6d54c45a7d0a3376c90
 						JDBC jdbc = null;
 						String fullname = null;
 						String address = null;
@@ -122,11 +117,7 @@
 				        }
 						out.print(pic);
 						%>" alt="user_photo">
-<<<<<<< HEAD
 						<h1 style="width:50%; float: right;"><%	
-=======
-						<h2 style="width:60%; font-size:120%;float:right; margin-right: 20%; margin-top: 4%;"><%	
->>>>>>> 79eced1e358d02e19391b6d54c45a7d0a3376c90
 						if(fullname != null){
 							out.print(fullname);
 						}

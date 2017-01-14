@@ -2,13 +2,28 @@ package com.main;
 
 import java.io.BufferedReader;
 
+
+
 import java.io.OutputStreamWriter;
 
 
 import java.io.InputStreamReader;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
+import java.util.Properties;
+
+import javax.mail.Authenticator;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+
+import com.sun.mail.iap.Protocol;
+
+
+import java.util.*;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
@@ -219,45 +234,44 @@ public class Main {
 			}
 		}
 	}
-	public void sendEmail(String receiver,String message){
-		try {
-			 
-			 String encoding = "UTF-8";
-			 
-			 String apiKey = "07bfbaa7-5e57-49ad-8545-b73596325055";
-			 String from = "desaman.chalith@gmail.com";
-			 String fromName = "EMidwify";
-			 String subject = "PasswordReset";
-			 String body = message;
-			 String to = receiver;
-			 String isTransactional = "true";
-			 String data = "apikey=" + URLEncoder.encode(apiKey, encoding);
-			 data += "&from=" + URLEncoder.encode(from, encoding);
-			 data += "&fromName=" + URLEncoder.encode(fromName, encoding);
-			 data += "&subject=" + URLEncoder.encode(subject, encoding);
-			 data += "&bodyHtml=" + URLEncoder.encode(body, encoding);
-			 data += "&to=" + URLEncoder.encode(to, encoding);
-			 data += "&isTransactional=" + URLEncoder.encode(isTransactional, encoding);
-			 
-			 URL url = new URL("https://api.elasticemail.com/v2/email/send");
-			 URLConnection conn = url.openConnection();
-			 conn.setDoOutput(true);
-			 OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
-			 wr.write(data);
-			 wr.flush();
-			 BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream())); 
-			 String result = rd.readLine();
-			 wr.close();
-			 rd.close();
-
-			 System.out.print("email sent");
-		 }
-			 
-		 catch(Exception e) {
-		 
-			 e.printStackTrace();
-		 }
-	}
+	public static void sendEmail(String toAddress,String message) throws AddressException,MessagingException {
+		String host = "smtp.gmail.com";
+		String port = "587";
+		final String userName = "emidwify@gmail.com";
+		final String password = "UCsc@123";
+		String subject = "reset password";
+		
+        // sets SMTP server properties
+        Properties properties = new Properties();
+        properties.put("mail.smtp.host", host);
+        properties.put("mail.smtp.port", port);
+        properties.put("mail.smtp.auth", "true");
+        properties.put("mail.smtp.starttls.enable", "true");
+ 
+        // creates a new session with an authenticator
+        Authenticator auth = new Authenticator() {
+            public PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(userName, password);
+            }
+        };
+ 
+        Session session = Session.getInstance(properties, auth);
+ 
+        // creates a new e-mail message
+        Message msg = new MimeMessage(session);
+ 
+        msg.setFrom(new InternetAddress(userName));
+        InternetAddress[] toAddresses = { new InternetAddress(toAddress) };
+        msg.setRecipients(Message.RecipientType.TO, toAddresses);
+        msg.setSubject(subject);
+        msg.setSentDate(new java.util.Date());
+        msg.setText(message);
+ 
+        // sends the e-mail
+        Transport.send(msg);
+ 
+    }
+	
 	public void send(String number, String message){
 		
 		try{
