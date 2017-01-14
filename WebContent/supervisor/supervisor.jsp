@@ -11,11 +11,19 @@
 <title>My Profile</title>
 <head>
 <base href="${pageContext.request.contextPath}/" />
-<link rel="stylesheet" type="text/css" href="midwife/css/midwife.css">
-<link rel="stylesheet" type="text/css" href="midwife/css/main.css">
+<link rel="stylesheet" type="text/css" href="supervisor/css/supervisor.css">
+<link rel="stylesheet" type="text/css" href="supervisor/css/main.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
-<script src="midwife/js/createviewforall.js"></script>
-<script src="midwife/js/midwife.js"></script>
+<script src="supervisor/js/createviewforall.js"></script>
+<script src="supervisor/js/supervisor.js"></script>
+<script>
+$(document).ready(function(){
+	$('#editinfotab').on("click",function(){
+		window.location="supervisor/editsupervisorinfo.jsp";
+	});
+});
+
+</script>
 </head>
 <body>
 	<%
@@ -41,6 +49,7 @@
 						String areacode = "";
 						String area = "";
 						String dateofbirth = null;
+						String email = null;
 						String age = null;
 						String pic = null;
 						String dateofstart = null;
@@ -51,19 +60,20 @@
 						
 						try{
 							jdbc = new JDBC();
-							String q="SELECT * FROM midwife WHERE midwifeID = '"+mid+"';";
-							Statement st=jdbc.conn.createStatement();
+							String q="SELECT * FROM supervisor WHERE supervisorID = '"+mid+"';";
+							Statement st = jdbc.conn.createStatement();
 							st.executeQuery(q);
 							ResultSet rs = st.getResultSet();
 							while(rs.next()){
 								fullname = (String)rs.getString("name");
 								address = (String)rs.getString("address");
+								email = (String)rs.getString("email");
 								dateofbirth = (String)rs.getString("dateOfBirth");
 								dateofstart = (String)rs.getString("startedDate");
-								pic = (String)rs.getString("midwifePicture");
+								pic = (String)rs.getString("supervisorPicture");
 								
 							}
-							q="SELECT mobileNumber FROM midwifemobilenumber WHERE midwifeID = '"+mid+"';";
+							q="SELECT mobileNumber FROM supervisormobilenumber WHERE supervisorID = '"+mid+"';";
 							st.executeQuery(q);
 							rs = st.getResultSet();
 							while(rs.next()){
@@ -78,8 +88,8 @@
 					    	Date wDate = FormatDate.createDate(dateofstart);
 					    	experience = wDate.getAge(currentDate);
 					    	
-					    	q="SELECT areaCode,area FROM area WHERE midwifeID = '"+mid+"';";
-					    	st.executeQuery(q);
+					    	q="SELECT areaCode,area FROM area WHERE midwifeID IN (SELECT midwifeID FROM midwife WHERE supervisorID = '"+mid+"');";
+							st.executeQuery(q);
 							ResultSet rs2 = st.getResultSet();
 							while(rs2.next()){
 								if(area.equals("")){
@@ -92,14 +102,15 @@
 								}
 								
 							}
-							q="SELECT COUNT(guardianID) FROM guardian WHERE guardianID IN (SELECT guardianID FROM mother) && guardianAreaCode IN (SELECT areaCode FROM area WHERE midwifeID = '"+mid+"');";
+							
+					    	q="SELECT COUNT(guardianID) FROM guardian WHERE guardianID IN (SELECT guardianID FROM mother) && guardianAreaCode IN (SELECT areaCode FROM area WHERE midwifeID IN (SELECT midwifeID FROM midwife WHERE supervisorID = '"+mid+"'));";
 							st.executeQuery(q);
 							rs2 = st.getResultSet();
 							while(rs2.next()){
 								mcount = (String)rs2.getString(1);
 							}
 							
-							String q1="SELECT COUNT(childID) FROM child WHERE guardianID IN (SELECT guardianID FROM guardian WHERE guardianAreaCode IN (SELECT areaCode FROM area WHERE midwifeID = '"+mid+"'));";
+							String q1="SELECT COUNT(childID) FROM child WHERE guardianID IN (SELECT guardianID FROM guardian WHERE guardianAreaCode IN (SELECT areaCode FROM area WHERE midwifeID IN (SELECT midwifeID FROM midwife WHERE supervisorID = '"+mid+"')));";
 							st.executeQuery(q1);
 							rs2 = st.getResultSet();
 							while(rs2.next()){
@@ -151,6 +162,10 @@
 									}
 									out.print("</li>");
 								}
+								if(email!=null){
+									out.print("<li>Email Address :-  "+email+"</li></br>");
+								}
+								
 								if(dateofbirth!=null){
 									out.print("<li>Date of birth :-  "+dateofbirth+"</li></br>");
 								}
@@ -196,18 +211,6 @@
 			</div>
 			<div class="right_sidebar">
 				<div class="online_userbar">
-					<select name="area" id="area">
-						<%
-							Areas a = new Areas(mid);
-							ArrayList<String[]> areaArr = null;
-							areaArr = a.getAreas();
-							String areas = "";
-							for(int i=0;i<areaArr.size();i++){
-								areas = areas+"<option value="+areaArr.get(i)[0]+">("+areaArr.get(i)[0]+") "+areaArr.get(i)[1]+"</option>";
-							}
-							out.print(areas);
-						%>
-					</select>
 					<div id="onlineusers">
 						
 					</div>			

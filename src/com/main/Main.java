@@ -2,23 +2,32 @@ package com.main;
 
 import java.io.BufferedReader;
 
+import java.io.OutputStreamWriter;
+
+
 import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.net.URL;
+import java.net.URLConnection;
+import java.net.URLEncoder;
+
+import java.net.HttpURLConnection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.UUID;
 
-import com.mysql.jdbc.PreparedStatement;
+
 
 public class Main {
-	JDBC jdbc = null;
 	public boolean isHave(String table ,String column ,String compare){
 		boolean re = false;
-		jdbc = new JDBC();
+		JDBC jdbc = new JDBC();
 		try{
 			String q = "SELECT * FROM "+table+" WHERE "+column+" = '"+compare+"';";
 			Statement st=jdbc.conn.createStatement();
@@ -40,7 +49,7 @@ public class Main {
 	}
 	public String generateID(String table, String prefix){
 		String ID = null;
-		jdbc = new JDBC();
+		JDBC jdbc = new JDBC();
 		try{
 			String q="SELECT "+table+"ID FROM "+table+" WHERE "+table+"ID NOT LIKE '%v' OR "+table+"ID NOT LIKE '%V'";
 			Statement st=jdbc.conn.createStatement();
@@ -68,7 +77,7 @@ public class Main {
 	}
 	public String generateCode(String table, String prefix){
 		String ID = null;
-		jdbc = new JDBC();
+		JDBC jdbc = new JDBC();
 		try{
 			String q="SELECT * FROM "+table+";";
 			Statement st=jdbc.conn.createStatement();
@@ -195,29 +204,7 @@ public class Main {
 				pst.setString(2, message);
 				pst.executeUpdate();
 				
-				
-				
-				// Construct data
-				String user = "username=" + "desaman.chalith@gmail.com";
-				String hash = "&hash=" + "6d08961b353066a98e29f9e399bd9440717cf9d8";
-				message = "&message=" + message;
-				String sender = "&sender=" + "Emidwify";
-				String numbers = "&numbers=" + "94"+number.substring(1);
-				
-				// Send data
-				HttpURLConnection conn = (HttpURLConnection) new URL("http://api.txtlocal.com/send/?").openConnection();
-				String data = user + hash + numbers + message + sender;
-				conn.setDoOutput(true);
-				conn.setRequestMethod("POST");
-				conn.setRequestProperty("Content-Length", Integer.toString(data.length()));
-				conn.getOutputStream().write(data.getBytes("UTF-8"));
-				final BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-				final StringBuffer stringBuffer = new StringBuffer();
-				String line;
-				while ((line = rd.readLine()) != null) {
-					stringBuffer.append(line);
-				}
-				rd.close();
+				send(number, message);
 			}
 			
 			
@@ -231,5 +218,210 @@ public class Main {
 				e.printStackTrace();
 			}
 		}
+	}
+	public void sendEmail(String receiver,String message){
+		try {
+			 
+			 String encoding = "UTF-8";
+			 
+			 String apiKey = "07bfbaa7-5e57-49ad-8545-b73596325055";
+			 String from = "desaman.chalith@gmail.com";
+			 String fromName = "EMidwify";
+			 String subject = "PasswordReset";
+			 String body = message;
+			 String to = receiver;
+			 String isTransactional = "true";
+			 String data = "apikey=" + URLEncoder.encode(apiKey, encoding);
+			 data += "&from=" + URLEncoder.encode(from, encoding);
+			 data += "&fromName=" + URLEncoder.encode(fromName, encoding);
+			 data += "&subject=" + URLEncoder.encode(subject, encoding);
+			 data += "&bodyHtml=" + URLEncoder.encode(body, encoding);
+			 data += "&to=" + URLEncoder.encode(to, encoding);
+			 data += "&isTransactional=" + URLEncoder.encode(isTransactional, encoding);
+			 
+			 URL url = new URL("https://api.elasticemail.com/v2/email/send");
+			 URLConnection conn = url.openConnection();
+			 conn.setDoOutput(true);
+			 OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
+			 wr.write(data);
+			 wr.flush();
+			 BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream())); 
+			 String result = rd.readLine();
+			 wr.close();
+			 rd.close();
+
+			 System.out.print("email sent");
+		 }
+			 
+		 catch(Exception e) {
+		 
+			 e.printStackTrace();
+		 }
+	}
+	public void send(String number, String message){
+		
+		try{
+			// Construct data
+			String user = "username=" + "dhanushkasampath.mtr@gmail.com";
+			String hash = "&hash=" + "15de74a05f99388540e057b1c3f514eaf749f64c";
+			message = "&message=" + message;
+			String sender = "&sender=" + "Emidwify";
+			String numbers = "&numbers=" + "94"+number.substring(1);
+			
+			// Send data
+			HttpURLConnection conn = (HttpURLConnection) new URL("http://api.txtlocal.com/send/?").openConnection();
+			String data = user + hash + numbers + message + sender;
+			conn.setDoOutput(true);
+			conn.setRequestMethod("POST");
+			conn.setRequestProperty("Content-Length", Integer.toString(data.length()));
+			conn.getOutputStream().write(data.getBytes("UTF-8"));
+			final BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+			final StringBuffer stringBuffer = new StringBuffer();
+			String line;
+			while ((line = rd.readLine()) != null) {
+				stringBuffer.append(line);
+			}
+			rd.close();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+	}
+	public String sendCode(String username){
+		String code = UUID.randomUUID().toString();
+		JDBC jdbc = new JDBC();
+		String mobilenumber = null;
+		String email = null;
+		String person = null;
+		person = getPerson(username);
+		if(person == null){
+			return "Username not registered in the system";
+		}
+		try {
+			String q=null;
+			String q2=null;
+			if(person.equals("midwife")){
+				q = "SELECT mobileNumber FROM midwifemobilenumber WHERE midwifeID = '"+username+"';";
+				q2 = "SELECT email FROM midwife WHERE midwifeID = '"+username+"';";
+			}
+			else if(person.equals("mother")||person.equals("guardian")){
+				q = "SELECT guardianMobileNumber FROM guardianmobilenumber WHERE guardianID = '"+username+"';";
+				q2 = "SELECT guardianEmail FROM guardian WHERE guardianID = '"+username+"';";
+			}
+			else if(person.equals("supervisor")){
+				q = "SELECT mobileNumber FROM supervisormobilenumber WHERE supervisorID = '"+username+"';";
+				q2 = "SELECT email FROM supervisor WHERE supervisorID = '"+username+"';";
+			}
+			else if(person.equals("admin")){
+				q = "SELECT mobileNumber FROM adminmobilenumber WHERE adminID = '"+username+"';";
+				q2 = "SELECT email FROM admin WHERE adminID = '"+username+"';";
+			}
+			Statement st=jdbc.conn.createStatement();
+			st.executeQuery(q);
+			ResultSet rs = st.getResultSet();
+			while(rs.next()){
+				mobilenumber = rs.getString(1);
+			}
+			st.executeQuery(q2);
+			rs = st.getResultSet();
+			while(rs.next()){
+				email = rs.getString(1);
+			}
+			if((mobilenumber==null)&&(email==null)){
+				return "You don't have mobile number send a request to MOH office change the password";
+			}
+			if((mobilenumber.equals(""))&&(email.equals(""))){
+				return "You don't have mobile number send a request to MOH office change the password";
+			}
+			if(email!=null){
+				q = "DELETE FROM resetpassword WHERE username = ?;";
+				java.sql.PreparedStatement pst=jdbc.conn.prepareStatement(q);
+				pst.setString(1, username);
+				pst.executeUpdate();
+				q = "INSERT INTO resetpassword (username,code) VALUES(?,?);";
+				pst=jdbc.conn.prepareStatement(q);
+				pst.setString(1, username);
+				pst.setString(2, code);
+				pst.executeUpdate();
+				
+				sendEmail(email, code);
+				return "code have been sent you by a email";
+			}
+			if(mobilenumber!=null){
+				q = "DELETE FROM resetpassword WHERE username = ?;";
+				java.sql.PreparedStatement pst=jdbc.conn.prepareStatement(q);
+				pst.setString(1, username);
+				pst.executeUpdate();
+				q = "INSERT INTO resetpassword (username,code) VALUES(?,?);";
+				pst=jdbc.conn.prepareStatement(q);
+				pst.setString(1, username);
+				pst.setString(2, code);
+				pst.executeUpdate();
+				
+				
+				send(mobilenumber, code);
+				return "code have been sent you by a SMS";
+			}
+		}catch (Exception e) {
+			System.out.println(e);
+		}finally{
+			try {
+				jdbc.conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return "error";
+	}
+	public boolean checkCode(String username,String code){
+		JDBC jdbc = new JDBC();
+		try{
+			String q = "SELECT code FROM resetpassword WHERE username = ?;";
+			java.sql.PreparedStatement pst=jdbc.conn.prepareStatement(q);
+			pst.setString(1, username);
+			ResultSet rs = pst.executeQuery();
+			String dbcode = null;
+			while(rs.next()){
+				dbcode = stripSlashes(rs.getString("code"));
+			}
+			if(dbcode==null){
+				return false;
+			}
+			if(code.equals(dbcode)){
+				q = "DELETE FROM resetpassword WHERE username = ?;";
+				pst=jdbc.conn.prepareStatement(q);
+				pst.setString(1, username);
+				pst.executeUpdate();
+				return true;
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			try {
+				jdbc.conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return false;
+	}
+	public boolean resetPassword(String username, String password){
+		JDBC jdbc = new JDBC();
+		try{
+			String q = "UPDATE users SET password = ? WHERE userName = ?;";
+			java.sql.PreparedStatement pst=jdbc.conn.prepareStatement(q);
+			pst.setString(1, encript(password));
+			pst.setString(2, username);
+			pst.executeUpdate();
+			return true;
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			try {
+				jdbc.conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return false;
 	}
 }

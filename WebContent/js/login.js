@@ -58,4 +58,8 @@ $(document).ready(function(){
 		$('#login').slideUp("slow");
 		document.getElementById("container_block").style.opacity="1";
 	});
+	$('#frgtpswrd').on('click',function(){
+		$('#reset').slideDown("slow");
+		document.getElementById("container_block").style.opacity="0.6";
+	});
 });

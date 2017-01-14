@@ -5,16 +5,16 @@
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-<title>Clinic - Babies</title>
+<title>Reports</title>
 <head>
 <base href="${pageContext.request.contextPath}/" />
-<link rel="stylesheet" type="text/css" href="midwife/css/clinic.css">
-<link rel="stylesheet" type="text/css" href="midwife/css/main.css">
+<link rel="stylesheet" type="text/css" href="supervisor/css/reports.css">
+<link rel="stylesheet" type="text/css" href="supervisor/css/main.css">
 </head>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
-<script src="midwife/js/createviewforall.js"></script>
-<script src="midwife/js/childclinic.js"></script>
+<script src="supervisor/js/createviewforall.js"></script>
+<script src="supervisor/js/reports.js"></script>
 <body>
 	<%	
 		String mid = (String) session.getAttribute("mid");
@@ -34,7 +34,7 @@
 				<div class="online_userbar">
 					<select name="area" id="area">
 						<%
-							Areas a = new Areas(mid);
+							Areas a = new Areas();
 							ArrayList<String[]> areaArr = null;
 							areaArr = a.getAreas();
 							String areas = "";
@@ -59,14 +59,9 @@
 				</div>
 			</div>
 			<div class="body">
-				<div class="titlebar" id="titlebar">
-					<div class="title" id="upcomingtab"><center><h1>Upcoming Clinics</h1></center></div>
-					<div class="title" id="pasttab"><center><h1>Past Clinics</h1></center></div>
-				</div>
-					
-				<div class="form" id="upcoming">
+				<div class="form" id="past">
 					<div class="form_content" style="border-bottom:solid;">
-						<center><h1>Clinics to come</h1></center>
+						<center><h1>Past clinics</h1></center>
 					</div>
 					<div class="form_content" style="font-size: 120%;">
 						<div style="float:left; width:50%;">
@@ -89,15 +84,23 @@
 					<div class="form_content" style="font-size: 120%;">
 						<div style="float:left; width:50%;">
 							<label>Venue</label>
-							<input id="venue" style="font-size: 80%; width:60%; background:#E6E6E6;" type="text" id="venue" placeholder="Venue" name="txtvenue" /readonly>
+							<input id="venue" style="font-size: 80%; width:60%; background:#E6E6E6;" type="text" placeholder="Venue" name="txtvenue" /readonly>
 						</div>
 						<div style="float:left; width:50%;">
 							<label>Time</label>
-							<input id="time" style="margin-left:10%; font-size: 80%; width:60%; background:#E6E6E6;" type="text" id="time" placeholder="Time" name="txttime" /readonly>
+							<input id="time" style="margin-left:10%; font-size: 80%; width:60%; background:#E6E6E6;" type="text" placeholder="Time" name="txttime" /readonly>
 						</div></br>
 					</div>
+					<div class="form_content" style="display: inline-block; width: 100%;">
+						<div class="form_content" id="ccount" style="width: 45%; float: left;">
+							
+						</div>
+						<div class="form_content" id="mcount" style="width: 45%; float: right;">
+							
+						</div>
+					</div>
 					<div class="form_content">
-						<table id="chlidTable" Style="width:100%; display:none;">
+						<table id="childTable" style="width:100%; display:none;">
 							<tr>
 								<th>Child</th>
 								<th>Age</th>
@@ -107,63 +110,25 @@
 						</table>
 					</div>
 					<div class="form_content">
-						<table id="triposhaTable" Style="width:100%; display:none;">
+						<table id="motherTable" style="width:100%; display:none;">
+							<tr>
+								<th>Child</th>
+								<th>Age</th>
+								<th>Vaccine</th>
+								<th>Amount</th>
+							</tr>
+						</table>
+					</div>
+					<div class="form_content" style="display: inline-block; width: 100%;">
+						<table id="childtriposhaTable" style="width:45%; float:left; display:none;">
 							<tr>
 								<th>Child</th>
 								<th>Triposha Amount</th>
 							</tr>
 						</table>
-					</div>
-				</div>
-				<div class="form" style="display:none;" id="past">
-					<div class="form_content" style="border-bottom:solid;">
-						<center><h1>Who didn't attend for the clinic</h1></center>
-					</div>
-					<div class="form_content" style="font-size: 120%;">
-						<div style="float:left; width:50%;">
-							<label>Area</label>
-							<select id="pastclinicareas" style="margin-left:13%; font-size: 80%; width:50%; background:#34495E; color: white;">
-								<option selected disabled option>Area</option>
-								<%
-									out.print(areas);
-								%>
-							</select>
-						</div>
-						<div style="float:left; width:50%;">
-							<label>Scheduled Date</label>
-							<select id="pastclinicdates" style="font-size: 80%; width:50%; background:#34495E; color: white;">
-								<option selected disabled option>Clinic Dates</option>
-								
-							</select>
-						</div></br>
-					</div>
-					<div class="form_content" style="font-size: 120%;">
-						<div style="float:left; width:50%;">
-							<label>Venue</label>
-							<input id="pastvenue" style="font-size: 80%; width:60%; background:#E6E6E6;" type="text" placeholder="Venue" name="txtvenue" /readonly>
-						</div>
-						<div style="float:left; width:50%;">
-							<label>Time</label>
-							<input id="pasttime" style="margin-left:10%; font-size: 80%; width:60%; background:#E6E6E6;" type="text" placeholder="Time" name="txttime" /readonly>
-						</div></br>
-					</div>
-					<div class="form_content" id="count">
-						
-					</div>
-					<div class="form_content">
-						<table id="pastChildTable" style="width:100%; display:none;">
+						<table id="mothertriposhaTable" style="width:45%; float:right; display:none;">
 							<tr>
-								<th>Child</th>
-								<th>Age</th>
-								<th>Vaccine</th>
-								<th>Amount</th>
-							</tr>
-						</table>
-					</div>
-					<div class="form_content">
-						<table id="pastTriposhaTable" style="width:100%; display:none;">
-							<tr>
-								<th>Child</th>
+								<th>Mother</th>
 								<th>Triposha Amount</th>
 							</tr>
 						</table>

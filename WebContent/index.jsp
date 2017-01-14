@@ -41,6 +41,10 @@ $(document).ready(function(){
 		if(warning != null){
 			out.print(warning);
 		}
+		String falert = (String) request.getAttribute("finalAlert");
+		if(falert != null){
+			out.print(falert);
+		}
 	%>
 	<div class="header">
 		<table style="width: 100%; height: 100%;">
@@ -111,12 +115,15 @@ $(document).ready(function(){
 			<div class="about">
 				<center>
 					<div class="sec">
-						<p><font color="#5B5855"><b> We are here to educate you, guide you and take care of you and your child
+						<p><font color="black"><b> We are here to educate you, guide you and take care of you and your child
 						We simply generate reports and graphs according to the collected data.
-						provide a better communication amoung midwives and your self !
+						provide a better communication amoung midwiwives and your self!
 						</b></p>
 					</div>
-					
+					<div class="sec">
+						<p><font color="black"><b> Advance the health and wellbeing of women and newborns by setting the standards for midwifery excellence by automating the current system”
+						</b></p>
+					</div>
 				</center>
 			</div>
 			<div class="mid">

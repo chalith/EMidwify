@@ -14,7 +14,5 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="C:/eclipse/workspace/EMidwify/WebContent/WEB-INF/lib/commons-codec-1.10.jar"/>
-	<classpathentry kind="lib" path="C:/eclipse/workspace/EMidwify/WebContent/WEB-INF/lib/jasperreports-6.3.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Ganusha/Desktop/itext7-7.0.1/itext7-pdfa-7.0.1.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

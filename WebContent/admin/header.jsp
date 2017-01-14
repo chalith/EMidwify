@@ -79,12 +79,7 @@
 		</tr>
 	</table>
 	<div style="margin: 1% 1% 1% 1%; float:right; width: 30%; color: #796CCA;">
-		<div id="searchboxshow" style="border-radius:5%; font-size:120%; margin-left:5%; padding:2.5px; float:right; color: white;">
-			<img style="width: 80%;" id="searchboxshow" src="midwife/images/services/search.png">
-		</div>
-		<div id="searchbox" style="box-shadow:0.2px 0.2px 1px 1px inset; border-radius:1%; width:80%; float:right; color: black;">
-			<jsp:include page="/search.jsp" />
-		</div>
+		
 	</div>		
 	
 </div>

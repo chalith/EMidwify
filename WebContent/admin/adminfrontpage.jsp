@@ -23,6 +23,9 @@ $(document).ready(function(){
 	$('#viewprofile').click(function(){
 		window.location = "admin/profile.jsp";
 	});
+	$('#statistics').click(function(){
+		window.location = "admin/editstatistics.jsp";
+	});
 });
 </script>
 </head>
@@ -43,7 +46,7 @@ $(document).ready(function(){
 				
 					<div style="display: inline-block; width: 100%; float: left;">
 					
-					<div class="services" id="viewprofile" style="margin-left: 1.5%;">
+					<div class="services" id="viewprofile" style="margin-left: 10.5%;">
 						<button><a><img id="viewprofile" src="admin/images/services/viewprofile.png" alt="profile"></a></button>
 						<h3 align="center" id="viewprofile">Profile</h3></br>
 						<p style="margin-left: 25%;" id="viewprofile">View my profile</p>
@@ -103,7 +106,10 @@ $(document).ready(function(){
 						</div>
 					</div>
 					
-					<div class="services" id="diseases">
+					</div>
+					<div style="display: inline-block; width: 100%; float: left;">
+					
+					<div class="services" id="diseases" style="margin-left: 20.5%;">
 						<button><a><img id="diseases" src="admin/images/services/diseases.png" alt="diseases"></a></button>
 						<h3 align="center" id="diseases">Diseases</h3></br>
 						<p id="diseases" style="margin-left: 5%;">Add / Edit / Delete Diseases</p>
@@ -120,11 +126,8 @@ $(document).ready(function(){
 						</table>
 						</div>
 					</div>
-					
-					</div>
-					<div style="display: inline-block; width: 100%; float: left;">
-					
-					<div class="services" id="area" style="margin-left: 40.5%;">
+										
+					<div class="services" id="area">
 						<button><a><img id="area" src="admin/images/services/location.png"area.png " alt="area"></a></button>
 						<h3 id="area" align="center">Area</h3></br>
 						<p id="area" style="margin-left: 3%;">Add / Edit / Delete Area</p>
@@ -140,6 +143,12 @@ $(document).ready(function(){
 						</tr>
 						</table>
 						</div>
+					</div>
+					
+					<div class="services" id="statistics">
+						<button><a><img id="statistics" src="admin/images/services/update.png"area.png " alt="area"></a></button>
+						<h3 id="statistics" align="center">Edit Statistics Data</h3></br>
+						<p id="statistics" style="margin-left: 3%;">Edit static date in thr system</p>
 					</div>
 					
 					</div>

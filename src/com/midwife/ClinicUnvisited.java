@@ -43,7 +43,7 @@ public class ClinicUnvisited {
 				}catch(Exception e){
 					e.printStackTrace();
 				}
-			}	
+			}		
 		}
 		children = clinic.getChildren();
 		for(int i=0;i<children.size();i++){
@@ -116,10 +116,10 @@ public class ClinicUnvisited {
 	}
 	
 	public int getUnvisitedMotherCount(){
-		return mothers.size();
+		return unvisitedmothers.size();
 	}
 	public int getUnvisitedChildrenCount(){
-		return children.size();
+		return unvisitedchildren.size();
 	}
 	String viewUnvisitedMothers(){
 		String view = "";
@@ -130,7 +130,7 @@ public class ClinicUnvisited {
 		}
 		if(unvisitedchildren != null){
 			for(int i=0;i<unvisitedchildren.size();i++){
-				view = view + "<li><p> Mother Name :- "+unvisitedchildren.get(i).name+"</br> Clinic Date :- "+unvisitedchildren.get(i).date+"</br> Age :- "+unvisitedchildren.get(i).age+"</p></li>";
+				view = view + "<li><p> Child Name :- "+unvisitedchildren.get(i).name+"</br> Clinic Date :- "+unvisitedchildren.get(i).date+"</br> Age :- "+unvisitedchildren.get(i).age+"</p></li>";
 			}
 		}
 		return view;
