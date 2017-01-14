@@ -32,6 +32,9 @@ $(document).ready(function(){
 	$('#viewtimeline').click(function(){
 		window.location = "supervisor/timeline.jsp";
 	});
+	$('#reports').click(function(){
+		window.location = "supervisor/reports.jsp";
+	});
 });
 </script>
 </head>
@@ -50,7 +53,9 @@ $(document).ready(function(){
 		</div>
 		<div class="body clearfix" id="container" style="background-color:#DEE6FB;">
 				<div class="servicebox">
-					<div class="services" id="viewprofile">
+					<div style="display: inline-block; width: 100%; float: left;">
+					
+					<div class="services" id="viewprofile" style="margin-left: 11.5%;">
 						<button id="viewprofile"><a><img src="supervisor/images/services/viewprofile.png" alt="profile"></a></button>
 						<h3 align="center" id="viewprofile">Profile</h3></br>
 						<p style="margin-left: 25%;" id="viewprofile">View my profile</p>
@@ -86,7 +91,10 @@ $(document).ready(function(){
 						<p style="margin-left: 15%;" id="clinic">Create clinic schedule</p>
 					</div>
 					
-					<div name="message" id="message" class="services">
+					</div>
+					<div style="display: inline-block; width: 100%; float: left;">
+					
+					<div name="message" id="message" class="services" style="margin-left: 24%;">
 						<button name="message"><a>
 						<h1 name="message" id="messagecount" class="msgnotify" style="display:none;"></h1>
 						<img name="message" src="supervisor/images/services/message.png " alt="message"></a></button>
@@ -94,9 +102,12 @@ $(document).ready(function(){
 						<p name="message" style="margin-left: 10%;">Send messeges to Midwives</p>
 					</div>
 					
-					<form action="ReportServlet">
-					<input type="submit" value="Generate PDF report">
-					</form>
+					<div name="reports" id="reports" class="services">
+						<button id="reports"><a><img id="reports" src="supervisor/images/services/message.png " alt="reports"></a></button>
+						<h3 id="reports" align="center">Clinic Reports</h3></br>
+						<p id="reports" style="margin-left: 10%;">View clinic reports</p>
+					</div>
+				</div>
 					
 				
   					

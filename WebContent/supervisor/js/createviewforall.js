@@ -83,7 +83,7 @@ function loadUsers(){
 }
 function loadNews(){
 	var xmlhttp = new XMLHttpRequest();
-    var url="createnotification"; 
+    var url="createsupervisornewsfeed"; 
 	xmlhttp.onreadystatechange = function() {
 		if(xmlhttp.readyState==4 && xmlhttp.status==200){
 	        var news = xmlhttp.responseText;

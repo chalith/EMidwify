@@ -14,6 +14,19 @@ function loadMessagecounts(){
 	xmlhttp.open("GET",url,true);
     xmlhttp.send(null);
 }
+function loadNews(){
+	var xmlhttp = new XMLHttpRequest();
+    var url="createsupervisornewsfeed"; 
+	xmlhttp.onreadystatechange = function() {
+		if(xmlhttp.readyState==4 && xmlhttp.status==200){
+	        var news = xmlhttp.responseText;
+	        document.getElementById("notifications").innerHTML = news;
+		}
+	};
+	xmlhttp.open("GET",url,true);
+    xmlhttp.send(null);
+}
+
 $(window).load(function(){
 	loadMessagecounts();
 	loadNews();

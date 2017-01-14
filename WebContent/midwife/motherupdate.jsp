@@ -177,11 +177,10 @@ $(window).load(function(){
 								<div style="float:left; width:30%;">
 									<label>Amount(pckts)</label>
 								</div>
-								<select style="width:43%;" id="trposhaamount" name="txttriposhaamount">
-									<option selected value>Amount</option>
-									<option>1</option>
-									<option>2</option>
-								</select>
+								<input style="width:43%;" id="trposhaamount" name="txttriposhaamount" value="<%
+									TriposhaAmounts ta = new TriposhaAmounts(guardianid);
+									out.print(ta.getAmount());
+								%>" readonly/>
 							</div>
 						</div></br>
 						<div style="margin: 2% 2% 7% 39%;">

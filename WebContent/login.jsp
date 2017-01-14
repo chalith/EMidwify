@@ -14,6 +14,9 @@
 </style>
 </head>
 <body>
+	<jsp:include page="alert.jsp" />
+	<jsp:include page="forgotpassword.jsp" />
+	
 	<div id="login" class="login">
 		<a id="loginclose" class="loginclose">X</a>
 		<form name="myForm" action="login" method="post">
@@ -40,6 +43,7 @@
 				</tr>
 			</table>
 			</br>
+			<a style="cursor: pointer;" id="frgtpswrd">forgot password</a>
 			<button type="button" onclick="doSubmit()">Log In</button></br>
 		</form>
 	</div>

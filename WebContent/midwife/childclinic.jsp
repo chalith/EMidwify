@@ -117,7 +117,7 @@
 				</div>
 				<div class="form" style="display:none;" id="past">
 					<div class="form_content" style="border-bottom:solid;">
-						<center><h1>Past clinics</h1></center>
+						<center><h1>Who didn't attend for the clinic</h1></center>
 					</div>
 					<div class="form_content" style="font-size: 120%;">
 						<div style="float:left; width:50%;">
