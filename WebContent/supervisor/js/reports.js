@@ -3,7 +3,7 @@
 function loadClinics(){
 	var xmlhttp = new XMLHttpRequest();
 	var area=document.getElementById("clinicareas").value;
-	var url="loadclinicdates"; 
+	var url="loadpastclinicdates"; 
 	url=url+"?area="+area;
 	xmlhttp.onreadystatechange = function() {
 		if(xmlhttp.readyState==4 && xmlhttp.status==200){
