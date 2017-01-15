@@ -201,7 +201,7 @@ function loadGraph(){
 								out.print(areaCode);
 							}
 							%>">
-						<div  style="font-size: 120%; float:left; width:70%; color:#040C23;">
+						<div  style="font-size: 100%; float:left; width:70%; color:#040C23;">
 							<ul>
 								<%
 									if(area!=null){

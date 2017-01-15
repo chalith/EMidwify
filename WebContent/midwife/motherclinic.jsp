@@ -49,7 +49,7 @@
 				</div>
 				<div class ="newsfeed clearfix">
 					
-					<h2>Latest News</h2>
+					<h2>Notifications</h2>
 						
 					<ul id="notifications">
 						
@@ -124,6 +124,7 @@
 							<select id="pastclinicareas" style="font-size: 80%; width:53%; background:#34495E; color: white; float: right; margin-right: 20%;">
 								<option selected disabled option>Area</option>
 								<%
+								
 									out.print(areas);
 								%>
 							</select>

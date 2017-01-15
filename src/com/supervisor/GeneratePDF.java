@@ -89,20 +89,17 @@ public class GeneratePDF {
 	Paragraph paragraph = new Paragraph();
 	creteEmptyLine(paragraph, 2);
 	document.add(paragraph);
-	PdfPTable table = new PdfPTable(3);		
+	PdfPTable table = new PdfPTable(2);		
 
-	PdfPCell c1 = new PdfPCell(new Phrase("First Name"));
+	PdfPCell c1 = new PdfPCell(new Phrase("MotherName"));
 	c1.setHorizontalAlignment(Element.ALIGN_CENTER);
 	table.addCell(c1);
 
-	c1 = new PdfPCell(new Phrase("Last Name"));
+	c1 = new PdfPCell(new Phrase("Amount"));
 	c1.setHorizontalAlignment(Element.ALIGN_CENTER);
 	table.addCell(c1);
 
-	c1 = new PdfPCell(new Phrase("Test"));
-	c1.setHorizontalAlignment(Element.ALIGN_CENTER);
-	table.addCell(c1);
-	table.setHeaderRows(1);
+	
 	
 	
 	for (int i = 0; i < 5; i++) {
@@ -111,7 +108,7 @@ public class GeneratePDF {
 		table.getDefaultCell().setVerticalAlignment(Element.ALIGN_MIDDLE);
 		table.addCell("Java");
 		table.addCell("Honk");
-		table.addCell("Success");
+		
 	}		
 
 	document.add(table);

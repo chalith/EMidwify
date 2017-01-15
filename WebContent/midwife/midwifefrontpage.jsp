@@ -162,7 +162,7 @@ $(document).ready(function(){
 				
 			<div class ="newsfeed" style="height: 100%; width: 20%; float: right; background-color:#AFC6DF;">
 				
-				<h2>Latest News</h2>
+				<h2>Notifications</h2>
 					
 				<ul id="notifications">
 					

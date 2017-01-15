@@ -199,7 +199,7 @@ function loadGraph(){
 								out.print(guardian.areacode);
 							}
 							%>">
-						<div  style="font-size: 120%; float:left; width:70%; color:#040C23;">
+						<div  style="font-size: 100%; float:left; width:70%; color:#040C23;">
 							<ul>
 								<%
 									if(area!=null){
@@ -214,7 +214,7 @@ function loadGraph(){
 									if(mobileNumbers.size()!=0){
 										out.print("<li>Mobile numbers :-  ");
 										for(int i=0;i<mobileNumbers.size();i++){
-											out.print("<li>"+mobileNumbers.get(i)+"</li></br>");
+											out.print(mobileNumbers.get(i)+"</li></br>");
 										}
 										out.print("</li>");
 									}
