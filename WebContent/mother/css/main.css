@@ -16,7 +16,7 @@ html{
 }
 .container{
 	background-color: white;
-	width: 1366px;
+	width: 100%;
 }
 .header table{
 	overflow:hidden;

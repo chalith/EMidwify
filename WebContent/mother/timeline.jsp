@@ -44,10 +44,14 @@
 						String notificationString = "";
 						MotherNotifications notifications = new MotherNotifications(mid);
 						ArrayList<Notification> mnotifications = notifications.getNotifications();
-						for(int i=0;i<mnotifications.size();i++){
-							notificationString = notificationString + "<tr id=\""+mnotifications.get(i).id+"\"><td id=\""+mnotifications.get(i).id+"\">"+mnotifications.get(i).title+"</td><td id=\""+mnotifications.get(i).id+"\">"+mnotifications.get(i).date+"</td><td id=\""+mnotifications.get(i).id+"\">"+mnotifications.get(i).description+"</td></tr>";
+						if(mnotifications.size()>0){
+							for(int i=0;i<mnotifications.size();i++){
+								notificationString = notificationString + "<tr id=\""+mnotifications.get(i).id+"\"><td id=\""+mnotifications.get(i).id+"\">"+mnotifications.get(i).title+"</td><td id=\""+mnotifications.get(i).id+"\">"+mnotifications.get(i).date+"</td><td id=\""+mnotifications.get(i).id+"\">"+mnotifications.get(i).description+"</td></tr>";
+							}
+							out.print(notificationString);
+						}else{
+							out.print("No notifications to show");
 						}
-						out.print(notificationString);
 					%>
 					</table>
 				</div>
