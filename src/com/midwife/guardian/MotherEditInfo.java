@@ -167,7 +167,7 @@ public class MotherEditInfo extends HttpServlet {
 	    			e1.printStackTrace();
 	    		}
 	        }
-	        getServletContext().getRequestDispatcher("/midwife/editmotherinfo.jsp?id="+mother.id).forward(request,response);
+	        getServletContext().getRequestDispatcher("/midwife/viewmother.jsp?guardianid="+id).forward(request,response);
 		}
 	}
 	boolean isInt(String integer){

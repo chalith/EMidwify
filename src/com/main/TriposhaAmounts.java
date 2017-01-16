@@ -170,6 +170,7 @@ public class TriposhaAmounts {
 			}
 		}
 		amount = amount - checkTriposhaGiven();
+		
 		if(amount>0){
 			return amount;
 		}else{

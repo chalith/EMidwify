@@ -65,7 +65,7 @@
 					
 				<div class="form" id="upcoming">
 					<div class="form_content" style="border-bottom:solid;">
-						<center><h1>Clinics to come</h1></center>
+						<center><h1>Upcoming Clinics</h1></center>
 					</div>
 					<div class="form_content" style="font-size: 120%;">
 						<div style="float:left; width:50%;">

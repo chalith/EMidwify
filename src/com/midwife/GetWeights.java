@@ -8,6 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import org.apache.catalina.connector.Request;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.main.DateSort;
@@ -41,8 +42,8 @@ public class GetWeights {
 				java.util.Date date = new java.util.Date();
 				DateFormat frmt = new SimpleDateFormat("yyyy-MM-dd");
 				endDate = frmt.format(date);
-				
 				q = "SELECT * FROM motherclinic WHERE motherID = '"+id+"' && clinicDate <= '"+endDate+"' && clinicDate >= '"+startDate+"';";
+				st.executeQuery(q);
 				rs = st.getResultSet();
 				while(rs.next()){
 					JSONObject ob = new JSONObject();

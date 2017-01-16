@@ -40,6 +40,7 @@ function loadGraph(){
 			}
 	        //var myData = new Array([1, 20], [2, 10], [3, 30], [4, 10], [5, 5]);
 	        if(k.length>1){
+	        	document.getElementById("graphtitle").innerHTML = "Weight Graphs";
 				var myChart = new JSChart('chartcontainer', 'line');
 				myChart.setDataArray(myData);
 				myChart.setAxisNameX("Date");
@@ -271,7 +272,7 @@ function loadGraph(){
 								</tr>
 							</table>
 						</div>
-						<h2 style="width: 100%;">Weight graphs</h2>
+						<h2 style="width: 100%;" id="graphtitle"></h2>
 						<!-- <table style="float:left; width: 100%;">
 							<tr>
 								<th>

@@ -85,6 +85,29 @@ public class Messages {
 		}
 		return messageCount;
 	}
+	public int getUnreadMessageCount(String receiver){
+		jdbc = new JDBC();
+		int messageCount = 0;
+		try{
+			String q = "SELECT COUNT(senderID) FROM messages WHERE ( receiverID = '"+receiver+"' ) && (receiveTime IS NULL);";
+			Statement st=jdbc.conn.createStatement();
+			st.executeQuery(q);
+			ResultSet rs = st.getResultSet();
+			while(rs.next()){
+				messageCount = Integer.parseInt((String) rs.getString(1));
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		finally{
+			try {
+				jdbc.conn.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		return messageCount;
+	}
 	public void setMessageRead(String sender, String receiver){
 		jdbc = new JDBC();
 		try{

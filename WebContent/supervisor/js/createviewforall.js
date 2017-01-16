@@ -87,7 +87,10 @@ function loadNews(){
 	xmlhttp.onreadystatechange = function() {
 		if(xmlhttp.readyState==4 && xmlhttp.status==200){
 	        var news = xmlhttp.responseText;
-	        document.getElementById("notifications").innerHTML = news;
+	        if(news!="")
+	        	document.getElementById("notifications").innerHTML = news;
+	        else
+	        	document.getElementById("notifications").innerHTML = "No notifications to show up";
 		}
 	};
 	xmlhttp.open("GET",url,true);

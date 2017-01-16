@@ -58,7 +58,7 @@
 				<div class="msgcontent" id="msgcontent">
 					<div id="sendername" class="sendername" style="font-size: 80%; margin-left: 20%;"></div>
 					<div class="msgs" id="msgs">
-						<center><h1 style="margin-top:20%; font-size: 200%; opacity:0.4;">Select a mother to view messages</h1></center>
+						<center><h1 style="margin-top:20%; font-size: 200%; opacity:0.4;">Select a Midwife to view messages</h1></center>
 					</div>
 					<div style="margin-top:2%; height: 21%; width: 100%;">
 						<textarea id="message" rows="2";></textarea>

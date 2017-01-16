@@ -31,6 +31,26 @@ public class ChildVisit {
     	int age = bDate.getDeference(currentDate);
     	visitAge = bDate.getAge(currentDate);
     	Date d = null;
+    	if(age%20>20-7){
+    		d = currentDate.increase(age%20);
+			visitType = "20 days Visit";
+			visitDate = d.year+"/"+d.month+"/"+d.day;
+			createVisit();
+    	}
+    	if(age%30>30-10){
+    		d = currentDate.increase(age%30);
+			visitType = "30 days Visit";
+			visitDate = d.year+"/"+d.month+"/"+d.day;
+			createVisit();
+    	}
+    	if(age%365>365-10){
+    		d = currentDate.increase(age%365);
+			visitType = "365 days Visit";
+			visitDate = d.year+"/"+d.month+"/"+d.day;
+			createVisit();
+    	}
+    	
+    	/*
     	if(age<=5){
 			d = currentDate.increase(5-age);
 			visitType = "5 days";
@@ -49,7 +69,7 @@ public class ChildVisit {
 			visitDate = d.year+"/"+d.month+"/"+d.day;
 			createVisit();
 		}
-		
+		*/
 	}
 	void createVisit(){
 		JDBC jdbc = new JDBC();

@@ -161,7 +161,7 @@ public class ChildEditInfo extends HttpServlet {
 					e.printStackTrace();
 				}
 	        }
-	        getServletContext().getRequestDispatcher("/midwife/editchildinfo.jsp?id="+id).forward(request, response);
+	        getServletContext().getRequestDispatcher("/midwife/viewchild.jsp?childid="+id).forward(request, response);
 		}
 	}
 }

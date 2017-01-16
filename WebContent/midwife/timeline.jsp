@@ -35,19 +35,25 @@
 		</div>
 		<div class="body">
 			<div style="float:left; width:80%; overflow:hidden; background-color:#E2E4F2;">
+				<%
+					String notificationString = "";
+					MidwifeNotifications notifications = new MidwifeNotifications(mid);
+					ArrayList<Notification> mnotifications = notifications.getNotifications();
+				%>
 				<div class="timeline">
 					<center><div style="background-color: white; width: 99%; float: left; border-radius:10%; border: solid #3C405B;">
 						<h2>Timeline</h2>
 					</div></center>
 					<table>
 					<%
-						String notificationString = "";
-						MidwifeNotifications notifications = new MidwifeNotifications(mid);
-						ArrayList<Notification> mnotifications = notifications.getNotifications();
-						for(int i=0;i<mnotifications.size();i++){
-							notificationString = notificationString + "<tr id=\""+mnotifications.get(i).id+"\"><td id=\""+mnotifications.get(i).id+"\">"+mnotifications.get(i).title+"</td><td id=\""+mnotifications.get(i).id+"\">"+mnotifications.get(i).date+"</td><td id=\""+mnotifications.get(i).id+"\">"+mnotifications.get(i).description+"</td></tr>";
+						if(mnotifications.size()>0){
+							for(int i=0;i<mnotifications.size();i++){
+								notificationString = notificationString + "<tr id=\""+mnotifications.get(i).id+"\"><td id=\""+mnotifications.get(i).id+"\">"+mnotifications.get(i).title+"</td><td id=\""+mnotifications.get(i).id+"\">"+mnotifications.get(i).date+"</td><td id=\""+mnotifications.get(i).id+"\">"+mnotifications.get(i).description+"</td></tr>";
+							}
+							out.print(notificationString);
+						}else{
+							out.print("No notifications to show");
 						}
-						out.print(notificationString);
 					%>
 					</table>
 				</div>

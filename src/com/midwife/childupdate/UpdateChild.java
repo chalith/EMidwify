@@ -127,7 +127,7 @@ public class UpdateChild extends HttpServlet {
 		} catch (SQLException e1) {
 			e1.printStackTrace();
 		}
-		getServletContext().getRequestDispatcher("/midwife/childupdate.jsp").forward(request,response);
+		getServletContext().getRequestDispatcher("/midwife/viewchild.jsp?childid="+id).forward(request,response);
 	}
 	Date createDate(String date,String seperator){
 		String d[] = new String[3];

@@ -31,17 +31,23 @@ public class UploadImage extends HttpServlet {
 			String id = (String)session.getAttribute("mid");
 			String usertype = m.getPerson(id);
 			String folder = "";
-			if(usertype == "guardian"){
+			String table = "";
+			
+			if((usertype == "guardian")||usertype == "mother"){
 				folder = "mother";
+				table = "guardian";
 			}
 			else if(usertype == "midwife"){
 				folder = "midwife";
+				table = "midwife";
 			}
 			else if(usertype == "supervisor"){
 				folder = "supervisor";
+				table = "supervisor";				
 			}
 			else if(usertype == "admin"){
 				folder = "admin";
+				table = "admin";
 			}
 			Part filepart = request.getPart("txtsourcepath");
 			if(filepart!=null){
@@ -62,7 +68,7 @@ public class UploadImage extends HttpServlet {
 					os.close();
 					JDBC jdbc = new JDBC();
 					try{
-						String q = "UPDATE "+usertype+" SET "+usertype+"Picture = '"+destination+"' WHERE "+usertype+"ID = '"+id+"';";
+						String q = "UPDATE "+table+" SET "+table+"Picture = '"+destination+"' WHERE "+table+"ID = '"+id+"';";
 						Statement st=jdbc.conn.createStatement();
 						st.executeUpdate(q);
 					}catch(Exception e){

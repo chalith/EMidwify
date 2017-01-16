@@ -102,7 +102,7 @@
 			    				title = "";
 			    				for(var i=0;i<k.length;i++){
 			    					var x = out[k[i]].location.split(", ");
-			    					if((i>1)&&(out[k[i]].location == out[k[i-1]].location)){
+			    					if((i>0)&&(out[k[i]].location == out[k[i-1]].location)){
 			    						var title = title + "\n..............................\n" + out[k[i]].visittype+"\n Date : "+out[k[i]].date+"\n Child : "+out[k[i]].child+"\n Guardian : "+out[k[i]].guardian;
 			    					}else{
 			    						var title = out[k[i]].visittype+"\n Date : "+out[k[i]].date+"\n Child : "+out[k[i]].child+"\n Guardian : "+out[k[i]].guardian;
