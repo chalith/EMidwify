@@ -50,7 +50,7 @@
 			
 				<div class ="newsfeed clearfix">
 					
-					<h2>Latest News</h2>
+					<h2>Notifications</h2>
 						
 					<ul id="notifications">
 						
@@ -62,7 +62,7 @@
 				<form name="eventForm" method="post" action="scheduleclinic">
 					<div class="form_content" style="border: solid;">
 							<center>
-								<h1>Schedule</h1>
+								<h1>Clinic Schedule</h1>
 							</center>
 						<div class="form_content">
 							<div style="float:left; width:50%;">

@@ -55,7 +55,7 @@ $(document).ready(function(){
 					<div id="register" class="services">
 						<button><a><img src="admin/images/services/reg.png" alt="location"></a></button>
 						<h3 align="center">Register</h3></br>
-						<p style="margin-left: 20%;">Register Supervisor / Midwife</p>
+						<p style="margin-left: 20%;">Supervisor / Midwife</p>
 						<div id="registerdrop" class="dropdown-content">
 						<table>
 						<tr>

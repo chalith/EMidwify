@@ -114,16 +114,13 @@ $(document).ready(function(){
 			</div>
 			<div class="about">
 				<center>
-					<div class="sec">
+					<div class="sec" style="width:94%">
 						<p><font color="black"><b> We are here to educate you, guide you and take care of you and your child
 						We simply generate reports and graphs according to the collected data.
 						provide a better communication amoung midwiwives and your self!
 						</b></p>
 					</div>
-					<div class="sec">
-						<p><font color="black"><b> Advance the health and wellbeing of women and newborns by setting the standards for midwifery excellence by automating the current system”
-						</b></p>
-					</div>
+					
 				</center>
 			</div>
 			<div class="mid">

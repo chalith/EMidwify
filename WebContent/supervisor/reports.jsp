@@ -50,7 +50,7 @@
 				</div>
 				<div class ="newsfeed clearfix">
 					
-					<h2>Latest News</h2>
+					<h2>Notification</h2>
 						
 					<ul id="notifications">
 						
@@ -107,7 +107,7 @@
 								<th>Child</th>
 								<th>Age</th>
 								<th>Vaccine</th>
-								<th>Amount</th>
+								<th>Amount(ml)</th>
 							</tr>
 						</table>
 					</div>
@@ -117,7 +117,7 @@
 								<th>Child</th>
 								<th>Age</th>
 								<th>Vaccine</th>
-								<th>Amount</th>
+								<th>Amount(ml)</th>
 							</tr>
 						</table>
 					</div>

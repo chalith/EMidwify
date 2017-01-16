@@ -335,7 +335,7 @@ function loadGraph(){
 					</ul>
 				</div>
 				<div class ="newsfeed clearfix">
-					<h2>Latest News</h2>
+					<h2>Notifications</h2>
 					<ul id="notifications">
 						
 					</ul>

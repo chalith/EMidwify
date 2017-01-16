@@ -101,7 +101,7 @@
 								<th>Mother</th>
 								<th>Age</th>
 								<th>Vaccine</th>
-								<th>Amount</th>
+								<th>Amount(ml)</th>
 							</tr>
 						</table>
 					</div>
@@ -157,7 +157,7 @@
 								<th>Mother</th>
 								<th>Age</th>
 								<th>Vaccine</th>
-								<th>Amount</th>
+								<th>Amount(ml)</th>
 							</tr>
 						</table>
 					</div>

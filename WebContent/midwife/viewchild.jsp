@@ -273,7 +273,7 @@ function loadGraph(){
 								<tr>
 									<th>Vaccine Code</th>
 									<th>Vaccine Name</th>
-									<th>Vaccine Dose</th>
+									<th>Vaccine Dose(ml)</th>
 								</tr>
 							</table>
 						</div>
@@ -339,7 +339,7 @@ function loadGraph(){
 					</ul>
 				</div>
 				<div class ="newsfeed clearfix">
-					<h2>Latest News</h2>
+					<h2>Notifications</h2>
 					<ul id="notifications">
 						
 					</ul>

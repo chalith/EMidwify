@@ -158,7 +158,7 @@ $(document).ready(function(){
 								if(mobileNumbers.size()!=0){
 									out.print("<li>Mobile numbers :-  ");
 									for(int i=0;i<mobileNumbers.size();i++){
-										out.print("<li>"+mobileNumbers.get(i)+"</li></br>");
+										out.print(mobileNumbers.get(i)+"</li></br>");
 									}
 									out.print("</li>");
 								}
@@ -217,7 +217,7 @@ $(document).ready(function(){
 				</div>
 				<div class ="newsfeed clearfix">
 					
-					<h2>Latest News</h2>
+					<h2>Notifications</h2>
 						
 					<ul id="notifications">
 						

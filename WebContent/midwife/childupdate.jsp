@@ -215,7 +215,7 @@
 						</div>
 						<div class="form_content" style="margin-bottom: 1%;">
 							<div style="float:left; width:15%;">
-								<label>Dose</label>
+								<label>Dose(ml)</label>
 							</div>
 							<div style="float:left; width:85%;">
 								<input style="width:30%;" type="text" id="vaccineamount" placeholder="Dose" name="txtvaccineamount">
@@ -229,7 +229,7 @@
 							<tr class="thead" id="thead">
 								<th id="thead">Vaccine Code</th>
 								<th id="thead">Vaccine</th>
-								<th id="thead">Dose</th>
+								<th id="thead">Dose(ml)</th>
 							</tr>
 						</table>
 					</div></br>

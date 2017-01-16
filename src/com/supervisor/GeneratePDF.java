@@ -219,7 +219,7 @@ public class GeneratePDF {
 		//c1.setHorizontalAlignment(Element.ALIGN_CENTER);
 		table.addCell(c3);
 		
-		PdfPCell c4 = new PdfPCell(new Phrase("Amount"));
+		PdfPCell c4 = new PdfPCell(new Phrase("Amount(ml)"));
 		//c1.setHorizontalAlignment(Element.ALIGN_CENTER);
 		table.addCell(c4);
 		

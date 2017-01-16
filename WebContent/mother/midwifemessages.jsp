@@ -36,7 +36,7 @@
 			<div class="right_sidebar">
 				<div class ="newsfeed clearfix" style="height: 100%;">
 					
-					<h2>Latest News</h2>
+					<h2>Notifications</h2>
 						
 					<ul id="notifications">
 						
