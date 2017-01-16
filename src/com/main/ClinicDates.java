@@ -22,7 +22,7 @@ public class ClinicDates {
 		String cDate = frmt.format(date);
 		try {
 			clinicDates = new ArrayList<String[]>();
-			String q = "SELECT clinicDate,venue,time FROM clinics WHERE areaCode = '"+areaCode+"' && clinicDate >= '"+cDate+"';";
+			String q = "SELECT clinicDate,venue,time FROM clinics WHERE areaCode = '"+areaCode+"';";
 			Statement st=jdbc.conn.createStatement();
 			st.executeQuery(q);
 			ResultSet rs = st.getResultSet();

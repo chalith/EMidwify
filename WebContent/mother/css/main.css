@@ -28,6 +28,7 @@ html{
 	text-align:center;
 	cursor:pointer;
 	width:100%;
+	max-height:10%;
 	min-height:10%;
 	z-index:10;
 	position: fixed;

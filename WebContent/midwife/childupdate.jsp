@@ -180,9 +180,9 @@
 									<label>Amount(pckts)</label>
 								</div>
 								<input style="width:43%;" id="trposhaamount" name="txttriposhaamount" value="<%
-									TriposhaAmounts ta = new TriposhaAmounts(childid);
-									out.print(ta.getAmount());
-								%>" readonly/>
+									TriposhaAmounts tamount = new TriposhaAmounts(childid);
+									out.print(tamount.getAmount());
+								%>"/>
 							</div>
 						</div>
 						<div style="margin: 2% 2% 7% 39%;">

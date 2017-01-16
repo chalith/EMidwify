@@ -48,14 +48,18 @@
 			<input type="hidden" id="midwifeid" value="<%
 				JDBC jdbc = new JDBC();
 				String sid = null;
+				String midwifeName = null;
+				String midwifePicture = null;
 				try{
-					String q = "SELECT midwifeID from area WHERE areaCode = (SELECT guardianAreaCode FROM guardian WHERE guardianID = '"+mid+"');";
+					String q = "SELECT * from midwife WHERE midwifeID = (SELECT midwifeID FROM area WHERE areaCode = (SELECT guardianAreaCode FROM guardian WHERE guardianID = '"+mid+"'));";
 					
 					Statement st = jdbc.conn.createStatement();
 					st.executeQuery(q);
 					ResultSet rs = st.getResultSet();
 					while (rs.next()) {
 						sid = rs.getString("midwifeID");
+						midwifeName = rs.getString("name");
+						midwifePicture = rs.getString("midwifePicture");
 					}
 				}catch(Exception e){
 					e.printStackTrace();
@@ -69,7 +73,14 @@
 				out.print(sid);
 			%>"/>
 				<div class="msgcontent" id="msgcontent">
-					<div id="sendername" class="sendername" style="font-size: 80%; margin-left: 20%;"></div>
+					<div id="sendername" class="sendername" style="font-size: 80%; margin-left: 20%;">
+						<div id="receiverii" style="display: none;">
+						<table style="bottom: 0;"><tr><td>
+						<img style="width: 100%; float: left;" src="<% out.print(midwifePicture); %>"></td><td style="width: 95%;">
+						<h3 style="float: left; font-size: 80%;"><% out.print(midwifeName); %>(Midwife)</h3>
+						</td></tr></table>
+						</div>
+					</div>
 					<div class="msgs" id="msgs">
 					
 					</div>

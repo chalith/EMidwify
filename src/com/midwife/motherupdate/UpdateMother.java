@@ -128,7 +128,7 @@ public class UpdateMother extends HttpServlet {
 		} catch (SQLException e1) {
 			e1.printStackTrace();
 		}
-		getServletContext().getRequestDispatcher("/midwife/motherupdate.jsp").forward(request,response);
+		getServletContext().getRequestDispatcher("/midwife/viewmother.jsp?guardianid="+id).forward(request,response);
 	}
 	Date createDate(String date,String seperator){
 		String d[] = new String[3];

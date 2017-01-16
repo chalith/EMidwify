@@ -91,7 +91,7 @@ function readURL(input,imgtg) {
 		<form class="picform" name="pictureForm" method="post" action="uploadimage" enctype="multipart/form-data">
 			<input style="width:100%; background-color:white; margin-top: 5%;" type="file" id="sourcepath" name="txtsourcepath"/>
 			<div class="pictable">
-				<div style="width: 70%; float: left; padding-right:2px;">
+				<div style="width: 70%; max-height:350px; overflow:hidden; float: left; padding-right:2px;">
 					<img src="" style="display:hidden; width:100%;" id="pic"></img>
 				</div><br>
 				<div style="width: 30%; float: right;">

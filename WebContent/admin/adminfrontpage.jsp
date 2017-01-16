@@ -146,7 +146,7 @@ $(document).ready(function(){
 					</div>
 					
 					<div class="services" id="statistics">
-						<button><a><img id="statistics" src="admin/images/services/update.png"area.png " alt="area"></a></button>
+						<button><a><img id="statistics" src="admin/images/services/dataentry.png"area.png " alt="area"></a></button>
 						<h3 id="statistics" align="center">Edit Statistics Data</h3></br>
 						<p id="statistics" style="margin-left: 3%;">Edit static date in thr system</p>
 					</div>

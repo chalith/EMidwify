@@ -64,9 +64,9 @@
 			<th id="picture" style="width: 5%; box-shadow: 1px -2px 2px -0.5px black;">
 				<h1 id="changepic" style="font-size: 100%; margin-left:10%; margin-bottom:-68%; width:5%; z-index:20; color: white; opacity:0.7; display: none;">
 				Change Picture</h1>
-				<img style="width: 96%; height: -5%;" src=<%
+				<div style="overflow:hidden; max-height:65px; min-height:65px;"><img style="width: 96%; height: -5%;" src=<%
 				out.print(guardianpicture);
-				%> alt="mother">
+				%> alt="mother"></div>
 			</th>
 			<th id="profile" style="width: 25%; color:white; padding: 0 1% 0 1%; font-size: 70%; box-shadow: 1px -2px 2px -0.5px black;">
 				<h2 id="profile" style="float: left;"><% 

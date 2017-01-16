@@ -1,5 +1,5 @@
 /**main front interface of mother*/
-function loadMessagecounts(){
+/*function loadMessagecounts(){
 	var xmlhttp = new XMLHttpRequest();
     var url="viewmidwifemsgcount"; 
 	xmlhttp.onreadystatechange = function() {
@@ -13,10 +13,78 @@ function loadMessagecounts(){
 	};
 	xmlhttp.open("GET",url,true);
     xmlhttp.send(null);
+}*/
+function sendMessage(){
+	var xmlhttp = new XMLHttpRequest();
+	var message=document.getElementById("message").value;
+	var gid=document.getElementById("midwifeid").value;
+	var url="sendmessage"; 
+	url=url+"?gid="+gid+"&message="+message;
+	xmlhttp.onreadystatechange = function() {
+		if(xmlhttp.readyState==4 && xmlhttp.status==200){
+			loadMessages();
+		    var out = xmlhttp.responseText;
+		    var message=document.getElementById("message").value = "";
+		    $('#msgs').animate({scrollTop:$('#msgs')[0].scrollHeight});
+		}
+	};
+	
+	xmlhttp.open("GET",url,true);
+	xmlhttp.send(null);
 }
+function setMsgAsRead(){
+	var xmlhttp = new XMLHttpRequest();
+	var gid=document.getElementById("midwifeid").value;
+	var url="setmessageread"; 
+	url=url+"?gid="+gid;
+	xmlhttp.onreadystatechange = function() {
+		if(xmlhttp.readyState==4 && xmlhttp.status==200){
+		    var out = xmlhttp.responseText;
+		    document.getElementById("msgnotify").innerHTML = "";
+		}
+	};
+	
+	xmlhttp.open("GET",url,true);
+	xmlhttp.send(null);
+}
+
+function getUnreadMsgCount(){
+	var xmlhttp = new XMLHttpRequest();
+	var url="getallunreadmsgcount"; 
+	xmlhttp.onreadystatechange = function() {
+		if(xmlhttp.readyState==4 && xmlhttp.status==200){
+		    var out = xmlhttp.responseText;
+		    if(out!='0'){
+		    	document.getElementById("msgnotify").innerHTML = out;
+		    	$("#messagecount").css("display","block");
+	        	document.getElementById("messagecount").innerHTML = out;
+		    }
+		}
+	};
+	
+	xmlhttp.open("GET",url,true);
+	xmlhttp.send(null);
+}
+function loadMessages(){
+	var xmlhttp = new XMLHttpRequest();
+	var gid=document.getElementById("midwifeid").value;
+	var url="loadmessages"; 
+	url=url+"?gid="+gid;
+	xmlhttp.onreadystatechange = function() {
+		if(xmlhttp.readyState==4 && xmlhttp.status==200){
+		    var out = xmlhttp.responseText;
+		    document.getElementById("msgs").innerHTML = out;
+		}
+	};
+	
+	xmlhttp.open("GET",url,true);
+	xmlhttp.send(null);
+}
+
 $(window).load(function(){
+	document.getElementById('receiveri').innerHTML=document.getElementById('receiverii').innerHTML;
 	loadChildren();
-	loadMessagecounts();
+	getUnreadMsgCount()
 	loadNews();
 });
 function show(id1,id2) {
@@ -31,7 +99,8 @@ function show(id1,id2) {
 	});
 }
 $(document).ready(function(){
-	setInterval("loadMessagecounts();", 3000);
+	setInterval("loadMessages();", 3000);
+	setInterval("getUnreadMsgCount();", 3000);
 	show('#view', '#viewdrop');
 	show('#register', '#registerdrop');
 	show('#update', '#updatedrop');
@@ -53,6 +122,14 @@ $(document).ready(function(){
 			}
 		}
 	});
+	$('#msgheader').on("click",function(){
+		setMsgAsRead();
+		$('#msgs').animate({scrollTop:$('#msgs')[0].scrollHeight});
+	});
+	$('#sendmessage').on("click",function(){
+		sendMessage();
+		$('#msgs').animate({scrollTop:$('#msgs')[0].scrollHeight});
+	});
 });
 function loadChildren(){
 	var xmlhttp = new XMLHttpRequest();
@@ -62,7 +139,10 @@ function loadChildren(){
 	xmlhttp.onreadystatechange = function() {
 		if(xmlhttp.readyState==4 && xmlhttp.status==200){
 		    var out = xmlhttp.responseText;
-		    document.getElementById("babies").innerHTML = out;
+		    if(out=="")
+		    	document.getElementById("babies").innerHTML = "You have no babies to show";
+		    else
+		    	document.getElementById("babies").innerHTML = out;
 		}
 	};
 	
@@ -75,8 +155,11 @@ function loadNotification(id){
     url=url+"?notificationid="+id;
 	xmlhttp.onreadystatechange = function() {
 		if(xmlhttp.readyState==4 && xmlhttp.status==200){
-	        var out = xmlhttp.responseText;
-	        document.getElementById("notificationcontent").innerHTML = out;
+	        var news = xmlhttp.responseText;
+	        if(news!="")
+	        	document.getElementById("notifications").innerHTML = news;
+	        else
+	        	document.getElementById("notifications").innerHTML = "No notifications to show up";
 		}
 	};
 	xmlhttp.open("GET",url,true);

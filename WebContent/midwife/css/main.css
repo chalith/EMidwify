@@ -96,6 +96,7 @@ html{
 	text-align:center;
 	cursor:pointer;
 	width:100%;
+	max-height:10%;
 	min-height:10%;
 	z-index:10;
 	position: fixed;
@@ -140,7 +141,8 @@ html{
 	box-shadow: 0px 8px 16px 0px black inset;
 }
 .online_userbar .mother img{
-	height:97%;
+	max-height:45px;
+	min-height:45px;
 	width:17%;
 	border-radius:50%;
 	margin-right:3%;

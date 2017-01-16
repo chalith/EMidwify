@@ -84,6 +84,9 @@ public class Date{
 		}catch(Exception e){
 			System.out.println(e);
 		}
+		if(this.isLarge(d2)){
+			return 365*10000000;
+		}
 		int days=0;
 		while(d2.isLarge(this)){
 			if(d2.day==0){

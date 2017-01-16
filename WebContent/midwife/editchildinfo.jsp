@@ -98,13 +98,13 @@
 									st.executeQuery(q);
 									ResultSet rs = st.getResultSet();
 									while(rs.next()){
-										guardianID = rs.getString(2).trim();
-										name = rs.getString(3).trim();
-										dob = rs.getString(4).trim();
-										bweight = rs.getString(5).trim();
-										fatherID = rs.getString(6).trim();
-										notes = rs.getString(7).trim();
-										picture = rs.getString(9);
+										guardianID = rs.getString("guardianID").trim();
+										name = rs.getString("childName").trim();
+										dob = rs.getString("childDateofDelivery").trim();
+										bweight = rs.getString("childBirthWeight").trim();
+										fatherID = rs.getString("childFatherID").trim();
+										notes = rs.getString("childNotes").trim();
+										picture = rs.getString("childPicture").trim();
 									}
 									q = "SELECT guardianName,guardianAreaCode FROM guardian WHERE guardianID = '"+guardianID+"';";
 									st=jdbc.conn.createStatement();
@@ -299,11 +299,11 @@
 								<div style="float:left; width:15%;">
 									<label>Date of Birth</label>
 								</div>
-								<input id="fatherdateofbirth" name="txtfatherdateofbirth" value=
+								<input  style="background:#E6E6E6;" placeholder="DateOfBirth" id="fatherdateofbirth" name="txtfatherdateofbirth"  value=
 								"<%
 									out.print(fdob);
 								%>"
-								>
+								readonly/>
 							</div></br>
 							<div class="form_content">
 								<div style="float:left; width:15%;">
@@ -313,8 +313,7 @@
 									<input style="width:30%;" type="text" id="occupation" placeholder="Occupation" name="txtoccupation" value=
 									"<%
 										out.print(foccupation);
-									%>"
-									>
+									%>">
 								</div>
 							</div></br>
 							<div class="form_content">

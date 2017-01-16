@@ -53,9 +53,9 @@
 			<th id="userpicture" style="width: 25%; box-shadow:0px -2px 1px 0px white;">
 				<h1 id="changepic" style="font-size: 100%; margin-left:5%; margin-bottom:-59%; z-index:20; color: white; opacity:0.7; display: none;">
 				Change Picture</h1>
-				<img style="width: 90%; height: -5%;" src=<%
+				<div style="overflow:hidden; max-height:65px; min-height:65px;"><img style="width: 90%; height: -5%;" src=<%
 				out.print(midwifepicture);
-				%> alt="midwife">
+				%> alt="midwife"></div>
 			</th>
 			<th id="profile" style="width: 75%; color:white; padding: 0 1% 0 1%; font-size: 60%; box-shadow:0px -2px 1px 0px;">
 				<h2 id="profile" style="float: left;"><% 

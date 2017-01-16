@@ -140,7 +140,7 @@ $(window).load(function(){
 						<div style="float:left; width:40%;">
 							<h2 id="mothername"></h2>
 						</div>
-						<div style="float:left; width:30%; height:90%; margin-left:30%;">
+						<div style="float:left; width:15%; height:90%; margin-left:45%;">
 							<img style="width: 100%; height: 100%;" id="motherpicture" src="">
 						</div>
 					</div>
@@ -178,9 +178,9 @@ $(window).load(function(){
 									<label>Amount(pckts)</label>
 								</div>
 								<input style="width:43%;" id="trposhaamount" name="txttriposhaamount" value="<%
-									TriposhaAmounts ta = new TriposhaAmounts(guardianid);
-									out.print(ta.getAmount());
-								%>" readonly/>
+									TriposhaAmounts tamount = new TriposhaAmounts(guardianid);
+									out.print(tamount.getAmount());
+								%>"/>
 							</div>
 						</div></br>
 						<div style="margin: 2% 2% 7% 39%;">
