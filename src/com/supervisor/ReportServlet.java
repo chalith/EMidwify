@@ -44,10 +44,12 @@ public class ReportServlet extends HttpServlet {
 	response.setHeader("Cache-Control", "max-age=0");
 	response.setHeader("Content-disposition", "attachment; " +
 			"filename="+ fileName);
+	String area=request.getParameter("area");
+	String date=request.getParameter("date");
 
 	try {
 		
-		GeneratePDF.createPDF(temperotyFilePath+"\\"+fileName);
+		GeneratePDF.createPDF(area,date,temperotyFilePath+"\\"+fileName);
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		baos = convertPDFToByteArrayOutputStream(
 				temperotyFilePath+"\\"+fileName);

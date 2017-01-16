@@ -59,6 +59,8 @@
 				</div>
 			</div>
 			<div class="body">
+			<form action="ReportServlet" >
+			
 				<div class="form" id="past">
 					<div class="form_content" style="border-bottom:solid;">
 						<center><h1>Past clinics</h1></center>
@@ -66,7 +68,7 @@
 					<div class="form_content" style="font-size: 120%;">
 						<div style="float:left; width:50%;">
 							<label>Area</label>
-							<select id="clinicareas" style="margin-left:13%; font-size: 80%; width:50%; background:#34495E; color: white;">
+							<select id="clinicareas" name="area" style="margin-left:13%; font-size: 80%; width:50%; background:#34495E; color: white;">
 								<option selected disabled option>Area</option>
 								<%
 									out.print(areas);
@@ -75,7 +77,7 @@
 						</div>
 						<div style="float:left; width:50%;">
 							<label>Scheduled Date</label>
-							<select id="clinicdates" style="font-size: 80%; width:50%; background:#34495E; color: white;">
+							<select id="clinicdates" name="date" style="font-size: 80%; width:50%; background:#34495E; color: white;">
 								<option selected disabled option>Clinic Dates</option>
 								
 							</select>
@@ -83,12 +85,12 @@
 					</div>
 					<div class="form_content" style="font-size: 120%;">
 						<div style="float:left; width:50%;">
-							<label>Venue</label>
-							<input id="venue" style="font-size: 80%; width:60%; background:#E6E6E6;" type="text" placeholder="Venue" name="txtvenue" /readonly>
+							
+							<input type="hidden" id="venue" style="font-size: 80%; width:60%; background:#E6E6E6;" type="text" placeholder="Venue" name="txtvenue" /readonly>
 						</div>
 						<div style="float:left; width:50%;">
-							<label>Time</label>
-							<input id="time" style="margin-left:10%; font-size: 80%; width:60%; background:#E6E6E6;" type="text" placeholder="Time" name="txttime" /readonly>
+							
+							<input  type="hidden" id="time" style="margin-left:10%; font-size: 80%; width:60%; background:#E6E6E6;" type="text" placeholder="Time" name="txttime" /readonly>
 						</div></br>
 					</div>
 					<div class="form_content" style="display: inline-block; width: 100%;">
@@ -134,6 +136,11 @@
 						</table>
 					</div>
 				</div>
+				
+				
+				<input style="float:right;margin-right: 4%; margin-bottom: 3%; background-color: #518187; height:20%;" type= "submit" value="Download as PDF">
+				
+				</form>
 			</div>
 			<div class="footer">
 				<div style="float:left; width:100%; height:100%;">

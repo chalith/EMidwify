@@ -9,6 +9,7 @@ function sendCode(){
 		showalert("Please enter a username");
 	}else{
 		send(uname.value);
+		uname.readOnly = true;
 	}
 }
 function resetPword(){

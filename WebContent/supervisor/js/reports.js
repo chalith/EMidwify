@@ -3,7 +3,7 @@
 function loadClinics(){
 	var xmlhttp = new XMLHttpRequest();
 	var area=document.getElementById("clinicareas").value;
-	var url="loadclinicdates"; 
+	var url="loadpastclinicdates"; 
 	url=url+"?area="+area;
 	xmlhttp.onreadystatechange = function() {
 		if(xmlhttp.readyState==4 && xmlhttp.status==200){
@@ -99,6 +99,8 @@ function addTriposha(name,tAmount,id) {
 	cell1.innerHTML=name;
 	cell2.innerHTML=tAmount;
 }
+
+
 
 function addChildren(name,age,vName,vAmount,id) {
 	var table = document.getElementById(id);

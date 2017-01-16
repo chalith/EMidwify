@@ -38,7 +38,7 @@ $(document).ready(function(){
 });
 </script>
 </head>
-<body >
+<body>
 	<%	
 		String sid = (String) session.getAttribute("mid");
 		if(sid==null){
@@ -109,8 +109,6 @@ $(document).ready(function(){
 					</div>
 				</div>
 					
-				
-  					
 				</div>	
 				
 			<div class ="newsfeed" style="height: 100%; width: 20%; float: right; background-color:#AFC6DF;">
